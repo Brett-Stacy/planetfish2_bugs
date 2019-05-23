@@ -1,0 +1,26 @@
+---
+title: "Hunt Strategy"
+author: "Brett Stacy"
+date: "23 May 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## List of To-Do's
+
+  * Build model that generates SSB discrepency
+    * Remove all estimated parameters from CASAL except B0
+    * Set rec_mu == 1e6
+    * Lots of tags
+    
+  * Extract CASAL arrays
+    * catch at age
+    * catch at length
+    * fish scanned / recaptured
+    
+  * Compare extracted arrays to catch
+  
+
