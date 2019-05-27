@@ -3,8 +3,8 @@
 ## Let's find that bug!
 
 ## Script for generating data and casal assessment output using Planetfish2
-## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect 
-## perfect knowledge of population parameters, correspondence of catch quantity and survey scanns, etc. 
+## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect
+## perfect knowledge of population parameters, correspondence of catch quantity and survey scanns, etc.
 
 
 ## Packages ----
@@ -14,10 +14,10 @@ library(fishplot)
 
 ## House ----
 
-rm(list = ls())
+# rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 1
+n_iters <- 2
 scenario <- "TOA_bug_1"
 
 ## define a file name
@@ -46,6 +46,12 @@ TOA_K     = 0.146
 TOA_t_0   = 0.015
 TOA_CV    = 0.122
 
+# # Growth. Von Bertalanfy. TOP
+# TOA_L_inf = 2870
+# TOA_K     = 0.02056
+# TOA_t_0   = -4.28970
+# TOA_CV    = 0.100
+
 # Weight-Length. Yates and Ziegler 2018
 TOA_wl_c = 3.0088e-12
 TOA_wl_d = 3.2064
@@ -67,8 +73,14 @@ TOA_h = 0.75
 
 
 
-## Model parameters
+### Model parameters ----
 ## mean recruitment
+
+########## STUDY PERIOD
+study_year_range = c(1990, 2010) # c(1968, 2018)
+no_fish_range = 1 ##** Don't fish the first 10 years
+
+
 R_mu <- 1e+6
 ## recruitment variability
 R_sigma <- 0 ############################################### 3e-01
@@ -76,19 +88,23 @@ R_sigma <- 0 ############################################### 3e-01
 
 # Total catch across single area
 total_catch <- 6000
-## The number of tags released in area 1 each year
-n_tags <- 25000
-## Number of years to release tags
-n_years_tags <- 5
+
+
+########## SAMPLING
+n_years_aged = 10 ##** age fish for last 20 years. used in para$ass$sample_years
+age_years = (study_year_range[2] - n_years_aged):study_year_range[2]
+# The number of tags released in area 1 each year ##### just area 1?
+n_tags = 2 # 2500
+# Number of years to release tags. leave out last year.
+n_years_tags = 5 # 5
+tag_years = (study_year_range[2] - n_years_tags + 1):study_year_range[2] - 1
 
 ## define longline selectivity
 LL_sel <- list(top=10, sigma_left=2, sigma_right=10)
 ## add a logistic selectivity
 
 
-
-## remove important objects from previous simulation (in case they still exist)
-remove(para, res, output)
+### OM ----
 ## specify the default parameters
 para	<- get_om_data()
 
@@ -183,11 +199,16 @@ para$om$select$Trawl <- NULL
 #                                      "Year" = c(0,0), "Season" = c(0, 0),
 #                                      setNames(move_tag_by_age, para$om$names_ages))
 
-### modify the sampling parameters
+### Sampling ----
 ## only release tags in Area 1
 para$sampling$pin_tag_N <- "Fixed" # this defines how tagging specified
 para$sampling$tag_N <- c(n_tags, 0)
 para$sampling$tag_rate <- c(2,0)
+
+# Change sampling length classes and n_classes
+# para$sampling$len_classes = seq(100, round(L_inf, digits = -2), 50)
+para$sampling$len_classes = seq(100, 3000, 50) # seq(300, 2000, 50) # yates and ziegler 2018
+para$sampling$n_lengths = length(para$sampling$len_classes)
 
 ## Tagging selectivity
 para$sampling$pin_tag_sel <- list()
@@ -196,17 +217,20 @@ para$sampling$pin_tag_sel[[para$om$fishery[1]]] <- para$om$pin_sel[[para$om$fish
 para$sampling$tag_select <- list()
 para$sampling$tag_select[[para$om$fishery[1]]] <- para$om$select[[para$om$fishery[1]]]
 
-###* Brett thinks this isn't being implemented
+###* Brett thinks this isn't being implemented. 23/5/19: It is being implemented but it isn't clear where it shows up in CASAL files.
 ## age 1000 fish in Region 1
-para$sampling$catchage_N <- 1000
+para$sampling$catchage_N <- 10 # 1000
 
-### Get default CASAL assessment paramters
+
+
+
+### Assessment ----
 para <- get_casal_para(para)
 
 
 
 
-### add TOA LHPs to ASSESSMENT ----
+### add TOA LHPs to ASSESSMENT
 
 
 para$ass$estgrowth = list(c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV))
@@ -244,7 +268,8 @@ para$ass$match_region <- matrix(c(1, "R1"), ncol=1, byrow=TRUE,
 
 ## make these boundries wider
 ## lower upper, casal lower casal upper
-para$ass$initialB0 <-  c(2e5, 3e5, 5e4, 1e6)
+para$ass$initialB0 <-  c(5e3, 5e5, 5e3, 5e5)
+# para$ass$initialB0 <-  c(2e5, 3e5, 5e4, 1e6)
 para$ass$B0 <-  runif(1, para$ass$initialB0[1],para$ass$initialB0[2])
 para$ass$estim_initialization.B0 <- c("1", (para$ass$initialB0[3]),
                                       (para$ass$initialB0[4]),
@@ -268,10 +293,12 @@ para$ass$est_selN_all[[1]] <- NULL
 
 para$ass$qqvalues ## there are 3 of these, should there only be one?
 para$ass$future_constant_catches <- 200 # what does this specify?
-para$ass$sample_years <- am_sampling()$sample_years
+# BS: ##### change para$ass$sample_years to accomodate edit above: expand study years.
+para$ass$sample_years = am_sampling(years = para$om$years,
+                                    ycurr = para$om$year[2],
+                                    catchage_yrs = age_years,
+                                    tagging_yrs = tag_years)$sample_years ##** This is the range of years various sampling (sizing, ageing, tagging, etc.) took place. note, when long year range, tagging row doesn't show up when print.
 
-first_yr_tag <- 2009 - n_years_tags + 1
-para$ass$sample_years["tagging",(first_yr_tag:2009)-para$om$years[1],] <- 1
 
 ## movement parameters
 para$ass$migration_est_pin <- FALSE
@@ -302,6 +329,18 @@ para$ass$spawning_part_mort <- 1
 ##*** now we modify the tag loss rate in the AM
 para$ass$tag_shedding_rate <- 0.0084
 
+
+#### Turn off estimations
+para$ass$estimate_selectivity = NULL
+# para$ass$estim_recruitment.YCS[[2]] = rep(1, para$om$n_years)
+# para$ass$estim_recruitment.YCS[[3]] = rep(1, para$om$n_years)
+# para$ass$estim_recruitment.YCS[4] = "uniform"
+
+#### Turn off other stuff?
+# para$ass$size_based = "True"
+
+
+
 # ## this appears to be correctly allocating arrays
 # res	<- setup_om_objects(para=para)
 # ## now populate the OM arrays
@@ -310,11 +349,16 @@ para$ass$tag_shedding_rate <- 0.0084
 # res <- get_initial_pop(para, res=res)
 # res <- run_annual_om(para, res=res, FALSE)
 
+
+## Check if OM matches AM parameters ----
 ## source check_lhps and check the life history parameters
 # source("../../check_lhps.R")
 # check_lhps(para)
 
 check_match(para)
+
+
+### Loop ----
 
 ## specify objects to save simulation outputs
 dim_names	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years),
@@ -323,13 +367,13 @@ dim_names	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years),
                paste0("AM_rec_", para$om$years),
                "SelLL_P1", "SelLL_P2", "SelLL_P3", "Starting_AM_B0")
 
-# #################################################################### add different dim_names if using AT selectivity ----
+# #################################################################### add different dim_names if using AT selectivity
 # dim_names	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years), paste0("OM_ssb_R2_",para$om$years),
 #                paste0("OM_rec_R1_", para$om$years), paste0("OM_rec_R2_", para$om$years),
 #                "AM_ssb0_",paste0("AM_ssb_", para$ass$years), paste0("AM_rec_", para$ass$years),
 #                "SelLL_P1", "SelLL_P2", "SelLL_P3", "SelLL_P4", "SelLL_P5", "Starting_AM_B0")
 #
-######################################### continuation ----
+
 dim_length <- length(dim_names)
 
 ## construct the output array
@@ -351,8 +395,8 @@ output_log <- para[["control"]]$output_log
 ## add the scenario name to para
 para$scenario$name <- scenario
 
-## a better way to save the parameters is to save an Rda
-save(para, file=paste0(file_name, "_Para.Rda"))
+## a better way to save the parameters is to save an Rds
+# saveRDS(para, file = paste0(file_path, "baseline_para_PT.Rds"))
 
 ## loop over the number of iterations
 for(i_iter in 1:n_iters){
@@ -408,36 +452,48 @@ for(i_iter in 1:n_iters){
   # OM_Rec_R1 - AM_Rec_R1
 } # end MCMC loop
 
+
+### Save Output ----
 ## write to file
-write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
-          quote=FALSE, na="NA", row.names=FALSE)
+# write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
+#           quote=FALSE, na="NA", row.names=FALSE)
 
 
 
 
 ################################## BS Plots ----
 library(fishplot)
-par(mfrow = c(1,3))
+par(mfrow = c(1,2))
 plot_SSB(output, item = "OM_ssb_R1")
 plot_SSB(output, item = "AM_ssb_", mean = F)
 
 
 par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(750000, 870000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(750000, 870000))
+plot_SSB(output, item = "OM_ssb_R1", ylim = c(9000, 60000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
 
 
 
 
-temp = read.csv("TOA_baseline_Niter_1001.csv")
+temp = read.csv("TOA_bug_1_Niter_1000.csv")
 par(mfrow = c(1,2))
-plot_SSB(temp, item = "OM_ssb_R1", ylim = c(600000, 870000), main = paste0(scenario, "_iters_", 1001))
-plot_SSB(temp, item = "AM_ssb_", mean = F, ylim = c(600000, 870000))
+plot_SSB(temp, item = "OM_ssb_R1", ylim = c(9000, 60000), main = "TOA_bug_1_Niter_1000")
+plot_SSB(temp, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
 
 
 
 
 
+
+
+
+par(mfrow = c(1,2))
+plot_SSB(output, item = "OM_ssb_R1", ylim = c(350000, 500000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(350000, 500000))
+
+par(mfrow = c(1,2))
+plot_SSB(output, item = "OM_ssb_R1", ylim = c(0, 30000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(0, 30000))
 
 
 

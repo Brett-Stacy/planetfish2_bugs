@@ -5,8 +5,8 @@ date: "23 May 2019"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, echo=F}
+library(casal)
 ```
 
 ## List of To-Do's
@@ -23,4 +23,69 @@ knitr::opts_chunk$set(echo = TRUE)
     
   * Compare extracted arrays to catch
   
+  * Determine where para$sampling$catchage_N and para$sampling$catchlen_N show up in CASAL output.
+
+
+
+  
+  
+## Code questions
+Cannot supress YCS estimation through planetfish.
+When I change bounds on YCS prior, they are not reflected in output.log. They remain the same as the default. Why?
+
+Cannot supress q estimation through planetfish. Why?
+
+WOW: PERFORMS BETTER WITH FEWER TAGS! I tried with 25,000 tags, 2,500 tags, 10 tags, and 2 tags. As the tag number decreased, the casal performs better at estimating SSB. Noteably, the estimate is still not good enough. This seems very odd. Perhaps the influence of other information is increasingly more influential as tag number decreases. My understanding is, the only other source of information in the survey is catch-at-age data. Could this truely be what is helping the casal model estimate SSB? And why does increasing the tag frequency hurt instead of help?
+
+Run with low tags and low catchA (10 instead of 1000) data collection:
+Performs as accurately as above, but not as precise. This must mean the majority of information contributing to the performance of the casal model is a combination of perfect knowledge of LHPs and catch data?
+
+Run with low tags and low catchA but with TOP Growth. 30 iterations.:
+PERFOMS REALLY WELL. 
+
+Run with low tags and low catchA but on single_region_TOP.R:
+Performs really BAD.
+  
+  
+  
+  
+## estimation.csl Questions
+
+Should \@size_based False be True in population.csl?
+
+
+
+
+Does \@catch_at LL_catchA add up to 1000 every year?
+
+```{r, echo=F}
+estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_1/casal_estimation.csl")
+temp = as.numeric(estimation$`catch_at[LL_catchA]`$`2000`) # this is a proportion at age class.
+
+sum(temp)
+
+```
+CONCLUSION: Undetermined. Only gives proportion, not quantity of fish. Can compare this frequency to selectivity possibly?
+
+
+
+
+Do scanned fish in \@tag_recapture Tags2005_R1_R1 add up to 6000 tonnes?
+
+```{r, echo=F}
+class_mins = as.numeric(estimation$`tag_recapture[Tags2005_R1_R1]`$class_mins)
+scanned    = as.numeric(estimation$`tag_recapture[Tags2005_R1_R1]`$scanned_2006)
+
+plot(class_mins[-length(class_mins)], scanned)
+
+
+
+```
+CONCLUSION: I need to convert length to wight to answer this question. I think this process requires length to age to weight calculation, but length to age is the inverse of Von Bertalanffy which cannot take L>L_inf. This is a problem if any length classes exceed L_inf, which they do. 
+
+
+
+
+Does frequency of scanned fish in \@tag_recapture Tags2005_R1_R1 match fishing selectivity? i.e. does tagging selectivity match fishing selectivity?
+
 
