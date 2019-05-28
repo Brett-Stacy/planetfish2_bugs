@@ -44,18 +44,33 @@ Run with low tags and low catchA but with TOP Growth. 30 iterations.:
 PERFOMS REALLY WELL. 
 
 Run with low tags and low catchA but on single_region_TOP.R:
-Performs really BAD.
+Performs really BAD. Why would it perform well in last run but not this one? The only difference is the LHPs other than growth. I tried turning off estimating selectivity and it is still bad. I need to figure out what is going on with TOA_bug_1.R; how can it perform well when tags and catchA are reduced to unreasonably low levels?
+CONCLUSION: The only evidence I can find that potentially explains the difference in performance between the two scripts is this: In the estimation.csl files, the only recaptured fish are caught earler in the sampling for TOA_bug_1 than in TOP_baseline_Minimum_Sampling (only recaptures for latter script were in 2010, the assessment year). Perhaps the earlier recaptures leads to better SSB quantification.
+CONCLUSION: After increasing the tag-years and #tags to 20 in TOP_baseline_Minimum_Sampling, the performance was finally good, and the tag-recaptures happened sooner. This could mean that recaptures early-on are very important?
+  
+  
+  
+  
+  
+Change Growth to TOP:
+PERFORMS WELL. => perhaps this is because somewhere along the line, the growth parameters are being used to calculate lengths. If this is happening, the fact that L_inf = 1565 is less than the modeled maximum length could produce problems. Mathematically, converting length to age using the von Bertalanffy relationship requires any length input to be less than L_inf. Otherwise, the log of a negative number is attempted. 
+  
+  
+  
+
+  
+## population.csl Questions
+Should \@size_based False be True in population.csl?
+I think it should be False because this is a age-based model.
+  
+  
+  
+  
   
   
   
   
 ## estimation.csl Questions
-
-Should \@size_based False be True in population.csl?
-
-
-
-
 Does \@catch_at LL_catchA add up to 1000 every year?
 
 ```{r, echo=F}
@@ -66,6 +81,7 @@ sum(temp)
 
 ```
 CONCLUSION: Undetermined. Only gives proportion, not quantity of fish. Can compare this frequency to selectivity possibly?
+In any case, still need to find where catchA numbers are reported in CASAL files.
 
 
 

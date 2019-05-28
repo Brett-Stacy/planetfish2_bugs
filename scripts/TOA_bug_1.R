@@ -17,7 +17,7 @@ library(fishplot)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 2
+n_iters <- 20
 scenario <- "TOA_bug_1"
 
 ## define a file name
@@ -51,6 +51,12 @@ TOA_CV    = 0.122
 # TOA_K     = 0.02056
 # TOA_t_0   = -4.28970
 # TOA_CV    = 0.100
+
+# Growth. Von Bertalanfy. TOA Mormede et al. 2014
+TOA_L_inf = 1690.7
+TOA_K     = 0.093
+TOA_t_0   = -0.256
+TOA_CV    = 0.102
 
 # Weight-Length. Yates and Ziegler 2018
 TOA_wl_c = 3.0088e-12
@@ -94,9 +100,9 @@ total_catch <- 6000
 n_years_aged = 10 ##** age fish for last 20 years. used in para$ass$sample_years
 age_years = (study_year_range[2] - n_years_aged):study_year_range[2]
 # The number of tags released in area 1 each year ##### just area 1?
-n_tags = 2 # 2500
+n_tags = 2500 # 2500
 # Number of years to release tags. leave out last year.
-n_years_tags = 5 # 5
+n_years_tags = 7 # 5
 tag_years = (study_year_range[2] - n_years_tags + 1):study_year_range[2] - 1
 
 ## define longline selectivity
@@ -207,8 +213,8 @@ para$sampling$tag_rate <- c(2,0)
 
 # Change sampling length classes and n_classes
 # para$sampling$len_classes = seq(100, round(L_inf, digits = -2), 50)
-para$sampling$len_classes = seq(100, 3000, 50) # seq(300, 2000, 50) # yates and ziegler 2018
-para$sampling$n_lengths = length(para$sampling$len_classes)
+# para$sampling$len_classes = seq(100, 3000, 50) # seq(300, 2000, 50) # yates and ziegler 2018
+# para$sampling$n_lengths = length(para$sampling$len_classes)
 
 ## Tagging selectivity
 para$sampling$pin_tag_sel <- list()
@@ -219,7 +225,7 @@ para$sampling$tag_select[[para$om$fishery[1]]] <- para$om$select[[para$om$fisher
 
 ###* Brett thinks this isn't being implemented. 23/5/19: It is being implemented but it isn't clear where it shows up in CASAL files.
 ## age 1000 fish in Region 1
-para$sampling$catchage_N <- 10 # 1000
+para$sampling$catchage_N <- 100 # 1000
 
 
 
