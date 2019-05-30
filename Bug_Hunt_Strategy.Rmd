@@ -54,9 +54,25 @@ CONCLUSION: After increasing the tag-years and #tags to 20 in TOP_baseline_Minim
   
 Change Growth to TOP:
 PERFORMS WELL. => perhaps this is because somewhere along the line, the growth parameters are being used to calculate lengths. If this is happening, the fact that L_inf = 1565 is less than the modeled maximum length could produce problems. Mathematically, converting length to age using the von Bertalanffy relationship requires any length input to be less than L_inf. Otherwise, the log of a negative number is attempted. 
+
+Change Growth to TOA S. Mormede 2015:
+PERFORMS BAD.
   
   
-  
+
+Why aren't para\$sampling\$catchlen_N being communicated to CASAL? 
+I can't find fish being measured anywhere in casal output.
+CONCLUSION: This is because in para\$ass\$sample_years, catchlen == 0 for all years.
+
+
+
+In Burch, et. al, "Within CASAL, releases-at-length of tagged fish were converted to releases-at-age via a
+length-at-age conversion matrix assuming a von Bertalanffy growth function and parameters
+from Table 1. Estimated recaptures-at-length were obtained by applying the same length-at-age
+conversion matrix to the estimated recaptures-at-age."
+BUT, with the L_inf problem, how could this conversion matrix be calculated for fishL > L_inf? And how do I access this matrix?
+
+
 
   
 ## population.csl Questions
