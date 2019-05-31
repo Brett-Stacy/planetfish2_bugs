@@ -29,7 +29,7 @@ library(casal)
 
   
   
-## Code questions
+## Code questions - Brett
 Cannot supress YCS estimation through planetfish.
 When I change bounds on YCS prior, they are not reflected in output.log. They remain the same as the default. Why?
 
@@ -73,6 +73,19 @@ conversion matrix to the estimated recaptures-at-age."
 BUT, with the L_inf problem, how could this conversion matrix be calculated for fishL > L_inf? And how do I access this matrix?
 
 
+Tried Growth L_inf = 2265
+PERFORMED BAD.
+
+
+
+Tried TOP growth with all other LHPs for TOA, and No catchA
+PERFORMED BAD.
+
+
+
+Should datass = datass instead of datass = para/$ass in run_complete_casal_assessment()?
+NO I don't think so because all it uses from para is casal_path, inputprefix, mpd_dat, output_log, linux, intern. 
+This means it can use para. THe only thing in the function that uses para$ass is specific_ratios which I don't use. see function for more. Note I'm using run_casal_pointest()
 
   
 ## population.csl Questions

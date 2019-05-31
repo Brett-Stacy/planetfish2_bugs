@@ -58,6 +58,12 @@ TOA_CV    = 0.122
 # TOA_t_0   = -0.256
 # TOA_CV    = 0.102
 
+# Growth. Von Bertalanfy. TOA Other
+# TOA_L_inf = 2265
+# TOA_K     = 0.093
+# TOA_t_0   = -0.256
+# TOA_CV    = 0.102
+
 # Weight-Length. Yates and Ziegler 2018
 TOA_wl_c = 3.0088e-12
 TOA_wl_d = 3.2064
@@ -87,7 +93,7 @@ study_year_range = c(1990, 2010) # c(1968, 2018)
 no_fish_range = 1 ##** Don't fish the first 10 years
 
 
-R_mu <- 1e+6
+R_mu <- 1e6 # 1e6
 ## recruitment variability
 R_sigma <- 0 ############################################### 3e-01
 
@@ -97,11 +103,11 @@ total_catch <- 6000
 
 
 ########## SAMPLING
-n_years_aged = 10 ##** age fish for last 20 years. used in para$ass$sample_years
-age_years = (study_year_range[2] - n_years_aged):study_year_range[2]
+n_years_aged = 15 ##** age fish for last 20 years. used in para$ass$sample_years
+age_years = if(n_years_aged == 0) NULL else((study_year_range[2] - n_years_aged):study_year_range[2])
 ### BS: 30/05/19 add len_years
-n_years_lengthed = 10
-len_years = (study_year_range[2] - n_years_lengthed):study_year_range[2]
+n_years_lengthed = 0
+len_years = if(n_years_lengthed == 0) NULL else((study_year_range[2] - n_years_lengthed):study_year_range[2])
 # The number of tags released in area 1 each year ##### just area 1?
 n_tags = 2500 # 2500
 # Number of years to release tags. leave out last year.
@@ -475,6 +481,7 @@ for(i_iter in 1:n_iters){
 
 
 ################################## BS Plots ----
+
 library(fishplot)
 par(mfrow = c(1,2))
 plot_SSB(output, item = "OM_ssb_R1")
@@ -509,10 +516,14 @@ plot_SSB(output, item = "OM_ssb_R1", ylim = c(0, 30000))
 plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(0, 30000))
 
 
+par(mfrow = c(1,2))
+plot_SSB(output, item = "OM_ssb_R1", ylim = c(70000, 140000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(70000, 140000))
 
 
-
-
+par(mfrow = c(1,2))
+plot_SSB(output, item = "OM_ssb_R1", ylim = c(200000, 330000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(200000, 330000))
 
 
 
