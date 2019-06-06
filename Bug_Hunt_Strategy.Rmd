@@ -119,6 +119,8 @@ I think it should be False because this is a age-based model.
 
 Do datass input parameter and estimation.csl line up?
 
+### TOA
+
 ```{r, echo=F}
 datass.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/datass_TOA_6_6_19")
 estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_1/casal_estimation.csl")
@@ -163,6 +165,39 @@ How is it getting big lengths at all in the first place?
 Why does datass.TOA\$survey_age_n exist when there is no survey age stuff in para\$om?
 
 
+
+### TOP
+```{r, echo=F}
+datass.TOP = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/datass_TOP_6_6_19")
+estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/casal_estimation_TOP.csl")
+size.class = datass.TOP$class_mins[-length(datass.TOP$class_mins)]
+
+## TAGS RECAPTURED
+tags.2009.om = datass.TOP$Rec_data$Tags2009_R1_R1
+tags.2009.am = estimation$`tag_recapture[Tags2009_R1_R1]`$recaptured_2010
+
+plot(size.class, tags.2009.om)
+points(size.class, tags.2009.am, col = "red", pch = 3)
+
+
+## TAGS SCANNED
+tags.2009.om = datass.TOP$scannedN$Tags2009_R1_R1
+tags.2009.am = estimation$`tag_recapture[Tags2009_R1_R1]`$scanned_2010
+
+plot(size.class, tags.2009.om)
+points(size.class, tags.2009.am, col = "red", pch = 3)
+
+
+## AGE FREQUENCY
+age.om = datass.TOP$catch_age$LL[,"2010",1,1,1]
+age.am = as.numeric(estimation$`catch_at[LL_catchA]`$`2010`)
+
+plot(age.om, ylim = c(0, 150))
+points(age.am*500, col = "red", pch = 3)
+lines(500*ogive("dbnormal", 1:35, params = list(top=10, sigma_left=2, sigma_right=10)))
+
+
+```
 
 
 Does \@catch_at LL_catchA add up to 1000 every year?
