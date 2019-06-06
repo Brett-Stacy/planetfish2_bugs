@@ -17,7 +17,7 @@ library(fishplot)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 2
+n_iters <- 10
 scenario <- "TOA_bug_1"
 
 ## define a file name
@@ -103,7 +103,7 @@ total_catch <- 6000
 
 
 ########## SAMPLING
-n_years_aged = 15 ##** age fish for last 20 years. used in para$ass$sample_years
+n_years_aged = 10 ##** age fish for last 20 years. used in para$ass$sample_years
 age_years = if(n_years_aged == 0) NULL else((study_year_range[2] - n_years_aged):study_year_range[2])
 ### BS: 30/05/19 add len_years
 n_years_lengthed = 0
@@ -244,7 +244,8 @@ para$sampling$catchlen_N = 1000 # 1000
 ### Assessment ----
 para <- get_casal_para(para)
 
-
+## Plust Group? BS 6/6/19 CONCLUSION: no effect.
+# para$ass$age_plus_group = "False"
 
 
 ### add TOA LHPs to ASSESSMENT

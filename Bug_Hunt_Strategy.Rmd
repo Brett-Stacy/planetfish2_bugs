@@ -87,6 +87,22 @@ Should datass = datass instead of datass = para/$ass in run_complete_casal_asses
 NO I don't think so because all it uses from para is casal_path, inputprefix, mpd_dat, output_log, linux, intern. 
 This means it can use para. THe only thing in the function that uses para$ass is specific_ratios which I don't use. see function for more. Note I'm using run_casal_pointest()
 
+
+datass <- get_casal_data(Yr_current=om$years[y], datass=datass, om=om, sampling=sampling, obs=obs, tag=tag, mod=mod)
+This part of the code exists right before the creation of CASAL input files. datass is used in the input files.
+Does get_casal_data() work like it should?
+
+
+create_casal_file_est(params=datass, casal_path=ctrl\$casal_path, skel_csl=ctrl\$est_skel_csl, csl=ctrl\$est_csl)
+Does the input datass accuratly transfer stuff to the estimation file?
+Compare datass to read.casal.est.file()
+
+
+
+Try TOA_bug_1 without plus group.
+CONCLUSION: no effect.
+
+
   
 ## population.csl Questions
 Should \@size_based False be True in population.csl?
@@ -100,6 +116,55 @@ I think it should be False because this is a age-based model.
   
   
 ## estimation.csl Questions
+
+Do datass input parameter and estimation.csl line up?
+
+```{r, echo=F}
+datass.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/datass_TOA_6_6_19")
+estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_1/casal_estimation.csl")
+size.class = datass.TOA$class_mins[-length(datass.TOA$class_mins)]
+
+## TAGS RECAPTURED
+tags.2009.om = datass.TOA$Rec_data$Tags2009_R1_R1
+tags.2009.am = estimation$`tag_recapture[Tags2009_R1_R1]`$recaptured_2010
+
+plot(size.class, tags.2009.om)
+points(size.class, tags.2009.am, col = "red", pch = 3)
+
+
+## TAGS SCANNED
+tags.2009.om = datass.TOA$scannedN$Tags2009_R1_R1
+tags.2009.am = estimation$`tag_recapture[Tags2009_R1_R1]`$scanned_2010
+
+plot(size.class, tags.2009.om)
+points(size.class, tags.2009.am, col = "red", pch = 3)
+
+
+## AGE FREQUENCY
+age.om = datass.TOA$catch_age$LL[,"2010",1,1,1]
+age.am = as.numeric(estimation$`catch_at[LL_catchA]`$`2010`)
+
+plot(age.om, ylim = c(0, 150))
+points(age.am*500, col = "red", pch = 3)
+lines(500*ogive("dbnormal", 1:35, params = list(top=10, sigma_left=2, sigma_right=10)))
+
+
+```
+
+CONCLUSION: How on earth does the operating model and subsequently assessment model know the selectivity in length if I provided it in age?
+If it knows it in age, it must have converted it to length somehow to get these proportion scanned and recaptured fish by length. 
+
+How is it getting big lengths at all in the first place?
+
+
+
+
+
+Why does datass.TOA\$survey_age_n exist when there is no survey age stuff in para\$om?
+
+
+
+
 Does \@catch_at LL_catchA add up to 1000 every year?
 
 ```{r, echo=F}
@@ -134,3 +199,31 @@ CONCLUSION: I need to convert length to wight to answer this question. I think t
 Does frequency of scanned fish in \@tag_recapture Tags2005_R1_R1 match fishing selectivity? i.e. does tagging selectivity match fishing selectivity?
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Warnings
+
+Warning message:
+In get_casal_data(Yr_current = om$years[y], datass = datass, om = om,  :
+  Metiers in OM that are not included in Assessment: LL1
+CONCLUSION: this warning shows up in Paul's stuff and mine.
+
+
+
+In casal.string.to.vector.of.numbers(casal.remove.first.words(lines[i],  ... :
+  NAs introduced by coercion
+CONCLUSION: Ask Paul...
