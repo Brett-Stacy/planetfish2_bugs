@@ -159,6 +159,21 @@ If it knows it in age, it must have converted it to length somehow to get these 
 How is it getting big lengths at all in the first place?
 
 
+#### Calculating lengths from ages
+
+```{r}
+
+
+ssages.TOA = seq(1.5, 35.5, 1)
+len_classes.TOA = seq(100, 2000, 50)
+
+round(sample_lengths(ssages, sampling$len_classes, dat_age1[,y], om$growth[[om$sex[i]]]), 1)
+
+
+
+```
+
+
 
 
 
@@ -194,7 +209,7 @@ age.am = as.numeric(estimation$`catch_at[LL_catchA]`$`2010`)
 
 plot(age.om, ylim = c(0, 150))
 points(age.am*500, col = "red", pch = 3)
-lines(500*ogive("dbnormal", 1:35, params = list(top=10, sigma_left=2, sigma_right=10)))
+lines(500*ogive("dbnormal", 1:30, params = list(top=10, sigma_left=2, sigma_right=10)))
 
 
 ```
