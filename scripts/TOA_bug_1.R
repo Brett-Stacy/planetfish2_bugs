@@ -17,7 +17,7 @@ library(fishplot)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 10
+n_iters <- 1
 scenario <- "TOA_bug_1"
 
 ## define a file name

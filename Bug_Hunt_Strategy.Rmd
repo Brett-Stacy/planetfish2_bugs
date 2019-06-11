@@ -55,6 +55,7 @@ CONCLUSION: After increasing the tag-years and #tags to 20 in TOP_baseline_Minim
 Change Growth to TOP:
 PERFORMS WELL. => perhaps this is because somewhere along the line, the growth parameters are being used to calculate lengths. If this is happening, the fact that L_inf = 1565 is less than the modeled maximum length could produce problems. Mathematically, converting length to age using the von Bertalanffy relationship requires any length input to be less than L_inf. Otherwise, the log of a negative number is attempted. 
 
+
 Change Growth to TOA S. Mormede 2015:
 PERFORMS BAD.
   
@@ -102,6 +103,9 @@ Compare datass to read.casal.est.file()
 Try TOA_bug_1 without plus group.
 CONCLUSION: no effect.
 
+Try logistic selectivity with lower (5) X50:
+CONCLUSION: BAD.
+
 
   
 ## population.csl Questions
@@ -130,33 +134,67 @@ size.class = datass.TOA$class_mins[-length(datass.TOA$class_mins)]
 tags.2009.om = datass.TOA$Rec_data$Tags2009_R1_R1
 tags.2009.am = estimation$`tag_recapture[Tags2009_R1_R1]`$recaptured_2010
 
-plot(size.class, tags.2009.om)
+plot(size.class, tags.2009.om, ylab = "Frequency", xlab = "Size")
 points(size.class, tags.2009.am, col = "red", pch = 3)
+legend("topright", legend = c("OM", "AM"), pch = c(1, 3), col = c("black", "red"), title = "Tags Recaptured")
 
 
-## TAGS SCANNED
+## FISH SCANNED
 tags.2009.om = datass.TOA$scannedN$Tags2009_R1_R1
 tags.2009.am = estimation$`tag_recapture[Tags2009_R1_R1]`$scanned_2010
 
-plot(size.class, tags.2009.om)
+plot(size.class, tags.2009.om, ylab = "Frequency", xlab = "Size")
 points(size.class, tags.2009.am, col = "red", pch = 3)
+legend("topright", legend = c("OM", "AM"), pch = c(1, 3), col = c("black", "red"), title = "Fish Scanned")
 
 
-## AGE FREQUENCY
+## CATCH AT AGE FREQUENCY
 age.om = datass.TOA$catch_age$LL[,"2010",1,1,1]
 age.am = as.numeric(estimation$`catch_at[LL_catchA]`$`2010`)
 
-plot(age.om, ylim = c(0, 150))
+plot(age.om, ylim = c(0, 150), ylab = "Frequency", xlab = "Age")
 points(age.am*500, col = "red", pch = 3)
-lines(500*ogive("dbnormal", 1:35, params = list(top=10, sigma_left=2, sigma_right=10)))
+lines(100*ogive("dbnormal", 1:35, params = list(top=10, sigma_left=2, sigma_right=10)))
+
+
+## COMBINED AGE (from catch_age) AND LENGTH (from scanned fish)
+tags.2009.om = datass.TOA$scannedN$Tags2009_R1_R1
+tags.2009.am = estimation$`tag_recapture[Tags2009_R1_R1]`$scanned_2010
+
+plot(size.class, tags.2009.om, ylab = "Frequency", xlab = "Size")
+points(size.class, tags.2009.am, col = "red", pch = 3)
+points(calc_VBlen(datass.TOA$ages, rep(NA, 35), datass.TOA$estgrowth[[1]]), age.om*250, col = "blue")
+points(calc_VBlen(datass.TOA$ages, rep(NA, 35), datass.TOA$estgrowth[[1]]), age.am*150000, col = "blue", pch = 3)
+legend("topright", legend = c("OM Scanned", "AM Scanned", "OM catchA", "AM catchA"), pch = c(1, 3), col = c("black", "red", "blue", "blue"))
+
+
+## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
+res.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/res_TOA_31_5_19")
+output.TOA = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_1/casalout_output.log")
+est.age.om = res.TOA$pop$n[,,1,,]*2
+est.age.am = output.TOA$Numbers_at_age_R1
+
+plot(est.age.om[,"1990"], ylim = c(0, 1e6))
+points(est.age.am$`1990`, col = "red")
+
+plot(est.age.om[,"2009"])
+points(est.age.am$`2009`, col = "red")
+
+for (i in 1:20) {
+  plot(est.age.om[,i], main = paste0("Year ", i), xlab = "Age", ylab = "Number in Population")
+  points(est.age.am[[i]], col = "red")
+  legend("topright", legend = c("OM", "AM"), pch = c(1, 3), col = c("black", "red"))
+}
+
+
+## CALCULATE SSB BY HAND AND COMPARE
 
 
 ```
 
 CONCLUSION: How on earth does the operating model and subsequently assessment model know the selectivity in length if I provided it in age?
 If it knows it in age, it must have converted it to length somehow to get these proportion scanned and recaptured fish by length. 
-
-How is it getting big lengths at all in the first place?
+IT CAN GET LENGTHS FROM AGES via VB function. The function cannot get ages from lengths.
 
 
 #### Calculating lengths from ages
@@ -203,7 +241,7 @@ plot(size.class, tags.2009.om)
 points(size.class, tags.2009.am, col = "red", pch = 3)
 
 
-## AGE FREQUENCY
+## CATCH AT AGE FREQUENCY
 age.om = datass.TOP$catch_age$LL[,"2010",1,1,1]
 age.am = as.numeric(estimation$`catch_at[LL_catchA]`$`2010`)
 
@@ -211,8 +249,78 @@ plot(age.om, ylim = c(0, 150))
 points(age.am*500, col = "red", pch = 3)
 lines(500*ogive("dbnormal", 1:30, params = list(top=10, sigma_left=2, sigma_right=10)))
 
+## COMBINED AGE (from catch_age) AND LENGTH (from scanned fish)
+tags.2009.om = datass.TOP$scannedN$Tags2009_R1_R1
+tags.2009.am = estimation$`tag_recapture[Tags2009_R1_R1]`$scanned_2010
+
+plot(size.class, tags.2009.om, ylab = "Frequency", xlab = "Size")
+points(size.class, tags.2009.am, col = "red", pch = 3)
+points(calc_VBlen(datass.TOP$ages, rep(NA, 30), datass.TOP$estgrowth[[1]]), age.om*1700, col = "blue")
+points(calc_VBlen(datass.TOP$ages, rep(NA, 30), datass.TOP$estgrowth[[1]]), age.am*800000, col = "blue", pch = 3)
+legend("topright", legend = c("OM Scanned", "AM Scanned", "OM catchA", "AM catchA"), pch = c(1, 3), col = c("black", "red", "blue", "blue"))
+
+
+
+## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
+res.TOP = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/res_TOP_31_5_19")
+output.TOP = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/casalout_output_TOP_11_6_19.log")
+est.age.om = res.TOP$pop$n[,,1,,]*2
+est.age.am = output.TOP$Numbers_at_age_R1
+
+plot(est.age.om[,"1990"])
+points(est.age.am$`1990`, col = "red")
+
+plot(est.age.om[,"2009"])
+points(est.age.am$`2009`, col = "red")
+
+for (i in 1:20) {
+  plot(est.age.om[,i], main = paste0("Year ", i), xlab = "Age", ylab = "Number in Population")
+  points(est.age.am[[i]], col = "red")
+  legend("topright", legend = c("OM", "AM"), pch = c(1, 3), col = c("black", "red"))
+}
+
+
+
 
 ```
+
+
+
+
+
+
+
+Does res\$fleet stuff = res\$obs stuff?
+
+```{r}
+res.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/res_TOA_31_5_19")
+
+# Catch Selectivity = tag Selectivity?
+res.TOA$fleet$LL1$landings_sel[,,1,1,1] - res.TOA$obs$LL1$tag_sel[,,1,1,1]
+# CONCLUSION: YES
+```
+
+
+Does res\$fleet stuff = res\$obs stuff?
+
+```{r}
+res.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/res_TOA_31_5_19")
+
+# Selectivity
+res.TOA$fleet$LL1$landings_sel[,,1,1,1] - res.TOA$fleet$LL1$landings_sel[,,1,1,1]
+# CONCLUSION: YES
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 Does \@catch_at LL_catchA add up to 1000 every year?
