@@ -107,7 +107,68 @@ Try logistic selectivity with lower (5) X50:
 CONCLUSION: BAD.
 
 
+Change recruitment YCS to not be estimated:
+Tried changing prior bounds in para\$ass\$estim_recruitment.YCS: 
+CONCLUSION: Not translating to casal_out.log. Not even translating into datass before assessment files created. 
+
   
+  
+### After meeting with Paul 12/6
+Try another set of LHPs, maybe mackrel (short lived)
+TOA_bug_3.R
+CONCLUSION: They agree pretty well, except for overestimation of SSB0. The precision is extremely good. I think this is because there are very many tagged fish being recaptured.
+
+Fork Planetfish DONE
+
+Look at casal manual for phases of estimation. 
+Is YCS estimated along with other parameters? is it estimated on it's own?
+
+Look at res\$tags for numbers at age of RELEASE as well as recaptures
+
+Propose plan for Paul
+
+Make more diagnostic plot functions to explore the om results vs am results.
+Generalize these to accept multiple types of data.
+
+Add switch that creates csl files but doesn't run the assessment.
+para\$control\$pin_generate_casal_files
+CONCLUSION: didn't do this but added switch to save datass
+REASON: If save csl files and don't run assessment, user will not know if the assessment will work.
+I can always run the assessment one time to generate csl files, but I really need the datass object to compare, 
+hence the utility in saving it. Also, the output_log file contains important stuff that the csl files do not.
+
+
+YCS.
+I changed the estimate YCS parameters to all be 1. I commented out the position in M3_CASAL1_Data.r where the parameters were over-written to allow full transmission to the casal csl files. 
+CONCLUSION: this had the intended effect: the numbers at age between the OM and AM agree very nicely now. 
+PROBLEM: SSB is still being under-estimated by the am after 30 iterations. How could this be?
+  
+  
+  
+  
+Should the tagged fish be a negligible fraction of the total fish population without an impact of the population abundance or mortality?
+(Burch et al. 2017 says this)
+
+
+Why is SSB calculated before 2nd half of natM in OM but in Burch et al. 2017 it says it is calculated at the end of the year's processes?
+I changed this to be calculated at the very end of OM loop, The discrepency was lessened as the OM SSB generally decreased. However, there was still a consistent discrepency. 
+I tried manually calculating SSB (see below) for the OM and it does better at matching the AM for initial 
+  
+  
+  
+  
+  
+#### For Paul
+Why would numbers at age agree so well but SSB doesn't agree?
+Are the time steps SSB is calculated the same between OM and CASAL?
+Are the methods the same?
+  
+  
+Can you go through the settings related to biomass like para\$ass\$estim_initialization.B0 to see if they are reasonable for my lower value of recruitment (and subsequent biomass).
+  
+
+Can you go though my match function and see if there is anything missing?
+
 ## population.csl Questions
 Should \@size_based False be True in population.csl?
 I think it should be False because this is a age-based model.
@@ -126,8 +187,12 @@ Do datass input parameter and estimation.csl line up?
 ### TOA
 
 ```{r, echo=F}
-datass.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/datass_TOA_6_6_19")
-estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_1/casal_estimation.csl")
+library(casal)
+library(earthfish)
+# datass.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/datass_TOA_6_6_19")
+datass.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/datass.Rds")
+estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casal_estimation.csl")
+population.TOA = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casal_population.csl")
 size.class = datass.TOA$class_mins[-length(datass.TOA$class_mins)]
 
 ## TAGS RECAPTURED
@@ -169,8 +234,8 @@ legend("topright", legend = c("OM Scanned", "AM Scanned", "OM catchA", "AM catch
 
 
 ## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
-res.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/res_TOA_31_5_19")
-output.TOA = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_1/casalout_output.log")
+res.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/res.Rds")
+output.TOA = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casalout_output.log")
 est.age.om = res.TOA$pop$n[,,1,,]*2
 est.age.am = output.TOA$Numbers_at_age_R1
 
@@ -180,17 +245,81 @@ points(est.age.am$`1990`, col = "red")
 plot(est.age.om[,"2009"])
 points(est.age.am$`2009`, col = "red")
 
-for (i in 1:20) {
+for (i in 1:21) {
   plot(est.age.om[,i], main = paste0("Year ", i), xlab = "Age", ylab = "Number in Population")
-  points(est.age.am[[i]], col = "red")
+  points(est.age.am[[i]], col = "red", pch = 3)
   legend("topright", legend = c("OM", "AM"), pch = c(1, 3), col = c("black", "red"))
 }
 
 
 ## CALCULATE SSB BY HAND AND COMPARE
+2*sum(res.TOA$pop$n[,"1990",1,1,1] * (1-0.5*res.TOA$mod$h_species[,"1990",1,1,1]) * res.TOA$pop$wt[,"1990",1,1,1] * res.TOA$pop$fec[,"1990",1,1,1])
+2*res.TOA$mod$ssb[,"1990",1,1,1] # Same as res.TOP$mod$ssb0
+# Why are the two above different? -> look into it in run_annual_om()
+
+sum(est.age.am$`1990` * res.TOA$pop$wt[,"1990",1,1,1] * res.TOA$pop$fec[,"1990",1,1,1])
+
+
+
+## TAGS RELEASED
+tags.2007.om = rowSums(res.TOA$tag$tags[,"2007",,1,1,"2007",1]) # by age, summed over sex
+tags.2007.am = as.numeric(population.TOA$`tag[Tags2007_R1_LL]`$number) * as.numeric(population.TOA$`tag[Tags2007_R1_LL]`$props_all) # by length bin
+sum(tags.2007.om)
+sum(tags.2007.am)
+####### WHY AREN't THE OM TAGS SUMMING TO 2500???
+# I think because tag shedding rate and natural mortality is applied?
+
+
+
+## TAGS RELEASED FROM DATASS?
+
+
 
 
 ```
+
+### Hard Calculate SSB
+This r section loads the age frequency data from a single OM and AM run and calculates the SSB with my function.
+It uses the res.Rds results from the OM and the casalout_output.log results from the AM.
+
+```{r}
+## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
+res.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/res.Rds")
+para.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/para.Rds")
+output.TOA = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casalout_output.log")
+output.TOA2 = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/TOA_bug_2_Niter_1000.csv")
+est.age.om = res.TOA$pop$n[,,1,,]*2
+est.age.am = output.TOA$Numbers_at_age_R1
+
+
+
+
+SSB.om = calc_SSB("res", est.age.om, para.TOA$om$growth$f, para.TOA$om$WL$f, para.TOA$om$pin_mat, para.TOA$om$maturity$f)
+SSB.am = calc_SSB("output_log", est.age.am, para.TOA$om$growth$f, para.TOA$om$WL$f, para.TOA$om$pin_mat, para.TOA$om$maturity$f)
+SSB.am2 = output.TOA2[, grep("AM_ssb_", colnames(output.TOA2))]
+SSB.om2 = as.numeric(output.TOA2[nrow(output.TOA2), grep("OM_ssb_R1", colnames(output.TOA2))])
+
+# All the things
+plot(SSB.om, ylim = c(10000, 60000), main = "SSB Calculated Manually")
+points(SSB.am, col = "red", pch = 3)
+points(SSB.am2[nrow(output.TOA2), ], col = "red")
+points(SSB.om2, pch = 3)
+legend("topright", legend = c("Earthfish OM SSB", "Manual OM SSB", "Casal SSB", "Manual Casal SSB"), pch = c(3, 1, 1, 3), col = c("black", "black", "red", "red"))
+
+
+# Just my manual om SSB and casal SSB distribution
+plot_SSB(output.TOA2, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
+points(SSB.om, pch = 3, col = "red")
+
+
+# relative error
+par(mfrow = c(1,3))
+boxplot((SSB.am2[, ncol(SSB.am2)] - SSB.om[length(SSB.om)]) / SSB.om[length(SSB.om)], main = "current", ylim = c(-0.22, 0.02))
+boxplot((SSB.am2[, 1] - SSB.om[1]) / SSB.om[1], main = "initial", ylim = c(-0.22, 0.02))
+boxplot((SSB.am2[, ncol(SSB.am2)]/SSB.am2[, 1] - SSB.om[length(SSB.om)]/SSB.om[1]) / SSB.om[length(SSB.om)]/SSB.om[1], main = "status", ylim = c(-0.22, 0.02))
+
+```
+
 
 CONCLUSION: How on earth does the operating model and subsequently assessment model know the selectivity in length if I provided it in age?
 If it knows it in age, it must have converted it to length somehow to get these proportion scanned and recaptured fish by length. 
@@ -263,23 +392,33 @@ legend("topright", legend = c("OM Scanned", "AM Scanned", "OM catchA", "AM catch
 
 ## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
 res.TOP = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/res_TOP_31_5_19")
-output.TOP = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/casalout_output_TOP_11_6_19.log")
+output.TOP = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/casalout_output2_TOP_11_6_19.log")
 est.age.om = res.TOP$pop$n[,,1,,]*2
 est.age.am = output.TOP$Numbers_at_age_R1
 
-plot(est.age.om[,"1990"])
+plot(est.age.om[,"1990"], ylim = c(0, 1.7e7))
 points(est.age.am$`1990`, col = "red")
 
-plot(est.age.om[,"2009"])
+plot(est.age.om[,"2009"], ylim = c(0, 1.7e7))
 points(est.age.am$`2009`, col = "red")
 
-for (i in 1:20) {
+for (i in 1:21) {
   plot(est.age.om[,i], main = paste0("Year ", i), xlab = "Age", ylab = "Number in Population")
   points(est.age.am[[i]], col = "red")
   legend("topright", legend = c("OM", "AM"), pch = c(1, 3), col = c("black", "red"))
 }
 
 
+## CALCULATE SSB BY HAND AND COMPARE
+2*sum(res.TOP$pop$n[,"1990",1,1,1] * (1-0.5*res.TOP$mod$h_species[,"1990",1,1,1]) * res.TOP$pop$wt[,"1990",1,1,1] * res.TOP$pop$fec[,"1990",1,1,1])
+2*res.TOP$mod$ssb[,"1990",1,1,1] # Same as res.TOP$mod$ssb0
+# Why are the two above different? -> look into it in run_annual_om()
+
+sum(est.age.am$`1990` * res.TOP$pop$wt[,"1990",1,1,1] * res.TOP$pop$fec[,"1990",1,1,1])
+
+
+
+output.TOP$SSBs$SSB
 
 
 ```
@@ -362,7 +501,9 @@ Does frequency of scanned fish in \@tag_recapture Tags2005_R1_R1 match fishing s
 
 
 
-
+## Things I'd like to change in Planetfish
+ * allow assessment model year flexibility
+ * allow turning off of YCS and q.
 
 
 

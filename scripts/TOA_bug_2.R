@@ -1,14 +1,15 @@
-## 23 May 2019 - R 3.5.3 - planetfish2 version 0.6.1
+## 12 June 19 - R 3.5.3 - earthfish version 0.1.0
 
 ## Let's find that bug!
 
-## Script for generating data and casal assessment output using Planetfish2
+## Script for generating data and casal assessment output using earthfish
 ## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect
 ## perfect knowledge of population parameters, correspondence of catch quantity and survey scanns, etc.
 
 
 ## Packages ----
-library(planetfish2)
+# library(planetfish2)
+library(earthfish)
 library(casal)
 library(fishplot)
 
@@ -17,8 +18,8 @@ library(fishplot)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 10
-scenario <- "TOA_bug_1"
+n_iters <- 1000
+scenario <- "TOA_bug_2"
 
 ## define a file name
 file_name <- scenario
@@ -417,7 +418,7 @@ output_log <- para[["control"]]$output_log
 para$scenario$name <- scenario
 
 ## a better way to save the parameters is to save an Rds
-# saveRDS(para, file = paste0(file_path, "baseline_para_PT.Rds"))
+saveRDS(para, file = paste0(para$control$casal_path, "para.Rds"))
 
 ## loop over the number of iterations
 for(i_iter in 1:n_iters){
@@ -431,6 +432,8 @@ for(i_iter in 1:n_iters){
   #### Run Annual OM loops with/without assessment
   #para[["control"]]$pin_casal_assess <- 1
   res <- run_annual_om(para=para, res=res) #, intern=TRUE) #
+  ## Save res object for inspection
+  if(i_iter == 1) saveRDS(res, file = paste0(para$control$casal_path, "res.Rds"))
   ## set output quantities to NULL, could use rm() instead
   ssb <- rec <- SSB0 <- OM_SSB_R1 <- OM_Rec_R1 <- NULL
   ## calculated quantities
@@ -476,8 +479,8 @@ for(i_iter in 1:n_iters){
 
 ### Save Output ----
 ## write to file
-# write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
-#           quote=FALSE, na="NA", row.names=FALSE)
+write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
+          quote=FALSE, na="NA", row.names=FALSE)
 
 
 
@@ -519,8 +522,8 @@ plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(0, 30000))
 
 
 par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(70000, 140000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(70000, 140000))
+plot_SSB(output, item = "OM_ssb_R1", ylim = c(55000, 140000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(55000, 140000))
 
 
 par(mfrow = c(1,2))

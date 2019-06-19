@@ -1,14 +1,16 @@
-## 23 May 2019 - R 3.5.3 - planetfish2 version 0.6.1
+## 18 June 19 - R 3.5.3 - earthfish version 0.1.0
 
 ## Let's find that bug!
+## Different Species
 
-## Script for generating data and casal assessment output using Planetfish2
+## Script for generating data and casal assessment output using earthfish
 ## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect
 ## perfect knowledge of population parameters, correspondence of catch quantity and survey scanns, etc.
 
 
 ## Packages ----
-library(planetfish2)
+# library(planetfish2)
+library(earthfish)
 library(casal)
 library(fishplot)
 
@@ -17,8 +19,8 @@ library(fishplot)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 10
-scenario <- "TOA_bug_1"
+n_iters <- 2
+scenario <- "TOA_bug_3"
 
 ## define a file name
 file_name <- scenario
@@ -36,48 +38,48 @@ getwd()
 
 
 
-### Specify Antarctic toothfish biological parameters ----
+### Specify SPECIES biological parameters ----
 # Ages
-TOA_max_age = 35 # Yates and Ziegler 2018
+TOA_max_age = 12
 
-# Growth. Von Bertalanfy. Yates and Ziegler 2018
-TOA_L_inf = 1565
-TOA_K     = 0.146
-TOA_t_0   = 0.015
-TOA_CV    = 0.122
+# Growth. Von Bertalanfy. https://www.fishbase.se/Summary/SpeciesSummary.php?ID=107&AT=skipjack+tuna
+# 6 months at 40cm: first reach maturity. https://www.iccat.int/Documents/CVSP/CV071_2015/n_1/CV071010221.pdf
+TOA_L_inf = 1080
+TOA_K     = 0.32 # .14 # https://www.iccat.int/Documents/CVSP/CV071_2015/n_1/CV071010221.pdf
+TOA_t_0   = 0 # Guess
+TOA_CV    = 0.122  # Guess
 
-# # Growth. Von Bertalanfy. TOP
-# TOA_L_inf = 2870
-# TOA_K     = 0.02056
-# TOA_t_0   = -4.28970
-# TOA_CV    = 0.100
 
-# Growth. Von Bertalanfy. TOA Mormede et al. 2014
-# TOA_L_inf = 1690.7
-# TOA_K     = 0.093
-# TOA_t_0   = -0.256
-# TOA_CV    = 0.102
 
-# Growth. Von Bertalanfy. TOA Other
-# TOA_L_inf = 2265
-# TOA_K     = 0.093
-# TOA_t_0   = -0.256
-# TOA_CV    = 0.102
-
-# Weight-Length. Yates and Ziegler 2018
+# Weight-Length.
 TOA_wl_c = 3.0088e-12
 TOA_wl_d = 3.2064
 
-# Maturity. Yates and Ziegler 2018
+# Maturity.
 TOA_maturity_ogive = "logistic"
-TOA_a_50 = 14.45 # 14.45
-TOA_a_95 = 6.5  # 6.5
+TOA_a_50 = 3 # Guess
+TOA_a_95 = 2 # Guess
 
-# Natural Mortality. Yates and Ziegler 2018
-TOA_M = 0.13
+# Natural Mortality.
+TOA_M = 0.13 # Guess
 
 # Stock-recruitment Steepness h from Beverton-Holt
-TOA_h = 0.75
+TOA_h = 0.75 # Guess
+
+
+### Plots of LHPs and Selectivity ----
+LL_sel = list(top=4, sigma_left=1, sigma_right=3)
+x = 1:TOA_max_age
+y = calc_VBlen(1:12, x, c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV))
+z = calc_VBweight(1:12, x, c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV), list(a = TOA_wl_c, b = TOA_wl_d))
+m = ogive(TOA_maturity_ogive, x, list(x50 = TOA_a_50, x95 = TOA_a_95))
+s = ogive("dbnormal", x, LL_sel)
+par(mfrow = c(2,2))
+plot(x, y, type = "l", main = "Skipjack VB Length", xlab = "Age", ylab = "Length")
+plot(x, z, type = "l", main = "Skipjack VB Weight", xlab = "Age", ylab = "Weight")
+plot(x, m, type = "l", main = "Skipjack Maturity", xlab = "Age", ylab = "Probability Mature")
+plot(x, s, type = "l", main = "Skipjack Selectivity", xlab = "Age", ylab = "Probability Selected")
+
 
 
 
@@ -115,7 +117,7 @@ n_years_tags = 5 # 5
 tag_years = (study_year_range[2] - n_years_tags + 1):study_year_range[2] - 1
 
 ## define longline selectivity
-LL_sel <- list(top=10, sigma_left=2, sigma_right=10)
+LL_sel <- list(top=4, sigma_left=1, sigma_right=3) # https://www.wcpfc.int/node/27490
 ## add a logistic selectivity
 
 
@@ -417,7 +419,7 @@ output_log <- para[["control"]]$output_log
 para$scenario$name <- scenario
 
 ## a better way to save the parameters is to save an Rds
-# saveRDS(para, file = paste0(file_path, "baseline_para_PT.Rds"))
+saveRDS(para, file = paste0(para$control$casal_path, "para.Rds"))
 
 ## loop over the number of iterations
 for(i_iter in 1:n_iters){
@@ -431,6 +433,8 @@ for(i_iter in 1:n_iters){
   #### Run Annual OM loops with/without assessment
   #para[["control"]]$pin_casal_assess <- 1
   res <- run_annual_om(para=para, res=res) #, intern=TRUE) #
+  ## Save res object for inspection
+  if(i_iter == 1) saveRDS(res, file = paste0(para$control$casal_path, "res.Rds"))
   ## set output quantities to NULL, could use rm() instead
   ssb <- rec <- SSB0 <- OM_SSB_R1 <- OM_Rec_R1 <- NULL
   ## calculated quantities
@@ -491,8 +495,8 @@ plot_SSB(output, item = "AM_ssb_", mean = F)
 
 
 par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(9000, 60000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
+plot_SSB(output, item = "OM_ssb_R1", ylim = c(5000, 70000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(5000, 70000))
 
 
 
@@ -519,8 +523,8 @@ plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(0, 30000))
 
 
 par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(70000, 140000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(70000, 140000))
+plot_SSB(output, item = "OM_ssb_R1", ylim = c(55000, 140000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(55000, 140000))
 
 
 par(mfrow = c(1,2))
