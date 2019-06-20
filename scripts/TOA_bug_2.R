@@ -11,14 +11,13 @@
 # library(planetfish2)
 library(earthfish)
 library(casal)
-library(fishplot)
 
 ## House ----
 
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 1000
+n_iters <- 301
 scenario <- "TOA_bug_2"
 
 ## define a file name
@@ -96,11 +95,11 @@ no_fish_range = 1 ##** Don't fish the first 10 years
 
 R_mu <- 1e6 # 1e6
 ## recruitment variability
-R_sigma <- 0 ############################################### 3e-01
+R_sigma <- 3e-1 ############################################### 3e-01
 
 
 # Total catch across single area
-total_catch <- 6000
+total_catch <- 1000
 
 
 ########## SAMPLING
@@ -389,6 +388,11 @@ dim_names	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years),
                paste0("AM_rec_", para$om$years),
                "SelLL_P1", "SelLL_P2", "SelLL_P3", "Starting_AM_B0")
 
+
+## specify objects to save simulation outputs
+dim_names2	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years),
+               "AM_ssb0_",paste0("AM_ssb_", para$om$years))
+
 # #################################################################### add different dim_names if using AT selectivity
 # dim_names	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years), paste0("OM_ssb_R2_",para$om$years),
 #                paste0("OM_rec_R1_", para$om$years), paste0("OM_rec_R2_", para$om$years),
@@ -397,10 +401,13 @@ dim_names	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years),
 #
 
 dim_length <- length(dim_names)
+dim_length2 = length(dim_names2)
 
 ## construct the output array
 output <- array(data = 0, dim = c(n_iters, dim_length),
                 dimnames = list("Iter"=1:n_iters, dim_names))
+output2 = array(data = 0, dim = c(n_iters, dim_length2),
+                dimnames = list("Iter"=1:n_iters, dim_names2))
 ## some conveniences for accessing arrays in the OM
 R1 <- 1
 S1 <- para$om$season[2]
@@ -443,15 +450,18 @@ for(i_iter in 1:n_iters){
   ## Spawning Biomass
   OM_SSB0 <- res$mod$ssb0
   OM_SSB_R1 <- apply(ssb[1,,,S1,R1],c(1),sum)
+  OM_SSB_R12 = rowSums(calc_SSB("res", res$pop$n, para$om$growth$f, para$om$WL$f, para$om$pin_mat, para$om$maturity$f))
   ## Recruitment
   OM_Rec_R1 <- apply(rec[1,,,S1,R1],c(1),sum)
   ##*** Potentially add selectivity, however, perhaps not required
   ## length of output
   om_ncols <- length(OM_SSB0) + length(OM_SSB_R1) + length(OM_Rec_R1)
+  om_ncols2 = length(OM_SSB0) + length(OM_SSB_R12)
   # apply(ssb(stock)[,,,om$season[2],],c(2),sum)
   ##** I actually want the value for area 1 in my simulations
   ##** I'll need to sum up ssb for the first year and area (example below)
   output[i_iter, 1:om_ncols] <- c(OM_SSB0, OM_SSB_R1, OM_Rec_R1)
+  output2[i_iter, 1:om_ncols2] = c(OM_SSB0, OM_SSB_R12)
   ## add the AM output if it exists for this iteration
   if(file.exists(paste0(casal_path, para[["control"]]$mpd_dat)) &
      length(scan(file = paste0(casal_path, para[["control"]]$mpd_dat),
@@ -469,6 +479,7 @@ for(i_iter in 1:n_iters){
     }else AM_SelLL <- c(0, 0, 0, 0)
     ## add the rest of the output
     output[i_iter, (om_ncols+1):ncol(output)] <- c(AM_SSB0, AM_SSB_R1, AM_Rec_R1, AM_SelLL)
+    output2[i_iter, (om_ncols2+1):ncol(output2)] = c(AM_SSB0, AM_SSB_R1)
   }
   # print(round(c(OM_SSB0, OM_SSB_R1, OM_SSB_R2, OM_Rec_R1, OM_Rec_R2),0))
   # print(round(c(AM_SSB0, AM_SSB_R1, AM_Rec_R1, AM_SelLL),0))
@@ -479,30 +490,61 @@ for(i_iter in 1:n_iters){
 
 ### Save Output ----
 ## write to file
-write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
-          quote=FALSE, na="NA", row.names=FALSE)
+# write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
+#           quote=FALSE, na="NA", row.names=FALSE)
+#
+# write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
+#           quote=FALSE, na="NA", row.names=FALSE)
 
 
 
 
 ################################## BS Plots ----
 
-library(fishplot)
+
 par(mfrow = c(1,2))
 plot_SSB(output, item = "OM_ssb_R1")
 plot_SSB(output, item = "AM_ssb_", mean = F)
 
 
 par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(9000, 60000))
+plot_SSB(output, item = "OM_ssb_R1", mean = F, ylim = c(9000, 60000))
 plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
 
 
-
-
-temp = read.csv("TOA_bug_1_Niter_1000.csv")
+# With Recruitment Variability
+temp = read.csv("TOA_bug_2_Niter_301output2.csv")
 par(mfrow = c(1,2))
-plot_SSB(temp, item = "OM_ssb_R1", ylim = c(9000, 60000), main = "TOA_bug_1_Niter_1000")
+plot_SSB(temp, item = "OM_ssb_R1", mean = F, ylim = c(9000, 60000))
+plot_SSB(temp, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
+
+
+par(mfrow = c(1,3))
+plot_SSB_err(temp, type = "initial")
+plot_SSB_err(temp, type = "current")
+plot_SSB_err(temp, type = "status")
+
+boxplot(temp[,"OM_ssb_R1_1990"])
+boxplot(temp[, "AM_ssb_1990"])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+temp = read.csv("TOA_bug_2_Niter_20.csv")
+par(mfrow = c(1,2))
+plot_SSB(temp, item = "OM_ssb_R1", ylim = c(9000, 60000), main = "TOA_bug_2_Niter_20")
 plot_SSB(temp, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
 
 

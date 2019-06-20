@@ -129,6 +129,8 @@ Propose plan for Paul
 
 Make more diagnostic plot functions to explore the om results vs am results.
 Generalize these to accept multiple types of data.
+Made some in diagnostics.R
+
 
 Add switch that creates csl files but doesn't run the assessment.
 para\$control\$pin_generate_casal_files
@@ -155,7 +157,18 @@ I changed this to be calculated at the very end of OM loop, The discrepency was 
 I tried manually calculating SSB (see below) for the OM and it does better at matching the AM for initial 
   
   
-  
+Try lowering catch to 1000 tonnes
+Manual OM SSB matches casal SSB mutch better!
+
+
+Try calculating SSB at end of run_annual_om() loop again but without h_species.
+This had better agreement with AM but did not match exactly with my manual SSB. How could this be?
+Ran again with 200 runs and there wasn't great agreement between OM and AM SSB but there was pretty good
+agreement between the manual and built in OM SSB. WFT?
+
+
+Try reverting back to the original built in SSB method.
+
   
   
 #### For Paul
@@ -191,11 +204,11 @@ library(casal)
 library(earthfish)
 # datass.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/datass_TOA_6_6_19")
 # datass.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/datass.Rds")
-datass.TOA = readRDS("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/datass.Rds")
+datass.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/datass.Rds")
 # estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casal_estimation.csl")
-estimation = extract.csl.file("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casal_estimation.csl")
+estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casal_estimation.csl")
 # population.TOA = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casal_population.csl")
-population.TOA = extract.csl.file("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casal_population.csl")
+population.TOA = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casal_population.csl")
 
 size.class = datass.TOA$class_mins[-length(datass.TOA$class_mins)]
 
@@ -238,8 +251,8 @@ legend("topright", legend = c("OM Scanned", "AM Scanned", "OM catchA", "AM catch
 
 
 ## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
-res.TOA = readRDS("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/res.Rds")
-output.TOA = extract.quantities("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casalout_output.log")
+res.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/res.Rds")
+output.TOA = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casalout_output.log")
 est.age.om = res.TOA$pop$n[,,1,,]*2
 est.age.am = output.TOA$Numbers_at_age_R1
 
@@ -288,10 +301,10 @@ It uses the res.Rds results from the OM and the casalout_output.log results from
 
 ```{r}
 ## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
-res.TOA = readRDS("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/res.Rds")
-para.TOA = readRDS("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/para.Rds")
-output.TOA = extract.quantities("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casalout_output.log")
-output.TOA2 = read.csv("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/TOA_bug_2_Niter_1000.csv")
+res.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/res.Rds")
+para.TOA = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/para.Rds")
+output.TOA = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/casalout_output.log")
+output.TOA2 = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_2/TOA_bug_2_Niter_300.csv")
 est.age.om = res.TOA$pop$n[,,1,,]*2
 est.age.am = output.TOA$Numbers_at_age_R1
 
@@ -306,7 +319,7 @@ SSB.om2 = as.numeric(output.TOA2[nrow(output.TOA2), grep("OM_ssb_R1", colnames(o
 # All the things
 plot(SSB.om, ylim = c(10000, 60000), main = "SSB Calculated Manually")
 points(SSB.am, col = "red", pch = 3)
-points(SSB.am2[nrow(output.TOA2), ], col = "red")
+points(as.numeric(SSB.am2[nrow(output.TOA2), ]), col = "red")
 points(SSB.om2, pch = 3)
 legend("topright", legend = c("Earthfish OM SSB", "Manual OM SSB", "Casal SSB", "Manual Casal SSB"), pch = c(3, 1, 1, 3), col = c("black", "black", "red", "red"))
 
@@ -354,8 +367,8 @@ Why does datass.TOA\$survey_age_n exist when there is no survey age stuff in par
 
 ### TOP
 ```{r, echo=F}
-datass.TOP = readRDS("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Comparisons/datass_TOP_6_6_19")
-estimation = extract.csl.file("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Comparisons/casal_estimation_TOP.csl")
+datass.TOP = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/datass_TOP_6_6_19")
+estimation = extract.csl.file("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/casal_estimation_TOP.csl")
 size.class = datass.TOP$class_mins[-length(datass.TOP$class_mins)]
 
 ## TAGS RECAPTURED
@@ -395,8 +408,8 @@ legend("topright", legend = c("OM Scanned", "AM Scanned", "OM catchA", "AM catch
 
 
 ## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
-res.TOP = readRDS("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Comparisons/res_TOP_31_5_19")
-output.TOP = extract.quantities("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Comparisons/casalout_output2_TOP_11_6_19.log")
+res.TOP = readRDS("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/res_TOP_31_5_19")
+output.TOP = extract.quantities("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Comparisons/casalout_output2_TOP_11_6_19.log")
 est.age.om = res.TOP$pop$n[,,1,,]*2
 est.age.am = output.TOP$Numbers_at_age_R1
 

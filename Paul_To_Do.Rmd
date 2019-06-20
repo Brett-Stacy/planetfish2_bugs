@@ -1,0 +1,43 @@
+---
+title: "Hunt Strategy"
+author: "Brett Stacy"
+date: "19 June 2019"
+output: pdf_document
+---
+
+```{r, echo=F}
+library(casal)
+library(earthfish)
+```
+
+
+
+## Tasks for Paul
+
+### 1.
+Run TOA_bug_1.R for one iteration (don't run plot chunk at end). OK to change file path.
+
+look at the warnings at the end. Does the one about NAs mean anything to you?
+
+
+
+### 2. 
+the thing with tag age frequency overlaping catch not matching up.
+
+
+
+### 3.
+Can you go through the settings related to biomass like para\$ass\$estim_initialization.B0 to see if they are reasonable for my lower value of recruitment (and subsequent biomass).
+  
+  
+  
+### 4. 
+Can you go though my match function and see if there is anything missing?
+
+
+### 5. 
+Only when I manually calculate SSB for the OM does it line up with the SSB from CASAL. Why would this be the case for TOA and not for TOP?
+
+
+### 6.
+Why in res output do all ssb0 calculation methods equal the same number?
