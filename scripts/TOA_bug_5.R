@@ -1,7 +1,7 @@
-## 18 June 19 - R 3.5.3 - earthfish version 0.1.0
+## 24 June 19 - R 3.5.3 - earthfish version 0.1.0
 
 ## Let's find that bug!
-## Different Species - Skipjack Tuna
+## same as TOA_bug_2.R but for implementing equilibrium wind-up years before CASAL assessment.
 
 ## Script for generating data and casal assessment output using earthfish
 ## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect
@@ -12,15 +12,14 @@
 # library(planetfish2)
 library(earthfish)
 library(casal)
-library(fishplot)
 
 ## House ----
 
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 200
-scenario <- "TOA_bug_3"
+n_iters <- 100
+scenario <- "TOA_bug_5"
 
 ## define a file name
 file_name <- scenario
@@ -38,48 +37,48 @@ getwd()
 
 
 
-### Specify SPECIES biological parameters ----
+### Specify Antarctic toothfish biological parameters ----
 # Ages
-TOA_max_age = 12
+TOA_max_age = 35 # Yates and Ziegler 2018
 
-# Growth. Von Bertalanfy. https://www.fishbase.se/Summary/SpeciesSummary.php?ID=107&AT=skipjack+tuna
-# 6 months at 40cm: first reach maturity. https://www.iccat.int/Documents/CVSP/CV071_2015/n_1/CV071010221.pdf
-TOA_L_inf = 1080
-TOA_K     = 0.32 # .14 # https://www.iccat.int/Documents/CVSP/CV071_2015/n_1/CV071010221.pdf
-TOA_t_0   = 0 # Guess
-TOA_CV    = 0.122  # Guess
+# Growth. Von Bertalanfy. Yates and Ziegler 2018
+TOA_L_inf = 1565
+TOA_K     = 0.146
+TOA_t_0   = 0.015
+TOA_CV    = 0.122
 
+# # Growth. Von Bertalanfy. TOP
+# TOA_L_inf = 2870
+# TOA_K     = 0.02056
+# TOA_t_0   = -4.28970
+# TOA_CV    = 0.100
 
+# Growth. Von Bertalanfy. TOA Mormede et al. 2014
+# TOA_L_inf = 1690.7
+# TOA_K     = 0.093
+# TOA_t_0   = -0.256
+# TOA_CV    = 0.102
 
-# Weight-Length.
+# Growth. Von Bertalanfy. TOA Other
+# TOA_L_inf = 2265
+# TOA_K     = 0.093
+# TOA_t_0   = -0.256
+# TOA_CV    = 0.102
+
+# Weight-Length. Yates and Ziegler 2018
 TOA_wl_c = 3.0088e-12
 TOA_wl_d = 3.2064
 
-# Maturity.
+# Maturity. Yates and Ziegler 2018
 TOA_maturity_ogive = "logistic"
-TOA_a_50 = 3 # Guess
-TOA_a_95 = 2 # Guess
+TOA_a_50 = 14.45 # 14.45
+TOA_a_95 = 6.5  # 6.5
 
-# Natural Mortality.
-TOA_M = 0.13 # Guess
+# Natural Mortality. Yates and Ziegler 2018
+TOA_M = 0.13
 
 # Stock-recruitment Steepness h from Beverton-Holt
-TOA_h = 0.75 # Guess
-
-
-### Plots of LHPs and Selectivity ----
-LL_sel = list(top=4, sigma_left=1, sigma_right=3)
-x = 1:TOA_max_age
-y = calc_VBlen(1:12, x, c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV))
-z = calc_VBweight(1:12, x, c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV), list(a = TOA_wl_c, b = TOA_wl_d))
-m = ogive(TOA_maturity_ogive, x, list(x50 = TOA_a_50, x95 = TOA_a_95))
-s = ogive("dbnormal", x, LL_sel)
-par(mfrow = c(2,2))
-plot(x, y, type = "l", main = "Skipjack VB Length", xlab = "Age", ylab = "Length")
-plot(x, z, type = "l", main = "Skipjack VB Weight", xlab = "Age", ylab = "Weight")
-plot(x, m, type = "l", main = "Skipjack Maturity", xlab = "Age", ylab = "Probability Mature")
-plot(x, s, type = "l", main = "Skipjack Selectivity", xlab = "Age", ylab = "Probability Selected")
-
+TOA_h = 0.75
 
 
 
@@ -91,14 +90,14 @@ plot(x, s, type = "l", main = "Skipjack Selectivity", xlab = "Age", ylab = "Prob
 ## mean recruitment
 
 ########## STUDY PERIOD
-study_year_range = c(1990, 2010) # c(1968, 2018)
-no_fish_range = 1 ##** Don't fish the first 10 years
+study_year_range = c(1959, 2018) # c(1959, 2018)
+no_fish_range = 40 ##** Don't fish the first 40 years so pop reaches equilibrium
 
 
 R_mu <- 1e6 # 1e6
 ## recruitment variability
 R_sigma <- 3e-1 ############################################### 3e-01
-
+B0_calc_method = "casal" # one of "casal", "stoch", or "init_age"
 
 # Total catch across single area
 total_catch <- 1000
@@ -117,7 +116,7 @@ n_years_tags = 5 # 5
 tag_years = (study_year_range[2] - n_years_tags + 1):study_year_range[2] - 1
 
 ## define longline selectivity
-LL_sel <- list(top=4, sigma_left=1, sigma_right=3) # https://www.wcpfc.int/node/27490
+LL_sel <- list(top=10, sigma_left=2, sigma_right=10)
 ## add a logistic selectivity
 
 
@@ -125,7 +124,13 @@ LL_sel <- list(top=4, sigma_left=1, sigma_right=3) # https://www.wcpfc.int/node/
 ## specify the default parameters
 para	<- get_om_data()
 
+# Set assessment year to last year of study year range
+para$control$Assyr = study_year_range[2]
 
+# define study period
+para$om$year = study_year_range
+para$om$years = study_year_range[1]:study_year_range[2]
+para$om$n_years = length(para$om$years)
 
 # Set age parameters
 para$om$age = c(1, TOA_max_age)
@@ -161,7 +166,11 @@ para$om$region <- c(1,1)
 para$om$regions <- c(1)
 para$om$n_regions <- length(para$om$regions)
 
-## B0 is determined by method 3
+## B0 is determined by method 1,2, or 3
+para$om$B0_calculation_method = B0_calc_method
+
+
+
 ## redefine the fisheries
 para$om$fishery <- c("LL1")
 para$om$n_fisheries <- length(para$om$fishery)
@@ -178,7 +187,7 @@ para$om$catch	<- array(data=0, dim=c(para$om$n_years, para$om$n_fisheries,
                                      "Season"=para$om$seasons,"Region"=para$om$regions))
 ## fille the arrays with the catch in the specified proportions
 para$om$catch[,"LL1", 1,1]	<- rep(total_catch, para$om$n_years)
-para$om$catch[1,,,]	 		<- 0		# Catch in first year set to 0, such that SSB in first year is unfished biomass
+para$om$catch[1:no_fish_range,,,]	 		<- 0		# Catch in first year set to 0, such that SSB in first year is unfished biomass
 
 ## overwrite the effort (not sure it is used)
 para$om$effort <- para$om$catch
@@ -189,7 +198,7 @@ para$om$catchsplits	<- array(data=0, dim=c(para$om$n_years, para$om$n_fisheries,
                              dimnames=list("Year"=para$om$years,"Fishery"=para$om$fishery,
                                            "Season"=para$om$seasons,"Region"=para$om$regions))
 para$om$catchsplits[,"LL1", 1,1] <- rep(1, para$om$n_years)
-para$om$catchsplits[1,,,]	<- 0		# Catch in first year set to 0, such that SSB in first year is unfished biomass
+para$om$catchsplits[1:no_fish_range,,,]	<- 0		# Catch in first year set to 0, such that SSB in first year is unfished biomass
 
 ## remove Trawl selectivity
 ##** better to just specify the complete selectivity
@@ -373,6 +382,37 @@ para$ass$estim_recruitment.YCS[[3]] = rep(1, para$om$n_years)
 # res <- run_annual_om(para, res=res, FALSE)
 
 
+## play with years. From get_casal_para() BS: 24/06/19 ----
+
+para$ass$year = c(1998, 2018, 21)
+para$ass$years = 1998:2018
+para$ass$sample_years = am_sampling(years = para$ass$years,
+                                    ycurr = para$ass$year[2],
+                                    catchage_yrs = age_years,
+                                    catchlen_yrs = len_years,
+                                    tagging_yrs = tag_years)$sample_years ##** This is the range of years various sampling (sizing, ageing, tagging, etc.) took place. note, when long year range, tagging row doesn't show up when print.
+
+para$ass$rec_YCS_years         = para$ass$years - para$ass$rec_y_enter
+para$ass$rec_YCS               = rep(1,length(para$ass$years))
+para$ass$rec_first_free        = para$ass$year[1] - para$ass$rec_y_enter
+para$ass$rec_last_free         = para$ass$year[2] - para$ass$rec_y_enter - para$ass$years_to_recruit - 2
+para$ass$rec_first_random_year = para$ass$rec_last_free + 1
+para$ass$rec_year_range        = c(para$ass$rec_first_free, para$ass$rec_last_free)
+para$ass$rec_year_range_N      = length(para$ass$rec_first_free:para$ass$rec_last_free)
+datass$estim_recruitment.YCS <- list()
+
+para$ass$estimate_selectivity = NULL
+para$ass$estim_recruitment.YCS[[2]] = rep(1, length(para$ass$years))
+para$ass$estim_recruitment.YCS[[3]] = rep(1, length(para$ass$years))
+
+######### CONCLUSION:   Can't mess with years of AM because para$om$years is used in get_casal_para() and get_casal_data() and run_annual_om() I THINK. double check. But the fact
+#########               Remains that unless something is changed about setting am survey or sample years, I cannot have different om/am years.
+
+
+
+
+
+
 ## Check if OM matches AM parameters ----
 ## source check_lhps and check the life history parameters
 # source("../../check_lhps.R")
@@ -386,14 +426,14 @@ check_match(para)
 ## specify objects to save simulation outputs
 dim_names	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years),
                paste0("OM_rec_R1_", para$om$years),
-               "AM_ssb0_",paste0("AM_ssb_", para$om$years),
-               paste0("AM_rec_", para$om$years),
+               "AM_ssb0_",paste0("AM_ssb_", seq(para$control$Assyr_range[1], para$control$Assyr_range[2])),
+               paste0("AM_rec_", seq(para$control$Assyr_range[1], para$control$Assyr_range[2])),
                "SelLL_P1", "SelLL_P2", "SelLL_P3", "Starting_AM_B0")
 
 
 ## specify objects to save simulation outputs
 dim_names2	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years),
-                "AM_ssb0_",paste0("AM_ssb_", para$om$years))
+               "AM_ssb0_",paste0("AM_ssb_", seq(para$control$Assyr_range[1], para$control$Assyr_range[2])))
 
 # #################################################################### add different dim_names if using AT selectivity
 # dim_names	<- c("OM_ssb0", paste0("OM_ssb_R1_", para$om$years), paste0("OM_ssb_R2_",para$om$years),
@@ -452,6 +492,7 @@ for(i_iter in 1:n_iters){
   ## Spawning Biomass
   OM_SSB0 <- res$mod$ssb0
   OM_SSB_R1 <- apply(ssb[1,,,S1,R1],c(1),sum)
+  OM_SSB_R12 = rowSums(calc_SSB("res", res$pop$n, para$om$growth$f, para$om$WL$f, para$om$pin_mat, para$om$maturity$f))
   ## Recruitment
   OM_Rec_R1 <- apply(rec[1,,,S1,R1],c(1),sum)
   ##*** Potentially add selectivity, however, perhaps not required
@@ -499,53 +540,18 @@ write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output
 
 
 
+
 ################################## BS Plots ----
 
-library(fishplot)
+
 par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1")
+plot_SSB(output, item = "OM_ssb_R1_")
 plot_SSB(output, item = "AM_ssb_", mean = F)
 
 
 par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", mean = F, ylim = c(5000, 70000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(5000, 70000))
-
-
-
-
-temp1 = read.csv("TOA_bug_3_Niter_200.csv")
-library(fishnostics2)
-years = 1990:2010
-true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
-est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
-
-colnames(true_ssb1) = years
-plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
-legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
-       col=c("blue", "red"), lty=c(2,1), lwd=2, bty="n")
-
-
-temp2 = read.csv("TOA_bug_3_Niter_200output2.csv")
-library(fishnostics2)
-years = 1990:2010
-true_ssb1 = temp2[, grep("OM_ssb_R1", colnames(temp2))]
-est_ssb1 = temp2[, grep("AM_ssb_", colnames(temp2))]
-
-colnames(true_ssb1) = years
-plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
-legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
-       col=c("blue", "red"), lty=c(2,1), lwd=2, bty="n")
-
-
-
-
-
-
-
-
-
-
+plot_SSB(output, item = "OM_ssb_R1", mean = F, ylim = c(30000, 60000), xlim = c(35, 60))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(30000, 60000))
 
 
 

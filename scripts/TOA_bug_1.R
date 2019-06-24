@@ -123,7 +123,7 @@ LL_sel <- list(top=10, sigma_left=2, sigma_right=10)
 ## specify the default parameters
 para	<- get_om_data()
 
-
+para$control$Assyr_range = para$om$year
 
 # Set age parameters
 para$om$age = c(1, TOA_max_age)
@@ -236,7 +236,7 @@ para$sampling$tag_select[[para$om$fishery[1]]] <- para$om$select[[para$om$fisher
 ## age 1000 fish in Region 1
 para$sampling$catchage_N <- 1000 # 1000
 #### BS 30/05/19 add catchlen_N too
-para$sampling$catchlen_N = 1000 # 1000
+# para$sampling$catchlen_N = 1000 # 1000
 
 
 

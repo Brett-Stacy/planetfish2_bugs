@@ -240,7 +240,7 @@ para$sampling$tag_select[[para$om$fishery[1]]] <- para$om$select[[para$om$fisher
 ## age 1000 fish in Region 1
 para$sampling$catchage_N <- 1000 # 1000
 #### BS 30/05/19 add catchlen_N too
-para$sampling$catchlen_N = 1000 # 1000
+# para$sampling$catchlen_N = 1000 # 1000
 
 
 

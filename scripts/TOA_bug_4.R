@@ -41,17 +41,17 @@ getwd()
 # Ages
 TOA_max_age = 35 # Ziegler 2017
 
-# # Growth. Von Bertalanfy. Ziegler 2017
-# TOA_L_inf = 1605 
-# TOA_K     = 0.049
-# TOA_t_0   = -3.64
-# TOA_CV    = 0.131
+# Growth. Von Bertalanfy. Ziegler 2017
+TOA_L_inf = 1605
+TOA_K     = 0.049
+TOA_t_0   = -3.64
+TOA_CV    = 0.131
 
-# Growth. Von Bertalanfy. TOP
-TOA_L_inf = 2870
-TOA_K     = 0.02056
-TOA_t_0   = -4.28970
-TOA_CV    = 0.100
+# # Growth. Von Bertalanfy. TOP
+# TOA_L_inf = 2870
+# TOA_K     = 0.02056
+# TOA_t_0   = -4.28970
+# TOA_CV    = 0.100
 
 # Growth. Von Bertalanfy. TOA Mormede et al. 2014
 # TOA_L_inf = 1690.7
@@ -241,7 +241,7 @@ para$sampling$tag_select[[para$om$fishery[1]]] <- para$om$select[[para$om$fisher
 ## age 1000 fish in Region 1
 para$sampling$catchage_N <- 1000 # 1000
 #### BS 30/05/19 add catchlen_N too
-para$sampling$catchlen_N = 1000 # 1000
+# para$sampling$catchlen_N = 1000 # 1000
 
 
 

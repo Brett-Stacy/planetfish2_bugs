@@ -13,6 +13,11 @@ library(earthfish)
 
 
 ## Tasks for Paul
+
+### 
+Try my TOA_bug_5.R and figure out why my assessment year implementation isn't working. Tag recaptures not showing up in outputlog.
+
+
 ### 
 By the end of the week, please run your model with flounder life history parameters. Or perhaps updated TOP LHPs. Either way, run a scenario you know worked for your TOP migration paper but with different LHPs and plot the SSB for OM and AM. 
 

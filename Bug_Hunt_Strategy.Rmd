@@ -24,6 +24,13 @@ library(casal)
   * Compare extracted arrays to catch
   
   * Determine where para$sampling$catchage_N and para$sampling$catchlen_N show up in CASAL output.
+  
+## Script Tracker
+TOA_bug_1.R - TOA just as it was from single_region_TOA_baseline.R
+TOA_bug_2.R - TOA script after changing YCS in earthfish to allow different prior bound inputs
+TOA_bug_3.R - Skipjack Tuna LHPs
+TOA_bug_4.R - TOP with updated LHPs
+TOA_bug_5.R - same as TOA_bug_2.R except now implementing equilibrium wind-up years before CASAL assessment.
 
 
 
@@ -202,6 +209,9 @@ Along with the trial for Skipjack Tuna, This means that my calc SSB method is no
   
   
 
+Try changing assessment years.
+Current problem: tag recaptures not showing up in outputlog.
+come back to it at: datass.TOA\$Rec_data  why aren't there recaptures?? look at M3_CASAL1_Data.r
 
 
 
