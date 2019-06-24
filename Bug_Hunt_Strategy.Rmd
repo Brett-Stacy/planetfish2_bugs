@@ -111,12 +111,27 @@ Change recruitment YCS to not be estimated:
 Tried changing prior bounds in para\$ass\$estim_recruitment.YCS: 
 CONCLUSION: Not translating to casal_out.log. Not even translating into datass before assessment files created. 
 
+
+Try changing to B0 est method = "stoch"
+Didn't change anything
+
+
+Try changing to B0 est method = "init_age"
+Didn't change much, got a little worse
+
+
+
+
   
   
 ### After meeting with Paul 12/6
 Try another set of LHPs, maybe mackrel (short lived)
-TOA_bug_3.R
+TOA_bug_3.R - skipjack tuna
 CONCLUSION: They agree pretty well, except for overestimation of SSB0. The precision is extremely good. I think this is because there are very many tagged fish being recaptured.
+DOUBLE CHECK THIS WITH MORE ITERATIONS
+With 200 iterations, there is POOR agreement, even with my calculation of SSB! This is really bad because it means I cannot use my calc of SSB for just any species. It may only work for TOA for the scenario I tried!
+
+
 
 Fork Planetfish DONE
 
@@ -167,20 +182,28 @@ Ran again with 200 runs and there wasn't great agreement between OM and AM SSB b
 agreement between the manual and built in OM SSB. WFT?
 
 
-Try reverting back to the original built in SSB method.
+Try reverting back to the original built-in SSB method.
+this is better I think, just ignore it's calculation and calculate my own SSB...?
+Would this effect next year's recruitment calculation?
 
+
+Try increasing tags to 4500 and tag duration to 10 years to see if SSB estimation improves:
+YES, it improves, it is spot on with initial, but off a little with current SSB. 
+
+
+Try with TOP updated LHPs - TOA_bug_4.R     100 iters
+It does OK with internal SSB calculation but not great. 
+It does better with my SSB calculation. It does really well with current, but not as well with initial.
+
+
+Try with TOP updated LHPs but with old Growth - TOA_bug_4.R    201 iters
+It does better than above with internal SSB calc, but much worse with my SSB calc
+Along with the trial for Skipjack Tuna, This means that my calc SSB method is not reliably better or accurate. 
   
-  
-#### For Paul
-Why would numbers at age agree so well but SSB doesn't agree?
-Are the time steps SSB is calculated the same between OM and CASAL?
-Are the methods the same?
-  
-  
-Can you go through the settings related to biomass like para\$ass\$estim_initialization.B0 to see if they are reasonable for my lower value of recruitment (and subsequent biomass).
   
 
-Can you go though my match function and see if there is anything missing?
+
+
 
 ## population.csl Questions
 Should \@size_based False be True in population.csl?

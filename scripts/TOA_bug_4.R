@@ -1,6 +1,7 @@
-## 12 June 19 - R 3.5.3 - earthfish version 0.1.0
+## 24 June 19 - R 3.5.3 - earthfish version 0.1.0
 
 ## Let's find that bug!
+## Different Species - Patagonian toothfish with updated LHPs.
 
 ## Script for generating data and casal assessment output using earthfish
 ## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect
@@ -17,8 +18,8 @@ library(casal)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 101
-scenario <- "TOA_bug_2"
+n_iters <- 300
+scenario <- "TOA_bug_4"
 
 ## define a file name
 file_name <- scenario
@@ -36,21 +37,21 @@ getwd()
 
 
 
-### Specify Antarctic toothfish biological parameters ----
+### Specify Patagonian toothfish biological parameters ----
 # Ages
-TOA_max_age = 35 # Yates and Ziegler 2018
+TOA_max_age = 35 # Ziegler 2017
 
-# Growth. Von Bertalanfy. Yates and Ziegler 2018
-TOA_L_inf = 1565
-TOA_K     = 0.146
-TOA_t_0   = 0.015
-TOA_CV    = 0.122
+# # Growth. Von Bertalanfy. Ziegler 2017
+# TOA_L_inf = 1605 
+# TOA_K     = 0.049
+# TOA_t_0   = -3.64
+# TOA_CV    = 0.131
 
-# # Growth. Von Bertalanfy. TOP
-# TOA_L_inf = 2870
-# TOA_K     = 0.02056
-# TOA_t_0   = -4.28970
-# TOA_CV    = 0.100
+# Growth. Von Bertalanfy. TOP
+TOA_L_inf = 2870
+TOA_K     = 0.02056
+TOA_t_0   = -4.28970
+TOA_CV    = 0.100
 
 # Growth. Von Bertalanfy. TOA Mormede et al. 2014
 # TOA_L_inf = 1690.7
@@ -64,17 +65,17 @@ TOA_CV    = 0.122
 # TOA_t_0   = -0.256
 # TOA_CV    = 0.102
 
-# Weight-Length. Yates and Ziegler 2018
-TOA_wl_c = 3.0088e-12
+# Weight-Length. Ziegler 2017
+TOA_wl_c = 2.59e-12
 TOA_wl_d = 3.2064
 
-# Maturity. Yates and Ziegler 2018
+# Maturity. Ziegler 2017
 TOA_maturity_ogive = "logistic"
-TOA_a_50 = 14.45 # 14.45
-TOA_a_95 = 6.5  # 6.5
+TOA_a_50 = 13.9 # 14.45
+TOA_a_95 = 13.7  # 6.5
 
 # Natural Mortality. Yates and Ziegler 2018
-TOA_M = 0.13
+TOA_M = 0.155
 
 # Stock-recruitment Steepness h from Beverton-Holt
 TOA_h = 0.75
@@ -109,9 +110,9 @@ age_years = if(n_years_aged == 0) NULL else((study_year_range[2] - n_years_aged)
 n_years_lengthed = 0
 len_years = if(n_years_lengthed == 0) NULL else((study_year_range[2] - n_years_lengthed):study_year_range[2])
 # The number of tags released in area 1 each year ##### just area 1?
-n_tags = 4500 # 2500
+n_tags = 2500 # 2500
 # Number of years to release tags. leave out last year.
-n_years_tags = 10 # 5
+n_years_tags = 5 # 5
 tag_years = (study_year_range[2] - n_years_tags + 1):study_year_range[2] - 1
 
 ## define longline selectivity
@@ -494,9 +495,9 @@ for(i_iter in 1:n_iters){
 
 ### Save Output ----
 ## write to file
-# write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
-#           quote=FALSE, na="NA", row.names=FALSE)
-#
+write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
+          quote=FALSE, na="NA", row.names=FALSE)
+
 write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
           quote=FALSE, na="NA", row.names=FALSE)
 
@@ -512,25 +513,13 @@ plot_SSB(output, item = "AM_ssb_", mean = F)
 
 
 par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", mean = F, ylim = c(9000, 60000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
-
-# With Recruitment Variability Output1
-temp1 = read.csv("TOA_bug_2_Niter_301.csv")
-par(mfrow = c(1,2))
-plot_SSB(temp1, item = "OM_ssb_R1", mean = F, ylim = c(9000, 60000))
-plot_SSB(temp1, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
+plot_SSB(output, item = "OM_ssb_R1", mean = F, ylim = c(4000, 14000))
+plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(4000, 14000))
 
 
-par(mfrow = c(1,3))
-plot_SSB_err(temp1, type = "initial")
-plot_SSB_err(temp1, type = "current")
-plot_SSB_err(temp1, type = "status")
-
-boxplot(temp1[,"OM_ssb_R1_1990"])
-boxplot(temp1[, "AM_ssb_1990"])
 
 
+temp1 = read.csv("TOA_bug_4_Niter_101.csv")
 library(fishnostics2)
 years = 1990:2010
 true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
@@ -542,90 +531,16 @@ legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
        col=c("blue", "red"), lty=c(2,1), lwd=2, bty="n")
 
 
-
-
-# With Recruitment Variability Output2
-temp = read.csv("TOA_bug_2_Niter_101output2.csv")
-par(mfrow = c(1,2))
-plot_SSB(temp, item = "OM_ssb_R1", mean = F, ylim = c(9000, 60000))
-plot_SSB(temp, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
-
-
-par(mfrow = c(1,3))
-plot_SSB_err(temp, type = "initial")
-plot_SSB_err(temp, type = "current")
-plot_SSB_err(temp, type = "status")
-
-boxplot(temp[,"OM_ssb_R1_1990"])
-boxplot(temp[, "AM_ssb_1990"])
-
-
+temp2 = read.csv("TOA_bug_4_Niter_101output2.csv")
 library(fishnostics2)
 years = 1990:2010
-om_names = paste0("OM_ssb_R1_", years)
-am_names = paste0("AM_ssb_", years)
-true_ssb = temp[, grep("OM_ssb_R1", colnames(temp))]
-est_ssb = temp[, grep("AM_ssb_", colnames(temp))]
+true_ssb1 = temp2[, grep("OM_ssb_R1", colnames(temp2))]
+est_ssb1 = temp2[, grep("AM_ssb_", colnames(temp2))]
 
-colnames(true_ssb) = years
-plot_ts_uncertainty(d = true_ssb/1000, d2 = est_ssb/1000) # d is blue, d2 is red
+colnames(true_ssb1) = years
+plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
 legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
        col=c("blue", "red"), lty=c(2,1), lwd=2, bty="n")
-
-err <- process_two_series(res = temp, true_vars = om_names, est_vars = am_names,
-                             col_names = years, FUN = "rel_err")
-boxplot(err, ylab="Relative error", main="Baseline Brett")
-abline(h=0, col="red")
-
-
-
-
-
-
-
-
-
-
-
-temp = read.csv("TOA_bug_2_Niter_20.csv")
-par(mfrow = c(1,2))
-plot_SSB(temp, item = "OM_ssb_R1", ylim = c(9000, 60000), main = "TOA_bug_2_Niter_20")
-plot_SSB(temp, item = "AM_ssb_", mean = F, ylim = c(9000, 60000))
-
-
-
-
-
-
-
-
-par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(350000, 500000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(350000, 500000))
-
-par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(0, 30000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(0, 30000))
-
-
-par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(55000, 140000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(55000, 140000))
-
-
-par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", ylim = c(200000, 330000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(200000, 330000))
-
-
-
-
-
-
-
-
-
-
 
 
 
