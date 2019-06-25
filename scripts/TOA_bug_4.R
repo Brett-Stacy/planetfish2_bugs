@@ -18,7 +18,7 @@ library(casal)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 300
+n_iters <- 2
 scenario <- "TOA_bug_4"
 
 ## define a file name
@@ -495,11 +495,11 @@ for(i_iter in 1:n_iters){
 
 ### Save Output ----
 ## write to file
-write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
-          quote=FALSE, na="NA", row.names=FALSE)
-
-write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
-          quote=FALSE, na="NA", row.names=FALSE)
+# write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
+#           quote=FALSE, na="NA", row.names=FALSE)
+# 
+# write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
+#           quote=FALSE, na="NA", row.names=FALSE)
 
 
 

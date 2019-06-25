@@ -14,19 +14,15 @@ library(earthfish)
 
 ## Tasks for Paul
 
-### 
-Try my TOA_bug_5.R and figure out why my assessment year implementation isn't working. Tag recaptures not showing up in outputlog.
-
 
 ### 
-By the end of the week, please run your model with flounder life history parameters. Or perhaps updated TOP LHPs. Either way, run a scenario you know worked for your TOP migration paper but with different LHPs and plot the SSB for OM and AM. 
+Run your model with flounder life history parameters. Run a scenario you know worked for your TOP migration paper but with different LHPs and plot the SSB for OM and AM. 
+- find LHPs for Paul.
+
+###
+Run Phill's model with different LHPs
 
 
-
-### 
-Run TOA_bug_1.R for one iteration (don't run plot chunk at end). OK to change file path.
-
-look at the warnings at the end. Does the one about NAs mean anything to you?
 
 
 
@@ -43,6 +39,10 @@ Can you go through the settings related to biomass like para\$ass\$estim_initial
 ### 
 Can you go though my match function and see if there is anything missing?
 
+
+### 
+Numbers at age each year between the OM and AM match very well. If this is the case, then shouldn't SSB be the same between the two if they are calculated at the same time in the model sequence?
+- need to show Paul numbers at age are similar. 
 
 ### 
 Only when I manually calculate SSB for the OM does it line up with the SSB from CASAL. Why would this be the case for TOA and not for TOP?
