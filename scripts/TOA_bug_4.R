@@ -2,6 +2,7 @@
 
 ## Let's find that bug!
 ## Different Species - Patagonian toothfish with updated LHPs.
+## Source: An integrated stock assessment for the Heard Island and McDonald Islands Patagonian toothfish (Dissostichus eleginoides) fishery in Division 58.5.2
 
 ## Script for generating data and casal assessment output using earthfish
 ## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect
@@ -18,7 +19,7 @@ library(casal)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 2
+n_iters <- 1000
 scenario <- "TOA_bug_4"
 
 ## define a file name
@@ -97,7 +98,7 @@ no_fish_range = 1 ##** Don't fish the first 10 years
 R_mu <- 1e6 # 1e6
 ## recruitment variability
 R_sigma <- 3e-1 ############################################### 3e-01
-# B0_calc_method = "init_age" # one of "casal", "stoch", or "init_age"
+B0_calc_method = "casal" # one of "casal", "stoch", or "init_age"
 
 # Total catch across single area
 total_catch <- 1000
@@ -123,6 +124,9 @@ LL_sel <- list(top=10, sigma_left=2, sigma_right=10)
 ### OM ----
 ## specify the default parameters
 para	<- get_om_data()
+
+
+para$control$Assyr_range = para$om$year # set assessment year range to match om year range
 
 
 
@@ -171,7 +175,7 @@ para$om$n_fisheries <- length(para$om$fishery)
 
 ## set selectivity to NULL then define selectivities
 para$om$pin_sel <- NULL
-para$om$pin_sel$LL1 <- "dbnormal"
+para$om$pin_sel$LL1 <- "double_normal"
 para$om$select$LL1 <- LL_sel
 
 ## catches for the two fisheries
@@ -349,7 +353,10 @@ para[["control"]] <- update_casal_file_names(para[["control"]]) 	# Update casal 
 para[["control"]]$pin_TAC_finder <- 0
 
 ## set CASAL to calculate SSB after 100% F and M
-para$ass$spawning_part_mort <- 1
+# para$ass$spawning_part_mort <- 1
+# BS 18/7/19: try changing this back to default: 0.5
+para$ass$spawning_part_mort <- 0.5
+
 
 ##*** now we modify the tag loss rate in the AM
 para$ass$tag_shedding_rate <- 0.0084
@@ -495,11 +502,11 @@ for(i_iter in 1:n_iters){
 
 ### Save Output ----
 ## write to file
-# write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
-#           quote=FALSE, na="NA", row.names=FALSE)
-# 
-# write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
-#           quote=FALSE, na="NA", row.names=FALSE)
+write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
+          quote=FALSE, na="NA", row.names=FALSE)
+
+write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
+          quote=FALSE, na="NA", row.names=FALSE)
 
 
 
@@ -518,19 +525,32 @@ plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(4000, 14000))
 
 
 
-
-temp1 = read.csv("TOA_bug_4_Niter_101.csv")
+# Plot of internal SSB comparison. (internal meaning SSB calculated inside the om loop)
+temp1 = read.csv("TOA_bug_4_Niter_1000.csv")
 library(fishnostics2)
 years = 1990:2010
 true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
 est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
 
+# TS plot
 colnames(true_ssb1) = years
 plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
 legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
-       col=c("blue", "red"), lty=c(2,1), lwd=2, bty="n")
+       col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+
+# Error Plot
+om_names = paste0("OM_ssb_R1_", years)
+am_names = paste0("AM_ssb_", years)
+err <- process_two_series(res = temp1, true_vars = om_names, est_vars = am_names,
+                          col_names = years, FUN = "rel_err")
+boxplot(err, ylab="Relative error", main="Baseline Brett")
+abline(h=0, col="red")
 
 
+
+
+
+# Plot of external SSB comparison. (external meaning SSB calculated outside the om loop using numbers at age)
 temp2 = read.csv("TOA_bug_4_Niter_101output2.csv")
 library(fishnostics2)
 years = 1990:2010

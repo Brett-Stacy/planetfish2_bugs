@@ -12,7 +12,7 @@
 # library(planetfish2)
 library(earthfish)
 library(casal)
-library(fishplot)
+
 
 ## House ----
 
@@ -73,7 +73,7 @@ x = 1:TOA_max_age
 y = calc_VBlen(1:12, x, c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV))
 z = calc_VBweight(1:12, x, c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV), list(a = TOA_wl_c, b = TOA_wl_d))
 m = ogive(TOA_maturity_ogive, x, list(x50 = TOA_a_50, x95 = TOA_a_95))
-s = ogive("dbnormal", x, LL_sel)
+s = ogive("double_normal", x, LL_sel)
 par(mfrow = c(2,2))
 plot(x, y, type = "l", main = "Skipjack VB Length", xlab = "Age", ylab = "Length")
 plot(x, z, type = "l", main = "Skipjack VB Weight", xlab = "Age", ylab = "Weight")
@@ -125,7 +125,7 @@ LL_sel <- list(top=4, sigma_left=1, sigma_right=3) # https://www.wcpfc.int/node/
 ## specify the default parameters
 para	<- get_om_data()
 
-
+para$control$Assyr_range = para$om$year # set assessment year range to match om year range
 
 # Set age parameters
 para$om$age = c(1, TOA_max_age)
@@ -168,7 +168,7 @@ para$om$n_fisheries <- length(para$om$fishery)
 
 ## set selectivity to NULL then define selectivities
 para$om$pin_sel <- NULL
-para$om$pin_sel$LL1 <- "dbnormal"
+para$om$pin_sel$LL1 <- "double_normal"
 para$om$select$LL1 <- LL_sel
 
 ## catches for the two fisheries
@@ -346,7 +346,9 @@ para[["control"]] <- update_casal_file_names(para[["control"]]) 	# Update casal 
 para[["control"]]$pin_TAC_finder <- 0
 
 ## set CASAL to calculate SSB after 100% F and M
-para$ass$spawning_part_mort <- 1
+# para$ass$spawning_part_mort <- 1
+para$ass$spawning_part_mort <- 0.5
+
 
 ##*** now we modify the tag loss rate in the AM
 para$ass$tag_shedding_rate <- 0.0084
@@ -501,7 +503,7 @@ write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output
 
 ################################## BS Plots ----
 
-library(fishplot)
+
 par(mfrow = c(1,2))
 plot_SSB(output, item = "OM_ssb_R1")
 plot_SSB(output, item = "AM_ssb_", mean = F)

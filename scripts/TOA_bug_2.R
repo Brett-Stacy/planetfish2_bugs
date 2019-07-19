@@ -17,7 +17,7 @@ library(casal)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 101
+n_iters <- 2
 scenario <- "TOA_bug_2"
 
 ## define a file name
@@ -123,7 +123,7 @@ LL_sel <- list(top=10, sigma_left=2, sigma_right=10)
 ## specify the default parameters
 para	<- get_om_data()
 
-
+para$control$Assyr_range = para$om$year # set assessment year range to match om year range
 
 # Set age parameters
 para$om$age = c(1, TOA_max_age)
@@ -250,6 +250,9 @@ para <- get_casal_para(para)
 
 ## Plust Group? BS 6/6/19 CONCLUSION: no effect.
 # para$ass$age_plus_group = "False"
+
+## Tag sampling type? BS 26/06/19 CONCLUSION: this feature hasn't been coded yet, see create_estim_cls()
+# para$ass$tag_sampling_type = "age"
 
 
 ### add TOA LHPs to ASSESSMENT
@@ -497,8 +500,8 @@ for(i_iter in 1:n_iters){
 # write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
 #           quote=FALSE, na="NA", row.names=FALSE)
 #
-write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
-          quote=FALSE, na="NA", row.names=FALSE)
+# write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
+#           quote=FALSE, na="NA", row.names=FALSE)
 
 
 

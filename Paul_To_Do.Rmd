@@ -26,6 +26,8 @@ Run Phill's model with different LHPs
 
 
 
+
+## Ideas for Paul
 ### 
 the thing with tag age frequency overlaping catch not matching up.
 

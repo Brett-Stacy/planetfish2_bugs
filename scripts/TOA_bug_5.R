@@ -18,7 +18,7 @@ library(casal)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 100
+n_iters <- 2
 scenario <- "TOA_bug_5"
 
 ## define a file name
@@ -123,6 +123,8 @@ LL_sel <- list(top=10, sigma_left=2, sigma_right=10)
 ### OM ----
 ## specify the default parameters
 para	<- get_om_data()
+
+# para$control$Assyr_range = para$om$year
 
 # Set assessment year to last year of study year range
 para$control$Assyr = study_year_range[2]
@@ -532,11 +534,11 @@ for(i_iter in 1:n_iters){
 
 ### Save Output ----
 ## write to file
-write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
-          quote=FALSE, na="NA", row.names=FALSE)
-
-write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
-          quote=FALSE, na="NA", row.names=FALSE)
+# write.csv(output, file=paste0(casal_path,file_name, "_Niter_", n_iters, ".csv"),
+#           quote=FALSE, na="NA", row.names=FALSE)
+#
+# write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output2", ".csv"),
+#           quote=FALSE, na="NA", row.names=FALSE)
 
 
 
