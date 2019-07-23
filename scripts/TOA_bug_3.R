@@ -19,7 +19,7 @@ library(casal)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 200
+n_iters <- 1000
 scenario <- "TOA_bug_3"
 
 ## define a file name
@@ -454,6 +454,7 @@ for(i_iter in 1:n_iters){
   ## Spawning Biomass
   OM_SSB0 <- res$mod$ssb0
   OM_SSB_R1 <- apply(ssb[1,,,S1,R1],c(1),sum)
+  OM_SSB_R12 = rowSums(calc_SSB("res", res$pop$n, para$om$growth$f, para$om$WL$f, para$om$pin_mat, para$om$maturity$f))
   ## Recruitment
   OM_Rec_R1 <- apply(rec[1,,,S1,R1],c(1),sum)
   ##*** Potentially add selectivity, however, perhaps not required
@@ -516,16 +517,17 @@ plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(5000, 70000))
 
 
 
-temp1 = read.csv("TOA_bug_3_Niter_200.csv")
+temp1 = read.csv("TOA_bug_3_Niter_1000.csv")
 library(fishnostics2)
 years = 1990:2010
 true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
 est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
 
 colnames(true_ssb1) = years
-plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
-legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
-       col=c("blue", "red"), lty=c(2,1), lwd=2, bty="n")
+plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000,
+                  ylab = "SSB ('000 Tonnes)", xlab = "Year", main = "Skipjack Tuna")
+legend("bottomleft",c("True", "Estimated from CASAL"),
+       col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
 
 
 temp2 = read.csv("TOA_bug_3_Niter_200output2.csv")

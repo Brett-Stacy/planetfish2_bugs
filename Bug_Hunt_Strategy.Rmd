@@ -9,6 +9,22 @@ output: pdf_document
 library(casal)
 ```
 
+## BS 23/07/19: Things to look at if I revisit this discrepency stuff:
+  * CatchA frequency matches up with scanned frequency for TOP but not TOA. Is this a problem?
+  * Does frequency of scanned fish in \@tag_recapture Tags2005_R1_R1 match fishing selectivity? i.e. does tagging
+  selectivity match fishing selectivity?
+  * Why does ## set CASAL to calculate SSB after 100% F and M
+             para$ass$spawning_part_mort <- 0.5
+  work for updated TOP parameters but not for other species like TOA or skipjack tuna?
+  
+  
+  
+  
+  
+  
+  
+
+
 ## List of To-Do's
 
   * Build model that generates SSB discrepency
@@ -214,6 +230,10 @@ Current problem: tag recaptures not showing up in outputlog.
 come back to it at: datass.TOA\$Rec_data  why aren't there recaptures?? look at M3_CASAL1_Data.r
 
 
+Messing with para\$ass\$spawning_part_mort <- 0.5
+Worked well for TOA_bug_4.R
+Didn't work for TOA_bug_2.R
+Didn't work for TOA_bug_3.R
 
 ## population.csl Questions
 Should \@size_based False be True in population.csl?
@@ -269,7 +289,7 @@ age.am = as.numeric(estimation$`catch_at[LL_catchA]`$`2010`)
 
 plot(age.om, ylim = c(0, 150), ylab = "Frequency", xlab = "Age")
 points(age.am*500, col = "red", pch = 3)
-lines(100*ogive("dbnormal", 1:35, params = list(top=10, sigma_left=2, sigma_right=10)))
+lines(100*ogive("double_normal", 1:35, params = list(top=10, sigma_left=2, sigma_right=10)))
 
 
 ## COMBINED AGE (from catch_age) AND LENGTH (from scanned fish)
@@ -426,7 +446,7 @@ age.am = as.numeric(estimation$`catch_at[LL_catchA]`$`2010`)
 
 plot(age.om, ylim = c(0, 150))
 points(age.am*500, col = "red", pch = 3)
-lines(500*ogive("dbnormal", 1:30, params = list(top=10, sigma_left=2, sigma_right=10)))
+lines(500*ogive("double_normal", 1:30, params = list(top=10, sigma_left=2, sigma_right=10)))
 
 ## COMBINED AGE (from catch_age) AND LENGTH (from scanned fish)
 tags.2009.om = datass.TOP$scannedN$Tags2009_R1_R1

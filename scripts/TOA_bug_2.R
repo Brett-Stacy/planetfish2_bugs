@@ -2,6 +2,8 @@
 
 ## Let's find that bug!
 
+## Changed from TOA_bug_1 just in using earthfish now
+
 ## Script for generating data and casal assessment output using earthfish
 ## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect
 ## perfect knowledge of population parameters, correspondence of catch quantity and survey scanns, etc.
@@ -17,7 +19,7 @@ library(casal)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 2
+n_iters <- 20
 scenario <- "TOA_bug_2"
 
 ## define a file name
@@ -109,9 +111,9 @@ age_years = if(n_years_aged == 0) NULL else((study_year_range[2] - n_years_aged)
 n_years_lengthed = 0
 len_years = if(n_years_lengthed == 0) NULL else((study_year_range[2] - n_years_lengthed):study_year_range[2])
 # The number of tags released in area 1 each year ##### just area 1?
-n_tags = 4500 # 2500
+n_tags = 2500 # 2500
 # Number of years to release tags. leave out last year.
-n_years_tags = 10 # 5
+n_years_tags = 5 # 5
 tag_years = (study_year_range[2] - n_years_tags + 1):study_year_range[2] - 1
 
 ## define longline selectivity
@@ -170,7 +172,7 @@ para$om$n_fisheries <- length(para$om$fishery)
 
 ## set selectivity to NULL then define selectivities
 para$om$pin_sel <- NULL
-para$om$pin_sel$LL1 <- "dbnormal"
+para$om$pin_sel$LL1 <- "double_normal"
 para$om$select$LL1 <- LL_sel
 
 ## catches for the two fisheries

@@ -1,5 +1,7 @@
 ## 24 June 19 - R 3.5.3 - earthfish version 0.1.0
 
+## 22/7/19: Changed para$ass$spawning_part_mort <- 0.5 and it does well!
+
 ## Let's find that bug!
 ## Different Species - Patagonian toothfish with updated LHPs.
 ## Source: An integrated stock assessment for the Heard Island and McDonald Islands Patagonian toothfish (Dissostichus eleginoides) fishery in Division 58.5.2
