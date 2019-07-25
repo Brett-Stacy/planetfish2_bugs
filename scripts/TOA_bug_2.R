@@ -19,7 +19,7 @@ library(casal)
 # rm(list = ls())
 
 ## number of iterations and scenario name
-n_iters <- 20
+n_iters <- 2
 scenario <- "TOA_bug_2"
 
 ## define a file name

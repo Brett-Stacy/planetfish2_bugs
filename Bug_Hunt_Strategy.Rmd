@@ -16,6 +16,8 @@ library(casal)
   * Why does ## set CASAL to calculate SSB after 100% F and M
              para$ass$spawning_part_mort <- 0.5
   work for updated TOP parameters but not for other species like TOA or skipjack tuna?
+  * Inspect what this is: para$ass$output$`numbers_at[Numbers_at_age_R1]`$proportion_mortality. Does it have to do/match with      para\$ass\$spawning_part_mort <- 0.5?
+  * Inspect datass$spawning_use_total_B
   
   
   
