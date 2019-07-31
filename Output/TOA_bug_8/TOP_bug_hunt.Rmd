@@ -3,10 +3,87 @@ title: "TOP Bug Hunt"
 author: "Brett Stacy"
 date: "31 July 2019"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+
+This script uses output from TOA_bug_8.r in my planetfish2_bugs repository
+
+
+## Illustrate the problem
+
+
+```{r}
+	RootDir  <- "C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_8/"
+	## Working directory
+	setwd(paste(RootDir,"",sep=""))
+	
+	library(casal)
+	library(lattice)
+	# source("1 Functions Diagnostics.r")
+	library(earthfish)
+	library(fishnostics2)
+```
+
+```{r, message=F, warning=F, results="hide"}
+	casalprefix		<- "casal_"
+	casaloutprefix	<- "casalout_"
+	pop_csl			<- paste(casalprefix, "population.csl", sep="")	
+	est_csl			<- paste(casalprefix, "estimation.csl", sep="")	
+	output_log		<- paste(casaloutprefix, "output.log", sep="")
+	mpd_dat			<- paste(casaloutprefix, "mpd.dat", sep="")
+	
+	top <- list()
+	dir1 <- RootDir
+	top[["est"]]	<- extract.csl.file(paste(dir1,est_csl,sep=""))	
+	top[["pop"]]	<- extract.csl.file(paste(dir1,pop_csl,sep=""))	
+	top[["quant"]]	<- extract.quantities(paste(dir1,output_log,sep=""))	
+	top[["mpd"]]	<- extract.mpd(paste(dir1,output_log,sep=""))	
+	top[["fits"]]	<- extract.fits(paste(dir1,output_log,sep=""))
+	
+	ppop <- top[["pop"]]
+	pest <- top[["est"]]
+	pquant <- top[["quant"]]
+	pfits <- top[["fits"]]
+```
+
+```{r, warning=F}
+	ages 	<- seq(ppop$min_age$value, ppop$max_age$value)
+	vb_para <- ppop$size_at_age
+	vb		<- as.numeric(as.character(vb_para$Linf))*(1-exp(-as.numeric(as.character(vb_para$k))*(ages-as.numeric(as.character(vb_para$t0)))))
+	plot(x=ages,y=vb, type="l",ylab="Length (mm)",xlab="Ages (y)",font.lab=2)
+	lw_para	<- ppop$size_weight 
+	lw		<- as.numeric(as.character(lw_para$a))*vb^(as.numeric(as.character(lw_para$b)))
+	plot(x=vb,y=lw*1000, type="l",ylab="Weight (kg)",xlab="Length(mm)",font.lab=2)
+	mat		<- as.numeric(as.character(ppop$maturity_props$all[2:length(ppop$maturity_props$all)]))
+	plot(x=ages,y=mat, type="l",ylab="Proportion mature",xlab="Ages (y)",font.lab=2)
+	sel_para	<- as.numeric(as.character(ppop$'selectivity[SelLL]'$all[2:length(ppop$'selectivity[SelLL]'$all)]))
+	if (ppop$'selectivity[SelLL]'$all[1] %in% "double_normal")
+		selLL 	<- 2^(-(((ages-sel_para[1])/ifelse(ages <= sel_para[1],sel_para[2],sel_para[3]))^2))
+	# selLL	<- pquant$'Ogive parameter values'	# Not estimated
+	plot(x=ages,y=selLL, type="l",ylab="Selectivity",xlab="Ages (y)",font.lab=2)
+	lines(x=ages,y=mat, type="l",col="blue")
+
+
+	# Fits to ageing data
+	plot_fits_in_trellis(dat=pfits, dat_name="LL_catchA", xlab="Age (years)", ylab="Proportion")
+	boxplot_fits_age(dat=pfits, dat_name=c("LL_catchA"),ylab="Mean age (year)")
+	plot_residuals(dat=pfits, dat_name=c("LL_catchA"),ylab=c("Age"),plotdims=c(6,6))
+
+	# Fits to tagging data
+	plot_fits_tags(dat=pfits,plotdims=c(16,12))
+	# savePlot(filename = paste("Plot Fits Tag ByLength.png",sep=""),type = "png")
+	plot_fits_tagN(dat=pfits,plotdims=c(8,8))
+	# savePlot(filename = paste("Plot Fits Tag Numbers.png",sep=""),type = "png")
+	plot_fits_tags_Exp_Obs(dat=pfits,plotdims=c(9,6))
+	# savePlot(filename = paste("Plot Fits Tag Exp-Obs.png",sep=""),type = "png")
+```
+
+
 
 
