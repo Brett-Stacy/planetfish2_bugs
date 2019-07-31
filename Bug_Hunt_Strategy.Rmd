@@ -9,6 +9,14 @@ output: pdf_document
 library(casal)
 ```
 
+
+## BS 31/07/19: After meeting with Phil:
+The estimated tagging data in casal does not match the observed well at all (even for TOP). This may mean one of the follwing is occuring:
+  * The OM may not be passing the tagging data to CASAL correctly
+  * The OM may not be calculating tagging data correctly
+      * If not, and it passes data correctly to CASAL, then CASAL should not be expected to estimate tag-recapture quantities          well. 
+
+
 ## BS 23/07/19: Things to look at if I revisit this discrepency stuff:
   * CatchA frequency matches up with scanned frequency for TOP but not TOA. Is this a problem?
   * Does frequency of scanned fish in \@tag_recapture Tags2005_R1_R1 match fishing selectivity? i.e. does tagging
