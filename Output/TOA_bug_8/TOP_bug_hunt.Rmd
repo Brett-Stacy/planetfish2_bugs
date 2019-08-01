@@ -14,12 +14,24 @@ knitr::opts_chunk$set(echo = FALSE)
 
 This script uses output from TOA_bug_8.r in my planetfish2_bugs repository
 
+### Paul 1/8/19
+should be able to set seed in Casal, but do it for the OM so we know it is different each time and can repeat it. Look at 3 output diagnostics to see if the trend is consistent. set up markdown with 3 runs and plots for each. 
+
+try taking data out completely.
+
+may need to add different index of abundance - CPUE placeholder in OM
+
+provide an index of abundance that reflects exactly the true abundance. may as well add some error around it (centered at zero). need to accociate it with a fleet. CASAL - should be able to do it as a CPUE fleet or survey fleet. Fleet will need to have a selectivity for survey or CPUE. 
+
+Most assessments adjust ageing data (length bin sampling - CCAMLR, NZ) - good to know
+
 
 ## Illustrate the problem
 
 
 ```{r}
-	RootDir  <- "C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_8/"
+	RootDir  <- "C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_8/"
+# RootDir  <- "C:/Users/bstacy/Work/Chapter_3_output/SKJ/baseline/"
 	## Working directory
 	setwd(paste(RootDir,"",sep=""))
 	
