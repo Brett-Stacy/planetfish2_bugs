@@ -1,0 +1,2026 @@
+CASAL (C++ algorithmic stock assessment laboratory)
+Call: casal -e -O C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_9/casalout_mpd.dat -f C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_9/casal_ 
+Date: Mon Aug 05 17:20:50 2019
+v2.30-2012-03-21 00:22:59 UTC (rev.4648)  (c) Copyright 2002-2012, NIWA
+User name: sta384
+Machine name: MACKEREL-HF (Microsoft Windows, PID=24880)
+
+Prefix for the input parameter filenames : C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_9/casal_
+
+Random number seed : 89650
+
+Estimation parameters:
+Stored as strings: 
+  MCMC.adapt_at                 	1e+05 2e+05 3e+05 4e+05
+  MCMC.adaptive_stepsize        	True
+  MCMC.burn_in                  	500
+  MCMC.keep                     	1000
+  MCMC.length                   	1500000
+  MCMC.start                    	0
+  MCMC.stepsize                 	0.01
+  ageing_error.c                	0
+  ageing_error.type             	normal
+  catch_at[LL_catchA].2000      	0 0 0 0.002 0.006 0.012 0.05 0.116 0.145 0.129 0.117 0.09 0.083 0.059 0.041 0.031 0.034 0.023 0.013 0.013 0.008 0.008 0.003 0.005 0.005 0 0.001 0 0.001 0.005
+  catch_at[LL_catchA].2001      	0 0 0 0.002 0.001 0.016 0.053 0.093 0.162 0.128 0.131 0.084 0.085 0.058 0.049 0.034 0.026 0.022 0.018 0.006 0.008 0.006 0.002 0.003 0.005 0.001 0.003 0 0 0.004
+  catch_at[LL_catchA].2002      	0 0 0 0.002 0.006 0.014 0.049 0.102 0.171 0.126 0.11 0.103 0.074 0.059 0.038 0.048 0.029 0.016 0.016 0.008 0.008 0.006 0.002 0.006 0.003 0.002 0 0 0 0.002
+  catch_at[LL_catchA].2003      	0 0 0 0 0.007 0.011 0.054 0.1 0.14 0.128 0.121 0.104 0.065 0.072 0.057 0.032 0.04 0.026 0.013 0.007 0.004 0.003 0.002 0.002 0.003 0.004 0.003 0 0.001 0.001
+  catch_at[LL_catchA].2004      	0 0 0.001 0 0.003 0.014 0.049 0.101 0.153 0.153 0.142 0.092 0.064 0.043 0.046 0.037 0.029 0.021 0.013 0.01 0.009 0.007 0.004 0.001 0.003 0.001 0 0.001 0 0.003
+  catch_at[LL_catchA].2005      	0 0 0 0 0.003 0.015 0.038 0.091 0.162 0.129 0.136 0.095 0.074 0.07 0.046 0.031 0.03 0.022 0.018 0.008 0.006 0.007 0.004 0.003 0.001 0.003 0.002 0 0 0.006
+  catch_at[LL_catchA].2006      	0 0 0 0.002 0.002 0.011 0.053 0.078 0.15 0.149 0.128 0.087 0.067 0.07 0.053 0.047 0.027 0.023 0.015 0.012 0.005 0.007 0.002 0.002 0.002 0.003 0.002 0.001 0 0.002
+  catch_at[LL_catchA].2007      	0 0 0 0 0.002 0.016 0.041 0.111 0.153 0.153 0.098 0.083 0.082 0.075 0.055 0.047 0.013 0.023 0.012 0.01 0.007 0.007 0.004 0 0.002 0.002 0 0.002 0.001 0.001
+  catch_at[LL_catchA].2008      	0 0 0 0.002 0.003 0.012 0.047 0.114 0.151 0.132 0.099 0.104 0.091 0.064 0.048 0.037 0.022 0.025 0.017 0.007 0.008 0.006 0.003 0 0.003 0.001 0.001 0 0.001 0.002
+  catch_at[LL_catchA].2009      	0 0 0 0 0.004 0.019 0.05 0.106 0.139 0.148 0.131 0.094 0.06 0.06 0.042 0.043 0.023 0.018 0.014 0.015 0.013 0.003 0.004 0.005 0.003 0.001 0.001 0.001 0 0.003
+  catch_at[LL_catchA].2010      	0 0 0 0.001 0.001 0.017 0.057 0.083 0.151 0.156 0.112 0.115 0.08 0.05 0.042 0.033 0.032 0.023 0.012 0.009 0.006 0.001 0.008 0.004 0.002 0.001 0.001 0.001 0 0.002
+  catch_at[LL_catchA].N_2000    	100
+  catch_at[LL_catchA].N_2001    	100
+  catch_at[LL_catchA].N_2002    	100
+  catch_at[LL_catchA].N_2003    	100
+  catch_at[LL_catchA].N_2004    	100
+  catch_at[LL_catchA].N_2005    	100
+  catch_at[LL_catchA].N_2006    	100
+  catch_at[LL_catchA].N_2007    	100
+  catch_at[LL_catchA].N_2008    	100
+  catch_at[LL_catchA].N_2009    	100
+  catch_at[LL_catchA].N_2010    	100
+  catch_at[LL_catchA].at_size   	False
+  catch_at[LL_catchA].dist      	multinomial
+  catch_at[LL_catchA].fishery   	LL
+  catch_at[LL_catchA].max_class 	30
+  catch_at[LL_catchA].min_class 	1
+  catch_at[LL_catchA].plus_group	True
+  catch_at[LL_catchA].r         	1e-11
+  catch_at[LL_catchA].sexed     	False
+  catch_at[LL_catchA].sum_to_one	False
+  catch_at[LL_catchA].years     	2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010
+  catch_limit_penalty[1].fishery	LL
+  catch_limit_penalty[1].label  	LL_Penalty
+  catch_limit_penalty[1].log_scale	True
+  catch_limit_penalty[1].multiplier	1000
+  estimate[1].lower_bound       	5000
+  estimate[1].parameter         	initialization.B0
+  estimate[1].prior             	uniform
+  estimate[1].upper_bound       	5e+05
+  estimator                     	Bayes
+  fish_tagged_penalty[1].label  	Penalty_Tags2005_R1_LL
+  fish_tagged_penalty[1].multiplier	1
+  fish_tagged_penalty[1].tagging_episode	Tags2005_R1_LL
+  fish_tagged_penalty[2].label  	Penalty_Tags2006_R1_LL
+  fish_tagged_penalty[2].multiplier	1
+  fish_tagged_penalty[2].tagging_episode	Tags2006_R1_LL
+  fish_tagged_penalty[3].label  	Penalty_Tags2007_R1_LL
+  fish_tagged_penalty[3].multiplier	1
+  fish_tagged_penalty[3].tagging_episode	Tags2007_R1_LL
+  fish_tagged_penalty[4].label  	Penalty_Tags2008_R1_LL
+  fish_tagged_penalty[4].multiplier	1
+  fish_tagged_penalty[4].tagging_episode	Tags2008_R1_LL
+  fish_tagged_penalty[5].label  	Penalty_Tags2009_R1_LL
+  fish_tagged_penalty[5].multiplier	1
+  fish_tagged_penalty[5].tagging_episode	Tags2009_R1_LL
+  grad_tol                      	0.001
+  max_evals                     	10000
+  max_iters                     	1600
+  profile[1].l                  	40000
+  profile[1].n                  	11
+  profile[1].parameter          	initialization.B0
+  profile[1].u                  	130000
+  q_method                      	nuisance
+  tag_recapture[Tags2005_R1_R1].area	R1
+  tag_recapture[Tags2005_R1_R1].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag_recapture[Tags2005_R1_R1].detection_probability	1
+  tag_recapture[Tags2005_R1_R1].dispersion	1
+  tag_recapture[Tags2005_R1_R1].do_bootstrap	True
+  tag_recapture[Tags2005_R1_R1].plus_group	False
+  tag_recapture[Tags2005_R1_R1].proportion_mortality	0.5
+  tag_recapture[Tags2005_R1_R1].r	1e-11
+  tag_recapture[Tags2005_R1_R1].recaptured_2006	0 0 0 0 0 0 0 0 0.6 4.7 20 52.7 91.5 111.3 103.7 83 62.4 45.4 31.6 20.9 13 7.7 4.4 2.4 1.3 0.7 0.4 0.2 0.1 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2005_R1_R1].recaptured_2007	0 0 0 0 0 0 0 0 0.2 1.7 9.2 29.7 61.2 87.9 96.1 86.6 68.7 50.8 36 24.4 15.7 9.7 5.8 3.4 1.9 1 0.5 0.2 0.1 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2005_R1_R1].recaptured_2008	0 0 0 0 0 0 0 0 0 0.5 3.2 12 29.6 51.7 68.3 71.6 62.7 49 35.8 24.6 15.8 9.5 5.5 3.2 1.7 0.9 0.5 0.3 0.2 0.1 0.1 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2005_R1_R1].recaptured_2009	0 0 0 0 0 0 0 0 0 0.1 0.9 3.9 11.7 25 40.2 51.2 53.1 46.5 35.7 24.9 16 9.6 5.5 3 1.5 0.7 0.3 0.1 0 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2005_R1_R1].recaptured_2010	0 0 0 0 0 0 0 0 0 0 0.2 1.3 5 13.3 26.2 39.4 46.3 43.4 34 24.1 16.4 10.9 6.9 4.1 2.3 1.1 0.5 0.2 0.1 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2005_R1_R1].sample	size
+  tag_recapture[Tags2005_R1_R1].scanned_2006	0 0 0 0 4 50 458 2838 11974 35164 73726 113752 134774 130416 110986 88416 68136 51292 37776 27218 19190 13250 8980 6004 3994 2670 1798 1204 778 466 250 118 48 16 4 2 0 0 0
+  tag_recapture[Tags2005_R1_R1].scanned_2007	0 0 0 0 4 50 458 2846 12002 35248 73898 114008 135066 130686 111202 88576 68252 51376 37830 27246 19194 13232 8944 5954 3940 2620 1760 1176 760 456 246 116 46 16 4 2 0 0 0
+  tag_recapture[Tags2005_R1_R1].scanned_2008	0 0 0 0 4 50 460 2852 12028 35320 74044 114222 135306 130900 111370 88698 68338 51436 37870 27270 19202 13224 8922 5924 3904 2584 1726 1152 742 446 240 114 46 16 4 2 0 0 0
+  tag_recapture[Tags2005_R1_R1].scanned_2009	0 0 0 0 4 50 460 2858 12052 35386 74174 114410 135510 131078 111502 88788 68398 51476 37896 27286 19210 13222 8910 5904 3878 2556 1700 1130 726 436 234 110 46 16 4 2 0 0 0
+  tag_recapture[Tags2005_R1_R1].scanned_2010	0 0 0 0 4 50 462 2862 12074 35448 74294 114582 135692 131230 111610 88858 68442 51502 37912 27296 19214 13222 8904 5890 3860 2534 1678 1110 712 426 230 108 44 16 4 2 0 0 0
+  tag_recapture[Tags2005_R1_R1].step	1
+  tag_recapture[Tags2005_R1_R1].tag_name	Tags2005_R1
+  tag_recapture[Tags2005_R1_R1].years	2006 2007 2008 2009 2010
+  tag_recapture[Tags2006_R1_R1].area	R1
+  tag_recapture[Tags2006_R1_R1].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag_recapture[Tags2006_R1_R1].detection_probability	1
+  tag_recapture[Tags2006_R1_R1].dispersion	1
+  tag_recapture[Tags2006_R1_R1].do_bootstrap	True
+  tag_recapture[Tags2006_R1_R1].plus_group	False
+  tag_recapture[Tags2006_R1_R1].proportion_mortality	0.5
+  tag_recapture[Tags2006_R1_R1].r	1e-11
+  tag_recapture[Tags2006_R1_R1].recaptured_2007	0 0 0 0 0 0 0 0 0.6 5 21.8 55.6 94.3 116.9 115.2 96.9 73.2 51 33.5 20.8 12.1 6.6 3.5 1.9 1.1 0.7 0.5 0.3 0.2 0.1 0.1 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2006_R1_R1].recaptured_2008	0 0 0 0 0 0 0 0 0.2 1.7 8.4 25.9 53.6 79.8 91.3 84.1 66 47.8 33.5 22.6 14.4 8.7 5.2 3.2 2.1 1.3 0.8 0.5 0.3 0.2 0.1 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2006_R1_R1].recaptured_2009	0 0 0 0 0 0 0 0 0.1 0.6 3.6 13.5 33.5 58.4 75.8 77.5 66.2 49.5 33.7 21.4 13.1 8 4.8 2.9 1.6 0.9 0.5 0.3 0.1 0.1 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2006_R1_R1].recaptured_2010	0 0 0 0 0 0 0 0 0 0.1 1.1 5 14.7 30.7 47.8 57.8 56.4 46.8 35.3 25.4 17.9 12.2 7.9 4.8 2.6 1.3 0.7 0.3 0.1 0.1 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2006_R1_R1].sample	size
+  tag_recapture[Tags2006_R1_R1].scanned_2007	0 0 0 0 4 50 458 2846 12002 35248 73898 114008 135066 130686 111202 88576 68252 51376 37830 27246 19194 13232 8944 5954 3940 2620 1760 1176 760 456 246 116 46 16 4 2 0 0 0
+  tag_recapture[Tags2006_R1_R1].scanned_2008	0 0 0 0 4 50 460 2852 12028 35320 74044 114222 135306 130900 111370 88698 68338 51436 37870 27270 19202 13224 8922 5924 3904 2584 1726 1152 742 446 240 114 46 16 4 2 0 0 0
+  tag_recapture[Tags2006_R1_R1].scanned_2009	0 0 0 0 4 50 460 2858 12052 35386 74174 114410 135510 131078 111502 88788 68398 51476 37896 27286 19210 13222 8910 5904 3878 2556 1700 1130 726 436 234 110 46 16 4 2 0 0 0
+  tag_recapture[Tags2006_R1_R1].scanned_2010	0 0 0 0 4 50 462 2862 12074 35448 74294 114582 135692 131230 111610 88858 68442 51502 37912 27296 19214 13222 8904 5890 3860 2534 1678 1110 712 426 230 108 44 16 4 2 0 0 0
+  tag_recapture[Tags2006_R1_R1].step	1
+  tag_recapture[Tags2006_R1_R1].tag_name	Tags2006_R1
+  tag_recapture[Tags2006_R1_R1].years	2007 2008 2009 2010
+  tag_recapture[Tags2007_R1_R1].area	R1
+  tag_recapture[Tags2007_R1_R1].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag_recapture[Tags2007_R1_R1].detection_probability	1
+  tag_recapture[Tags2007_R1_R1].dispersion	1
+  tag_recapture[Tags2007_R1_R1].do_bootstrap	True
+  tag_recapture[Tags2007_R1_R1].plus_group	False
+  tag_recapture[Tags2007_R1_R1].proportion_mortality	0.5
+  tag_recapture[Tags2007_R1_R1].r	1e-11
+  tag_recapture[Tags2007_R1_R1].recaptured_2008	0 0 0 0 0 0 0 0.1 1 6.2 23.3 55.4 89.9 108.8 107.4 91.6 70.2 49.8 33.8 22.3 14.5 9.2 5.9 3.8 2.4 1.4 0.7 0.3 0.1 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2007_R1_R1].recaptured_2009	0 0 0 0 0 0 0 0 0.2 2.2 10.8 32.5 64.3 90.3 97.1 87 69.9 52 35.8 22.9 13.8 8 4.5 2.6 1.5 0.8 0.4 0.2 0.1 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2007_R1_R1].recaptured_2010	0 0 0 0 0 0 0 0 0 0.4 2.8 11 27.4 47.9 63.1 67 60.7 48.8 35.4 23.6 14.9 9.3 5.7 3.4 1.8 0.9 0.4 0.1 0 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2007_R1_R1].sample	size
+  tag_recapture[Tags2007_R1_R1].scanned_2008	0 0 0 0 4 50 460 2852 12028 35320 74044 114222 135306 130900 111370 88698 68338 51436 37870 27270 19202 13224 8922 5924 3904 2584 1726 1152 742 446 240 114 46 16 4 2 0 0 0
+  tag_recapture[Tags2007_R1_R1].scanned_2009	0 0 0 0 4 50 460 2858 12052 35386 74174 114410 135510 131078 111502 88788 68398 51476 37896 27286 19210 13222 8910 5904 3878 2556 1700 1130 726 436 234 110 46 16 4 2 0 0 0
+  tag_recapture[Tags2007_R1_R1].scanned_2010	0 0 0 0 4 50 462 2862 12074 35448 74294 114582 135692 131230 111610 88858 68442 51502 37912 27296 19214 13222 8904 5890 3860 2534 1678 1110 712 426 230 108 44 16 4 2 0 0 0
+  tag_recapture[Tags2007_R1_R1].step	1
+  tag_recapture[Tags2007_R1_R1].tag_name	Tags2007_R1
+  tag_recapture[Tags2007_R1_R1].years	2008 2009 2010
+  tag_recapture[Tags2008_R1_R1].area	R1
+  tag_recapture[Tags2008_R1_R1].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag_recapture[Tags2008_R1_R1].detection_probability	1
+  tag_recapture[Tags2008_R1_R1].dispersion	1
+  tag_recapture[Tags2008_R1_R1].do_bootstrap	True
+  tag_recapture[Tags2008_R1_R1].plus_group	False
+  tag_recapture[Tags2008_R1_R1].proportion_mortality	0.5
+  tag_recapture[Tags2008_R1_R1].r	1e-11
+  tag_recapture[Tags2008_R1_R1].recaptured_2009	0 0 0 0 0 0 0 0 0.7 5.6 23.3 59.7 101.2 122.3 115.1 93.7 71.2 51.9 36.3 24.2 15.3 9.2 5.2 2.9 1.6 0.8 0.4 0.2 0.1 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2008_R1_R1].recaptured_2010	0 0 0 0 0 0 0 0 0.2 1.9 9.1 27.8 56.2 80 86.1 76.5 61.1 46.2 33.6 23.3 15.3 9.4 5.2 2.6 1.2 0.5 0.3 0.2 0.2 0.1 0.1 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2008_R1_R1].sample	size
+  tag_recapture[Tags2008_R1_R1].scanned_2009	0 0 0 0 4 50 460 2858 12052 35386 74174 114410 135510 131078 111502 88788 68398 51476 37896 27286 19210 13222 8910 5904 3878 2556 1700 1130 726 436 234 110 46 16 4 2 0 0 0
+  tag_recapture[Tags2008_R1_R1].scanned_2010	0 0 0 0 4 50 462 2862 12074 35448 74294 114582 135692 131230 111610 88858 68442 51502 37912 27296 19214 13222 8904 5890 3860 2534 1678 1110 712 426 230 108 44 16 4 2 0 0 0
+  tag_recapture[Tags2008_R1_R1].step	1
+  tag_recapture[Tags2008_R1_R1].tag_name	Tags2008_R1
+  tag_recapture[Tags2008_R1_R1].years	2009 2010
+  tag_recapture[Tags2009_R1_R1].area	R1
+  tag_recapture[Tags2009_R1_R1].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag_recapture[Tags2009_R1_R1].detection_probability	1
+  tag_recapture[Tags2009_R1_R1].dispersion	1
+  tag_recapture[Tags2009_R1_R1].do_bootstrap	True
+  tag_recapture[Tags2009_R1_R1].plus_group	False
+  tag_recapture[Tags2009_R1_R1].proportion_mortality	0.5
+  tag_recapture[Tags2009_R1_R1].r	1e-11
+  tag_recapture[Tags2009_R1_R1].recaptured_2010	0 0 0 0 0 0 0 0.1 0.8 5.9 24.5 61.5 101.7 122.1 115.6 93.3 69.1 49.1 33.1 21.2 13.2 8.1 4.9 3 1.7 1 0.6 0.3 0.1 0 0 0 0 0 0 0 0 0 0
+  tag_recapture[Tags2009_R1_R1].sample	size
+  tag_recapture[Tags2009_R1_R1].scanned_2010	0 0 0 0 4 50 462 2862 12074 35448 74294 114582 135692 131230 111610 88858 68442 51502 37912 27296 19214 13222 8904 5890 3860 2534 1678 1110 712 426 230 108 44 16 4 2 0 0 0
+  tag_recapture[Tags2009_R1_R1].step	1
+  tag_recapture[Tags2009_R1_R1].tag_name	Tags2009_R1
+  tag_recapture[Tags2009_R1_R1].years	2010
+  vector_average_penalty[1].k   	1
+  vector_average_penalty[1].label	meanYCS_1
+  vector_average_penalty[1].multiplier	100
+  vector_average_penalty[1].vector	recruitment.YCS
+Stored as DOUBLEs: 
+Stored as VECTORs: 
+Stored as OGIVEs: 
+
+Population parameters:
+Stored as strings: 
+  annual_cycle.M_props          	1
+  annual_cycle.aging_time       	1
+  annual_cycle.baranov          	False
+  annual_cycle.fishery_areas    	R1
+  annual_cycle.fishery_names    	LL
+  annual_cycle.fishery_times    	1
+  annual_cycle.growth_props     	0
+  annual_cycle.migrate_from     	R1
+  annual_cycle.migrate_to       	R2
+  annual_cycle.migration_names  	MoveRec_1_2
+  annual_cycle.migration_times  	1
+  annual_cycle.n_migrations     	0
+  annual_cycle.recruitment_areas	R1
+  annual_cycle.recruitment_time 	1
+  annual_cycle.spawning_all_areas	1
+  annual_cycle.spawning_p       	1
+  annual_cycle.spawning_part_mort	1
+  annual_cycle.spawning_time    	1
+  annual_cycle.spawning_use_total_B	False
+  annual_cycle.time_steps       	1
+  area_names                    	R1
+  current                       	2010
+  final                         	2045
+  first_random_year             	2007
+  fishery[LL].U_max             	0.95
+  fishery[LL].catches           	0 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000
+  fishery[LL].future_constant_catches	200
+  fishery[LL].selectivity       	SelLL
+  fishery[LL].years             	1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010
+  initial                       	1990
+  initialization.B0             	291598
+  mature_partition              	False
+  maturity_props.all            	allvalues  0 0 0 0 0 0 0 0 0 0 0 0.1667 0.3333 0.5 0.6667 0.8333 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+  max_age                       	30
+  min_age                       	1
+  n_areas                       	1
+  n_stocks                      	1
+  n_tags                        	5
+  natural_mortality.all         	0.155
+  plus_group                    	True
+  randomisation_method          	lognormal
+  recruitment.SR                	BH
+  recruitment.YCS               	1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+  recruitment.YCS_years         	1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
+  recruitment.first_free        	1989
+  recruitment.last_free         	2006
+  recruitment.p_male            	0.5
+  recruitment.rho               	0
+  recruitment.sigma_r           	0.6
+  recruitment.steepness         	0.7
+  recruitment.year_range        	1989 2006
+  selectivity[SelLL].all        	double_normal 10 2 10
+  selectivity_names             	SelLL
+  sex_partition                 	False
+  size_at_age.Linf              	2870.8
+  size_at_age.by_length         	True
+  size_at_age.cv                	0.08
+  size_at_age.k                 	0.02056
+  size_at_age.t0                	-4.2897
+  size_at_age_dist              	normal
+  size_at_age_type              	von_Bert
+  size_based                    	False
+  size_weight.a                 	2.59e-12
+  size_weight.b                 	3.2064
+  size_weight.verify_size_weight	500 0.5 1.5
+  standardise_YCS               	True
+  tag[Tags2005_R1_LL].area      	R1
+  tag[Tags2005_R1_LL].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag[Tags2005_R1_LL].mature_only	False
+  tag[Tags2005_R1_LL].mortality 	0.1
+  tag[Tags2005_R1_LL].number    	25000
+  tag[Tags2005_R1_LL].ogive     	SelLL
+  tag[Tags2005_R1_LL].plus_group	False
+  tag[Tags2005_R1_LL].props_all 	0 0 0 0 0 0 5e-04 0.0029 0.0123 0.0368 0.0779 0.1206 0.1432 0.138 0.1164 0.0922 0.0713 0.054 0.0401 0.0291 0.0206 0.0144 0.0098 0.0067 0.0045 0.003 0.0021 0.0014 9e-04 6e-04 3e-04 1e-04 1e-04 0 0 0 0 0 0
+  tag[Tags2005_R1_LL].release_type	deterministic
+  tag[Tags2005_R1_LL].sex       	both
+  tag[Tags2005_R1_LL].step      	1
+  tag[Tags2005_R1_LL].tag_name  	Tags2005_R1
+  tag[Tags2005_R1_LL].year      	2005
+  tag[Tags2006_R1_LL].area      	R1
+  tag[Tags2006_R1_LL].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag[Tags2006_R1_LL].mature_only	False
+  tag[Tags2006_R1_LL].mortality 	0.1
+  tag[Tags2006_R1_LL].number    	25000
+  tag[Tags2006_R1_LL].ogive     	SelLL
+  tag[Tags2006_R1_LL].plus_group	False
+  tag[Tags2006_R1_LL].props_all 	0 0 0 0 0 1e-04 5e-04 0.0029 0.0124 0.0367 0.0776 0.1202 0.1424 0.1375 0.1172 0.0939 0.0728 0.0549 0.0403 0.0289 0.0203 0.014 0.0095 0.0064 0.0042 0.0028 0.0018 0.0012 8e-04 4e-04 2e-04 1e-04 0 0 0 0 0 0 0
+  tag[Tags2006_R1_LL].release_type	deterministic
+  tag[Tags2006_R1_LL].sex       	both
+  tag[Tags2006_R1_LL].step      	1
+  tag[Tags2006_R1_LL].tag_name  	Tags2006_R1
+  tag[Tags2006_R1_LL].year      	2006
+  tag[Tags2007_R1_LL].area      	R1
+  tag[Tags2007_R1_LL].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag[Tags2007_R1_LL].mature_only	False
+  tag[Tags2007_R1_LL].mortality 	0.1
+  tag[Tags2007_R1_LL].number    	25000
+  tag[Tags2007_R1_LL].ogive     	SelLL
+  tag[Tags2007_R1_LL].plus_group	False
+  tag[Tags2007_R1_LL].props_all 	0 0 0 0 0 1e-04 5e-04 0.0031 0.0128 0.0373 0.0778 0.1194 0.1413 0.1372 0.1175 0.094 0.0725 0.0548 0.0405 0.0293 0.0206 0.0141 0.0094 0.0062 0.0041 0.0027 0.0019 0.0013 8e-04 5e-04 2e-04 1e-04 0 0 0 0 0 0 0
+  tag[Tags2007_R1_LL].release_type	deterministic
+  tag[Tags2007_R1_LL].sex       	both
+  tag[Tags2007_R1_LL].step      	1
+  tag[Tags2007_R1_LL].tag_name  	Tags2007_R1
+  tag[Tags2007_R1_LL].year      	2007
+  tag[Tags2008_R1_LL].area      	R1
+  tag[Tags2008_R1_LL].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag[Tags2008_R1_LL].mature_only	False
+  tag[Tags2008_R1_LL].mortality 	0.1
+  tag[Tags2008_R1_LL].number    	25000
+  tag[Tags2008_R1_LL].ogive     	SelLL
+  tag[Tags2008_R1_LL].plus_group	False
+  tag[Tags2008_R1_LL].props_all 	0 0 0 0 0 0 4e-04 0.0026 0.012 0.0366 0.0777 0.1202 0.1426 0.1379 0.1174 0.094 0.0728 0.055 0.0406 0.0292 0.0204 0.0138 0.0092 0.0061 0.0041 0.0027 0.0018 0.0012 7e-04 4e-04 2e-04 1e-04 0 0 0 0 0 0 0
+  tag[Tags2008_R1_LL].release_type	deterministic
+  tag[Tags2008_R1_LL].sex       	both
+  tag[Tags2008_R1_LL].step      	1
+  tag[Tags2008_R1_LL].tag_name  	Tags2008_R1
+  tag[Tags2008_R1_LL].year      	2008
+  tag[Tags2009_R1_LL].area      	R1
+  tag[Tags2009_R1_LL].class_mins	100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050
+  tag[Tags2009_R1_LL].mature_only	False
+  tag[Tags2009_R1_LL].mortality 	0.1
+  tag[Tags2009_R1_LL].number    	25000
+  tag[Tags2009_R1_LL].ogive     	SelLL
+  tag[Tags2009_R1_LL].plus_group	False
+  tag[Tags2009_R1_LL].props_all 	0 0 0 0 0 1e-04 5e-04 0.0028 0.0121 0.037 0.0789 0.1215 0.1435 0.1389 0.118 0.0936 0.0719 0.0539 0.0395 0.0283 0.0198 0.0136 0.0091 0.006 0.004 0.0026 0.0017 0.0012 8e-04 5e-04 2e-04 1e-04 0 0 0 0 0 0 0
+  tag[Tags2009_R1_LL].release_type	deterministic
+  tag[Tags2009_R1_LL].sex       	both
+  tag[Tags2009_R1_LL].step      	1
+  tag[Tags2009_R1_LL].tag_name  	Tags2009_R1
+  tag[Tags2009_R1_LL].year      	2009
+  tag_growth_loss[Tags2005_R1].nogrowth_period	0
+  tag_growth_loss[Tags2006_R1].nogrowth_period	0
+  tag_growth_loss[Tags2007_R1].nogrowth_period	0
+  tag_growth_loss[Tags2008_R1].nogrowth_period	0
+  tag_growth_loss[Tags2009_R1].nogrowth_period	0
+  tag_loss_props                	1
+  tag_names                     	Tags2005_R1 Tags2006_R1 Tags2007_R1 Tags2008_R1 Tags2009_R1
+  tag_shedding_rate             	0.0084 0.0084 0.0084 0.0084 0.0084
+  y_enter                       	1
+Stored as DOUBLEs: 
+Stored as VECTORs: 
+Stored as OGIVEs: 
+
+Output parameters:
+Stored as strings: 
+  n_projections                 	100
+  numbers_at[Numbers_at_age_R1].area	R1
+  numbers_at[Numbers_at_age_R1].proportion_mortality	0.5
+  numbers_at[Numbers_at_age_R1].step	1
+  numbers_at[Numbers_at_age_R1].years	1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010
+  print.covariance              	true
+  print.estimation_section      	true
+  print.final_state             	false
+  print.fits                    	true
+  print.fits_every_eval         	false
+  print.initial_state           	false
+  print.normalised_resids       	true
+  print.objective_every_eval    	false
+  print.parameter_vector_every_eval	false
+  print.parameters              	true
+  print.parameters_every_eval   	false
+  print.pearson_resids          	true
+  print.requests                	false
+  print.resids                  	true
+  print.results                 	false
+  print.state_annually          	false
+  print.state_every_step        	false
+  print.unused_parameters       	true
+  print.yields                  	true
+  quantities.B0                 	true
+  quantities.R0                 	true
+  quantities.SSBs               	true
+  quantities.YCS                	true
+  quantities.actual_catches     	false
+  quantities.all_free_parameters	true
+  quantities.fishing_pressures  	true
+  quantities.nuisance_qs        	true
+  quantities.recruitments       	true
+  quantities.true_YCS           	true
+Stored as DOUBLEs: 
+Stored as VECTORs: 
+Stored as OGIVEs: 
+
+A fish of size 500 cm has a weight of 1.16755 kg in your model. This size-weight scale check assumes that the growth curve is in centimetres, and that the catch is in tonnes.
+
+A fish of size 500 cm has a weight of 1.16755 kg in your model. This size-weight scale check assumes that the growth curve is in centimetres, and that the catch is in tonnes.
+
+Estimation section :
+
+Objective function: Bayes
+
+Minimiser convergence threshold: 0.001
+
+
+Observations:
+
+The observations are:
+LL_catchA
+Tags2005_R1_R1
+Tags2006_R1_R1
+Tags2007_R1_R1
+Tags2008_R1_R1
+Tags2009_R1_R1
+Fits follow:
+
+LL_catchA :
+catch proportions-at-age for fishery LL  with ageing error (not constrained to sum to 1):
+obs (last class is a plus group):
+class 1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29      30      
+2000 0       0       0       0.002   0.006   0.012   0.05    0.116   0.145   0.129   0.117   0.09    0.083   0.059   0.041   0.031   0.034   0.023   0.013   0.013   0.008   0.008   0.003   0.005   0.005   0       0.001   0       0.001   0.005   
+2001 0       0       0       0.002   0.001   0.016   0.053   0.093   0.162   0.128   0.131   0.084   0.085   0.058   0.049   0.034   0.026   0.022   0.018   0.006   0.008   0.006   0.002   0.003   0.005   0.001   0.003   0       0       0.004   
+2002 0       0       0       0.002   0.006   0.014   0.049   0.102   0.171   0.126   0.11    0.103   0.074   0.059   0.038   0.048   0.029   0.016   0.016   0.008   0.008   0.006   0.002   0.006   0.003   0.002   0       0       0       0.002   
+2003 0       0       0       0       0.007   0.011   0.054   0.1     0.14    0.128   0.121   0.104   0.065   0.072   0.057   0.032   0.04    0.026   0.013   0.007   0.004   0.003   0.002   0.002   0.003   0.004   0.003   0       0.001   0.001   
+2004 0       0       0.001   0       0.003   0.014   0.049   0.101   0.153   0.153   0.142   0.092   0.064   0.043   0.046   0.037   0.029   0.021   0.013   0.01    0.009   0.007   0.004   0.001   0.003   0.001   0       0.001   0       0.003   
+2005 0       0       0       0       0.003   0.015   0.038   0.091   0.162   0.129   0.136   0.095   0.074   0.07    0.046   0.031   0.03    0.022   0.018   0.008   0.006   0.007   0.004   0.003   0.001   0.003   0.002   0       0       0.006   
+2006 0       0       0       0.002   0.002   0.011   0.053   0.078   0.15    0.149   0.128   0.087   0.067   0.07    0.053   0.047   0.027   0.023   0.015   0.012   0.005   0.007   0.002   0.002   0.002   0.003   0.002   0.001   0       0.002   
+2007 0       0       0       0       0.002   0.016   0.041   0.111   0.153   0.153   0.098   0.083   0.082   0.075   0.055   0.047   0.013   0.023   0.012   0.01    0.007   0.007   0.004   0       0.002   0.002   0       0.002   0.001   0.001   
+2008 0       0       0       0.002   0.003   0.012   0.047   0.114   0.151   0.132   0.099   0.104   0.091   0.064   0.048   0.037   0.022   0.025   0.017   0.007   0.008   0.006   0.003   0       0.003   0.001   0.001   0       0.001   0.002   
+2009 0       0       0       0       0.004   0.019   0.05    0.106   0.139   0.148   0.131   0.094   0.06    0.06    0.042   0.043   0.023   0.018   0.014   0.015   0.013   0.003   0.004   0.005   0.003   0.001   0.001   0.001   0       0.003   
+2010 0       0       0       0.001   0.001   0.017   0.057   0.083   0.151   0.156   0.112   0.115   0.08    0.05    0.042   0.033   0.032   0.023   0.012   0.009   0.006   0.001   0.008   0.004   0.002   0.001   0.001   0.001   0       0.002   
+objective function: multinomial likelihood, with delta = 1e-011, N =
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+
+Tags2005_R1_R1 :
+tag-recapture data for tag Tags2005_R1 in years 2006 2007 2008 2009 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2006
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 458 0
+450 2838 0
+500 11974 0.6
+550 35164 4.7
+600 73726 20
+650 113752 52.7
+700 134774 91.5
+750 130416 111.3
+800 110986 103.7
+850 88416 83
+900 68136 62.4
+950 51292 45.4
+1000 37776 31.6
+1050 27218 20.9
+1100 19190 13
+1150 13250 7.7
+1200 8980 4.4
+1250 6004 2.4
+1300 3994 1.3
+1350 2670 0.7
+1400 1798 0.4
+1450 1204 0.2
+1500 778 0.1
+1550 466 0
+1600 250 0
+1650 118 0
+1700 48 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2007
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 458 0
+450 2846 0
+500 12002 0.2
+550 35248 1.7
+600 73898 9.2
+650 114008 29.7
+700 135066 61.2
+750 130686 87.9
+800 111202 96.1
+850 88576 86.6
+900 68252 68.7
+950 51376 50.8
+1000 37830 36
+1050 27246 24.4
+1100 19194 15.7
+1150 13232 9.7
+1200 8944 5.8
+1250 5954 3.4
+1300 3940 1.9
+1350 2620 1
+1400 1760 0.5
+1450 1176 0.2
+1500 760 0.1
+1550 456 0
+1600 246 0
+1650 116 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2008
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 460 0
+450 2852 0
+500 12028 0
+550 35320 0.5
+600 74044 3.2
+650 114222 12
+700 135306 29.6
+750 130900 51.7
+800 111370 68.3
+850 88698 71.6
+900 68338 62.7
+950 51436 49
+1000 37870 35.8
+1050 27270 24.6
+1100 19202 15.8
+1150 13224 9.5
+1200 8922 5.5
+1250 5924 3.2
+1300 3904 1.7
+1350 2584 0.9
+1400 1726 0.5
+1450 1152 0.3
+1500 742 0.2
+1550 446 0.1
+1600 240 0.1
+1650 114 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2009
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 460 0
+450 2858 0
+500 12052 0
+550 35386 0.1
+600 74174 0.9
+650 114410 3.9
+700 135510 11.7
+750 131078 25
+800 111502 40.2
+850 88788 51.2
+900 68398 53.1
+950 51476 46.5
+1000 37896 35.7
+1050 27286 24.9
+1100 19210 16
+1150 13222 9.6
+1200 8910 5.5
+1250 5904 3
+1300 3878 1.5
+1350 2556 0.7
+1400 1700 0.3
+1450 1130 0.1
+1500 726 0
+1550 436 0
+1600 234 0
+1650 110 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2010
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 462 0
+450 2862 0
+500 12074 0
+550 35448 0
+600 74294 0.2
+650 114582 1.3
+700 135692 5
+750 131230 13.3
+800 111610 26.2
+850 88858 39.4
+900 68442 46.3
+950 51502 43.4
+1000 37912 34
+1050 27296 24.1
+1100 19214 16.4
+1150 13222 10.9
+1200 8904 6.9
+1250 5890 4.1
+1300 3860 2.3
+1350 2534 1.1
+1400 1678 0.5
+1450 1110 0.2
+1500 712 0.1
+1550 426 0
+1600 230 0
+1650 108 0
+1700 44 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Tags2006_R1_R1 :
+tag-recapture data for tag Tags2006_R1 in years 2007 2008 2009 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2007
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 458 0
+450 2846 0
+500 12002 0.6
+550 35248 5
+600 73898 21.8
+650 114008 55.6
+700 135066 94.3
+750 130686 116.9
+800 111202 115.2
+850 88576 96.9
+900 68252 73.2
+950 51376 51
+1000 37830 33.5
+1050 27246 20.8
+1100 19194 12.1
+1150 13232 6.6
+1200 8944 3.5
+1250 5954 1.9
+1300 3940 1.1
+1350 2620 0.7
+1400 1760 0.5
+1450 1176 0.3
+1500 760 0.2
+1550 456 0.1
+1600 246 0.1
+1650 116 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2008
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 460 0
+450 2852 0
+500 12028 0.2
+550 35320 1.7
+600 74044 8.4
+650 114222 25.9
+700 135306 53.6
+750 130900 79.8
+800 111370 91.3
+850 88698 84.1
+900 68338 66
+950 51436 47.8
+1000 37870 33.5
+1050 27270 22.6
+1100 19202 14.4
+1150 13224 8.7
+1200 8922 5.2
+1250 5924 3.2
+1300 3904 2.1
+1350 2584 1.3
+1400 1726 0.8
+1450 1152 0.5
+1500 742 0.3
+1550 446 0.2
+1600 240 0.1
+1650 114 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2009
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 460 0
+450 2858 0
+500 12052 0.1
+550 35386 0.6
+600 74174 3.6
+650 114410 13.5
+700 135510 33.5
+750 131078 58.4
+800 111502 75.8
+850 88788 77.5
+900 68398 66.2
+950 51476 49.5
+1000 37896 33.7
+1050 27286 21.4
+1100 19210 13.1
+1150 13222 8
+1200 8910 4.8
+1250 5904 2.9
+1300 3878 1.6
+1350 2556 0.9
+1400 1700 0.5
+1450 1130 0.3
+1500 726 0.1
+1550 436 0.1
+1600 234 0
+1650 110 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2010
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 462 0
+450 2862 0
+500 12074 0
+550 35448 0.1
+600 74294 1.1
+650 114582 5
+700 135692 14.7
+750 131230 30.7
+800 111610 47.8
+850 88858 57.8
+900 68442 56.4
+950 51502 46.8
+1000 37912 35.3
+1050 27296 25.4
+1100 19214 17.9
+1150 13222 12.2
+1200 8904 7.9
+1250 5890 4.8
+1300 3860 2.6
+1350 2534 1.3
+1400 1678 0.7
+1450 1110 0.3
+1500 712 0.1
+1550 426 0.1
+1600 230 0
+1650 108 0
+1700 44 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Tags2007_R1_R1 :
+tag-recapture data for tag Tags2007_R1 in years 2008 2009 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2008
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 460 0
+450 2852 0.1
+500 12028 1
+550 35320 6.2
+600 74044 23.3
+650 114222 55.4
+700 135306 89.9
+750 130900 108.8
+800 111370 107.4
+850 88698 91.6
+900 68338 70.2
+950 51436 49.8
+1000 37870 33.8
+1050 27270 22.3
+1100 19202 14.5
+1150 13224 9.2
+1200 8922 5.9
+1250 5924 3.8
+1300 3904 2.4
+1350 2584 1.4
+1400 1726 0.7
+1450 1152 0.3
+1500 742 0.1
+1550 446 0
+1600 240 0
+1650 114 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2009
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 460 0
+450 2858 0
+500 12052 0.2
+550 35386 2.2
+600 74174 10.8
+650 114410 32.5
+700 135510 64.3
+750 131078 90.3
+800 111502 97.1
+850 88788 87
+900 68398 69.9
+950 51476 52
+1000 37896 35.8
+1050 27286 22.9
+1100 19210 13.8
+1150 13222 8
+1200 8910 4.5
+1250 5904 2.6
+1300 3878 1.5
+1350 2556 0.8
+1400 1700 0.4
+1450 1130 0.2
+1500 726 0.1
+1550 436 0
+1600 234 0
+1650 110 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2010
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 462 0
+450 2862 0
+500 12074 0
+550 35448 0.4
+600 74294 2.8
+650 114582 11
+700 135692 27.4
+750 131230 47.9
+800 111610 63.1
+850 88858 67
+900 68442 60.7
+950 51502 48.8
+1000 37912 35.4
+1050 27296 23.6
+1100 19214 14.9
+1150 13222 9.3
+1200 8904 5.7
+1250 5890 3.4
+1300 3860 1.8
+1350 2534 0.9
+1400 1678 0.4
+1450 1110 0.1
+1500 712 0
+1550 426 0
+1600 230 0
+1650 108 0
+1700 44 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Tags2008_R1_R1 :
+tag-recapture data for tag Tags2008_R1 in years 2009 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2009
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 460 0
+450 2858 0
+500 12052 0.7
+550 35386 5.6
+600 74174 23.3
+650 114410 59.7
+700 135510 101.2
+750 131078 122.3
+800 111502 115.1
+850 88788 93.7
+900 68398 71.2
+950 51476 51.9
+1000 37896 36.3
+1050 27286 24.2
+1100 19210 15.3
+1150 13222 9.2
+1200 8910 5.2
+1250 5904 2.9
+1300 3878 1.6
+1350 2556 0.8
+1400 1700 0.4
+1450 1130 0.2
+1500 726 0.1
+1550 436 0
+1600 234 0
+1650 110 0
+1700 46 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Year 2010
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 462 0
+450 2862 0
+500 12074 0.2
+550 35448 1.9
+600 74294 9.1
+650 114582 27.8
+700 135692 56.2
+750 131230 80
+800 111610 86.1
+850 88858 76.5
+900 68442 61.1
+950 51502 46.2
+1000 37912 33.6
+1050 27296 23.3
+1100 19214 15.3
+1150 13222 9.4
+1200 8904 5.2
+1250 5890 2.6
+1300 3860 1.2
+1350 2534 0.5
+1400 1678 0.3
+1450 1110 0.2
+1500 712 0.2
+1550 426 0.1
+1600 230 0.1
+1650 108 0
+1700 44 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+Tags2009_R1_R1 :
+tag-recapture data for tag Tags2009_R1 in years 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2010
+class scanned recaptured
+100 0 0
+150 0 0
+200 0 0
+250 0 0
+300 4 0
+350 50 0
+400 462 0
+450 2862 0.1
+500 12074 0.8
+550 35448 5.9
+600 74294 24.5
+650 114582 61.5
+700 135692 101.7
+750 131230 122.1
+800 111610 115.6
+850 88858 93.3
+900 68442 69.1
+950 51502 49.1
+1000 37912 33.1
+1050 27296 21.2
+1100 19214 13.2
+1150 13222 8.1
+1200 8904 4.9
+1250 5890 3
+1300 3860 1.7
+1350 2534 1
+1400 1678 0.6
+1450 1110 0.3
+1500 712 0.1
+1550 426 0
+1600 230 0
+1650 108 0
+1700 44 0
+1750 16 0
+1800 4 0
+1850 2 0
+1900 0 0
+1950 0 0
+2000 0 0
+
+
+
+Ageing_error:
+  Misclassification matrix:
+1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+Free parameters:
+
+initialization.B0
+uniform: bounds from 5000 to 500000
+current value: 291598
+lower bound: 5000
+upper bound: 500000
+
+
+Q's:
+qs are nuisance parameters
+
+Penalties:
+LL_Penalty :
+Catch limit penalty of 1000 x the sum of squares of (log(actual catch) - log(specified catch)) for fishery LL to disencourage breaking exploitation rate limits
+meanYCS_1 :
+Vector average penalty of 100 x square of (mean(recruitment.YCS) - 1) 
+Penalty_Tags2005_R1_LL :
+'Fish-must-be-tagged' penalty of 1 x square of (actual number of tagged fish - nominal number of tagged fish) for tagging episode Tags2005_R1_LL
+Penalty_Tags2006_R1_LL :
+'Fish-must-be-tagged' penalty of 1 x square of (actual number of tagged fish - nominal number of tagged fish) for tagging episode Tags2006_R1_LL
+Penalty_Tags2007_R1_LL :
+'Fish-must-be-tagged' penalty of 1 x square of (actual number of tagged fish - nominal number of tagged fish) for tagging episode Tags2007_R1_LL
+Penalty_Tags2008_R1_LL :
+'Fish-must-be-tagged' penalty of 1 x square of (actual number of tagged fish - nominal number of tagged fish) for tagging episode Tags2008_R1_LL
+Penalty_Tags2009_R1_LL :
+'Fish-must-be-tagged' penalty of 1 x square of (actual number of tagged fish - nominal number of tagged fish) for tagging episode Tags2009_R1_LL
+
+Components of the objective function are:
+  LL_catchA
+  Tags2005_R1_R1
+  Tags2006_R1_R1
+  Tags2007_R1_R1
+  Tags2008_R1_R1
+  Tags2009_R1_R1
+  prior_on_initialization.B0
+  LL_Penalty
+  meanYCS_1
+  Penalty_Tags2005_R1_LL
+  Penalty_Tags2006_R1_LL
+  Penalty_Tags2007_R1_LL
+  Penalty_Tags2008_R1_LL
+  Penalty_Tags2009_R1_LL
+
+Random number seed : 89650
+
+
+Minimiser achieved convergence after 5 quasi-Newton iterations using 7 objective function evaluations
+
+
+
+Approximate Covariance matrix (Inverse Hessian of parameters at point estimate):
+3.57808e+006 
+
+Correlation matrix:
+1 
+
+List of parameter names, in the same order as the rows & cols of the covariance/correlation matrices:
+initialization.B0 
+
+
+
+Start extracting output from here
+
+Point estimate:
+initialization.B0
+current value: 206099
+lower bound: 5000
+upper bound: 500000
+
+
+In a format suitable for -i :
+
+initialization.B0 
+206099 
+
+Objective function : 1015.14
+
+Components :
+LL_catchA                                          322.39
+Tags2005_R1_R1                                     209.125
+Tags2006_R1_R1                                     181.012
+Tags2007_R1_R1                                     145.649
+Tags2008_R1_R1                                     101.39
+Tags2009_R1_R1                                     55.5712
+prior_on_initialization.B0                         0
+LL_Penalty                                         0
+meanYCS_1                                          0
+Penalty_Tags2005_R1_LL                             1.32349e-023
+Penalty_Tags2006_R1_LL                             5.29396e-023
+Penalty_Tags2007_R1_LL                             1.19114e-022
+Penalty_Tags2008_R1_LL                             1.32349e-023
+Penalty_Tags2009_R1_LL                             0
+
+Fits : 
+
+The observations are:
+LL_catchA
+Tags2005_R1_R1
+Tags2006_R1_R1
+Tags2007_R1_R1
+Tags2008_R1_R1
+Tags2009_R1_R1
+Fits follow:
+
+LL_catchA :
+catch proportions-at-age for fishery LL  with ageing error (not constrained to sum to 1):
+obs (last class is a plus group):
+class 1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29      30      
+2000 0       0       0       0.002   0.006   0.012   0.05    0.116   0.145   0.129   0.117   0.09    0.083   0.059   0.041   0.031   0.034   0.023   0.013   0.013   0.008   0.008   0.003   0.005   0.005   0       0.001   0       0.001   0.005   
+2001 0       0       0       0.002   0.001   0.016   0.053   0.093   0.162   0.128   0.131   0.084   0.085   0.058   0.049   0.034   0.026   0.022   0.018   0.006   0.008   0.006   0.002   0.003   0.005   0.001   0.003   0       0       0.004   
+2002 0       0       0       0.002   0.006   0.014   0.049   0.102   0.171   0.126   0.11    0.103   0.074   0.059   0.038   0.048   0.029   0.016   0.016   0.008   0.008   0.006   0.002   0.006   0.003   0.002   0       0       0       0.002   
+2003 0       0       0       0       0.007   0.011   0.054   0.1     0.14    0.128   0.121   0.104   0.065   0.072   0.057   0.032   0.04    0.026   0.013   0.007   0.004   0.003   0.002   0.002   0.003   0.004   0.003   0       0.001   0.001   
+2004 0       0       0.001   0       0.003   0.014   0.049   0.101   0.153   0.153   0.142   0.092   0.064   0.043   0.046   0.037   0.029   0.021   0.013   0.01    0.009   0.007   0.004   0.001   0.003   0.001   0       0.001   0       0.003   
+2005 0       0       0       0       0.003   0.015   0.038   0.091   0.162   0.129   0.136   0.095   0.074   0.07    0.046   0.031   0.03    0.022   0.018   0.008   0.006   0.007   0.004   0.003   0.001   0.003   0.002   0       0       0.006   
+2006 0       0       0       0.002   0.002   0.011   0.053   0.078   0.15    0.149   0.128   0.087   0.067   0.07    0.053   0.047   0.027   0.023   0.015   0.012   0.005   0.007   0.002   0.002   0.002   0.003   0.002   0.001   0       0.002   
+2007 0       0       0       0       0.002   0.016   0.041   0.111   0.153   0.153   0.098   0.083   0.082   0.075   0.055   0.047   0.013   0.023   0.012   0.01    0.007   0.007   0.004   0       0.002   0.002   0       0.002   0.001   0.001   
+2008 0       0       0       0.002   0.003   0.012   0.047   0.114   0.151   0.132   0.099   0.104   0.091   0.064   0.048   0.037   0.022   0.025   0.017   0.007   0.008   0.006   0.003   0       0.003   0.001   0.001   0       0.001   0.002   
+2009 0       0       0       0       0.004   0.019   0.05    0.106   0.139   0.148   0.131   0.094   0.06    0.06    0.042   0.043   0.023   0.018   0.014   0.015   0.013   0.003   0.004   0.005   0.003   0.001   0.001   0.001   0       0.003   
+2010 0       0       0       0.001   0.001   0.017   0.057   0.083   0.151   0.156   0.112   0.115   0.08    0.05    0.042   0.033   0.032   0.023   0.012   0.009   0.006   0.001   0.008   0.004   0.002   0.001   0.001   0.001   0       0.002   
+fits (last class is a plus group):
+class 1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29      30      
+2000 4.80811e-007 7.85674e-006 9.07779e-005 0.000741588 0.00428294 0.01748 0.0503393 0.101899 0.144187 0.142331 0.116466 0.0940753 0.0750576 0.0591858 0.0461621 0.0356695 0.0273999 0.0210228 0.0161371 0.0123148 0.00928931 0.00692196 0.00509203 0.00369577 0.002645 0.00186569 0.00129649 0.000887318 0.000597956 0.00285816 
+2001 4.81979e-007 7.87571e-006 9.10002e-005 0.000743467 0.00429437 0.0175297 0.0504912 0.10222 0.144636 0.142741 0.116907 0.0943717 0.0752421 0.0592852 0.0461887 0.0356071 0.0272029 0.0206645 0.0156811 0.0119052 0.0089855 0.00670277 0.00493836 0.00359117 0.00257597 0.00182157 0.00126922 0.000871049 0.000588611 0.00284604 
+2002 4.82922e-007 7.89075e-006 9.11727e-005 0.000744902 0.00430302 0.0175672 0.0506071 0.102466 0.144986 0.143061 0.117134 0.0946406 0.0754093 0.0593767 0.0462249 0.0355967 0.0271325 0.0204993 0.0154018 0.0115601 0.00868038 0.00647905 0.00477878 0.00348055 0.00250151 0.00177296 0.00123848 0.000852239 0.000577495 0.00282797 
+2003 4.83723e-007 7.90327e-006 9.1313e-005 0.000746038 0.00430973 0.017596 0.0506957 0.102656 0.145255 0.143309 0.11731 0.0947543 0.0755689 0.0594659 0.0462638 0.0356004 0.0271067 0.0204333 0.0152694 0.0113476 0.00842408 0.00625574 0.00461695 0.00336646 0.00242333 0.00172095 0.00120491 0.000831249 0.000564794 0.00280408 
+2004 4.84441e-007 7.91433e-006 9.14343e-005 0.000746993 0.00431518 0.0176188 0.0507647 0.102802 0.145463 0.143499 0.117444 0.094841 0.075616 0.059558 0.0463078 0.0356114 0.0270956 0.0204038 0.0152131 0.0112451 0.00826575 0.00606862 0.00445614 0.00325129 0.0023431 0.00166662 0.0011692 0.000808475 0.000550723 0.00277451 
+2005 4.85119e-007 7.92468e-006 9.15462e-005 0.000747854 0.00431994 0.017638 0.0508206 0.102918 0.145623 0.143644 0.117545 0.0949053 0.0756502 0.0595682 0.0463592 0.0356302 0.0270931 0.0203877 0.0151857 0.0111998 0.00818846 0.00595277 0.00432164 0.00313722 0.00226238 0.00161106 0.00113204 0.000784344 0.000535524 0.0027394 
+2006 4.85827e-007 7.93552e-006 9.16628e-005 0.000748744 0.00432478 0.0176568 0.0508731 0.10302 0.145756 0.143752 0.117613 0.0949461 0.0756696 0.0595708 0.0463489 0.0356565 0.027098 0.0203793 0.0151693 0.0111767 0.0081536 0.00589589 0.00423837 0.00304205 0.00218271 0.00155538 0.00109419 0.000759347 0.0005195 0.0026992 
+2007 4.86542e-007 7.94638e-006 9.17798e-005 0.00074963 0.00432953 0.0176749 0.0509219 0.103112 0.14587 0.143839 0.117661 0.0949687 0.0756763 0.0595662 0.046336 0.0356376 0.0271101 0.0203774 0.0151591 0.011162 0.00813501 0.00586962 0.0041971 0.00298293 0.00211616 0.00150039 0.00105623 0.000733868 0.000502886 0.00265397 
+2008 4.87273e-007 7.95748e-006 9.18985e-005 0.00075053 0.00433432 0.0176929 0.0509695 0.103198 0.145972 0.143913 0.117697 0.0949781 0.0756711 0.0595536 0.046319 0.0356178 0.0270886 0.0203815 0.0151543 0.0111522 0.00812272 0.0058552 0.00417772 0.00295345 0.00207476 0.00145446 0.00101877 0.000708333 0.000485963 0.00260409 
+2009 4.88025e-007 7.96889e-006 9.20206e-005 0.00075145 0.00433923 0.0177112 0.0510174 0.103283 0.146069 0.143979 0.117724 0.0949795 0.0756571 0.0595329 0.0462968 0.0355956 0.027067 0.0203607 0.0151541 0.0111464 0.00811411 0.00584538 0.00416683 0.00293941 0.00205399 0.00142584 0.000987481 0.000683145 0.000469011 0.00255005 
+2010 4.88797e-007 7.98063e-006 9.21463e-005 0.000752397 0.00434425 0.01773 0.0510662 0.103369 0.146165 0.14404 0.117745 0.0949751 0.0756377 0.059506 0.0462687 0.0355698 0.0270438 0.02034 0.0151356 0.0111442 0.0081085 0.00583825 0.00415923 0.00293135 0.00204397 0.00141141 0.000967947 0.0006621 0.000452291 0.00249244 
+resids (last class is a plus group):
+class 1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29      30      
+2000 -4.80811e-007 -7.85674e-006 -9.07779e-005 0.00125841 0.00171706 -0.00548003 -0.000339268 0.0141005 0.000813237 -0.0133305 0.000534329 -0.00407527 0.00794239 -0.000185848 -0.00516207 -0.00466955 0.00660015 0.00197718 -0.00313714 0.000685216 -0.00128931 0.00107804 -0.00209203 0.00130423 0.002355 -0.00186569 -0.000296494 -0.000887318 0.000402044 0.00214184 
+2001 -4.81979e-007 -7.87571e-006 -9.10002e-005 0.00125653 -0.00329437 -0.00152966 0.00250877 -0.00921967 0.017364 -0.0147408 0.0140932 -0.0103717 0.00975792 -0.00128518 0.00281134 -0.00160714 -0.00120291 0.00133554 0.00231887 -0.00590522 -0.000985502 -0.000702771 -0.00293836 -0.000591174 0.00242403 -0.000821572 0.00173078 -0.000871049 -0.000588611 0.00115396 
+2002 -4.82922e-007 -7.89075e-006 -9.11727e-005 0.0012551 0.00169698 -0.00356724 -0.0016071 -0.000466433 0.0260145 -0.0170611 -0.00713387 0.00835941 -0.00140928 -0.000376743 -0.00822491 0.0124033 0.00186753 -0.00449926 0.000598245 -0.00356009 -0.00068038 -0.000479048 -0.00277878 0.00251945 0.000498488 0.000227037 -0.00123848 -0.000852239 -0.000577495 -0.000827969 
+2003 -4.83723e-007 -7.90327e-006 -9.1313e-005 -0.000746038 0.00269027 -0.00659603 0.00330432 -0.00265578 -0.00525525 -0.0153093 0.00369032 0.00924567 -0.0105689 0.0125341 0.0107362 -0.00360041 0.0128933 0.00556675 -0.00226938 -0.00434757 -0.00442408 -0.00325574 -0.00261695 -0.00136646 0.000576668 0.00227905 0.00179509 -0.000831249 0.000435206 -0.00180408 
+2004 -4.84441e-007 -7.91433e-006 0.000908566 -0.000746993 -0.00131518 -0.00361883 -0.00176467 -0.00180206 0.00753734 0.00950064 0.0245559 -0.00284104 -0.011616 -0.016558 -0.000307784 0.0013886 0.00190438 0.00059615 -0.00221312 -0.00124506 0.000734253 0.000931379 -0.000456143 -0.00225129 0.000656902 -0.000666622 -0.0011692 0.000191525 -0.000550723 0.000225494 
+2005 -4.85119e-007 -7.92468e-006 -9.15462e-005 -0.000747854 -0.00131994 -0.00263797 -0.0128206 -0.0119177 0.0163767 -0.0146437 0.0184554 9.4678e-005 -0.00165023 0.0104318 -0.000359185 -0.0046302 0.00290694 0.00161229 0.00281427 -0.00319981 -0.00218846 0.00104723 -0.000321637 -0.000137222 -0.00126238 0.00138894 0.000867963 -0.000784344 -0.000535524 0.0032606 
+2006 -4.85827e-007 -7.93552e-006 -9.16628e-005 0.00125126 -0.00232478 -0.00665678 0.00212694 -0.0250202 0.00424411 0.00524809 0.0103868 -0.00794611 -0.00866962 0.0104292 0.00665109 0.0113435 -9.79648e-005 0.00262074 -0.000169293 0.000823291 -0.0031536 0.00110411 -0.00223837 -0.00104205 -0.000182705 0.00144462 0.000905813 0.000240653 -0.0005195 -0.000699202 
+2007 -4.86542e-007 -7.94638e-006 -9.17798e-005 -0.00074963 -0.00232953 -0.00167486 -0.0099219 0.00788814 0.00713016 0.00916056 -0.0196612 -0.0119687 0.0063237 0.0154338 0.00866403 0.0113624 -0.0141101 0.00262262 -0.00315915 -0.00116198 -0.00113501 0.00113038 -0.000197099 -0.00298293 -0.00011616 0.000499611 -0.00105623 0.00126613 0.000497114 -0.00165397 
+2008 -4.87273e-007 -7.95748e-006 -9.18985e-005 0.00124947 -0.00133432 -0.0056929 -0.00396953 0.0108017 0.0050277 -0.0119134 -0.0186967 0.0090219 0.0153289 0.00444636 0.00168098 0.00138216 -0.00508863 0.00461852 0.00184571 -0.00415216 -0.000122716 0.000144803 -0.00117772 -0.00295345 0.000925244 -0.000454464 -1.87686e-005 -0.000708333 0.000514037 -0.000604089 
+2009 -4.88025e-007 -7.96889e-006 -9.20206e-005 -0.00075145 -0.000339232 0.00128876 -0.00101743 0.0027167 -0.00706929 0.00402138 0.0132765 -0.000979504 -0.0156571 0.000467063 -0.00429678 0.00740436 -0.004067 -0.00236072 -0.00115412 0.0038536 0.00488589 -0.00284538 -0.000166829 0.00206059 0.000946009 -0.000425842 1.25189e-005 0.000316855 -0.000469011 0.000449947 
+2010 -4.88797e-007 -7.98063e-006 -9.21463e-005 0.000247603 -0.00334425 -0.000730049 0.00593379 -0.020369 0.00483509 0.0119604 -0.00574455 0.0200249 0.00436234 -0.00950602 -0.00426873 -0.00256976 0.00495619 0.00266 -0.00313559 -0.00214417 -0.0021085 -0.00483825 0.00384077 0.00106865 -4.39734e-005 -0.000411411 3.20528e-005 0.0003379 -0.000452291 -0.000492444 
+pearson_resids (last class is a plus group):
+class 1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29      30      
+2000 -0.00693406 -0.02803 -0.0952818 0.462277 0.262933 -0.418159 -0.0155169 0.466108 0.0231507 -0.381538 0.016657 -0.139596 0.301437 -0.00787585 -0.246005 -0.251775 0.404308 0.137821 -0.248973 0.0621305 -0.134398 0.130025 -0.293921 0.214935 0.458515 -0.43234 -0.0823971 -0.298011 0.164463 0.401205 
+2001 -0.00694247 -0.0280638 -0.0953983 0.461004 -0.503799 -0.11656 0.114579 -0.304343 0.49367 -0.421396 0.438618 -0.354775 0.369924 -0.0544203 0.133941 -0.086728 -0.0739461 0.0938811 0.186647 -0.544463 -0.104435 -0.0861285 -0.419168 -0.0988276 0.47822 -0.192672 0.486125 -0.295264 -0.242684 0.216616 
+2002 -0.00694926 -0.0280906 -0.0954887 0.460034 0.259254 -0.271537 -0.0733187 -0.0153806 0.738867 -0.487273 -0.221838 0.285579 -0.0533718 -0.0159415 -0.391715 0.669426 0.114947 -0.317519 0.0485808 -0.333047 -0.0733458 -0.0597083 -0.402936 0.427798 0.0997925 0.0539674 -0.352139 -0.292056 -0.240381 -0.155916 
+2003 -0.00695502 -0.0281129 -0.0955622 -0.273239 0.410686 -0.501684 0.150624 -0.0875027 -0.149145 -0.436924 0.114681 0.315686 -0.399871 0.529994 0.51111 -0.19431 0.793951 0.393474 -0.18507 -0.410462 -0.48406 -0.412927 -0.386031 -0.235908 0.117286 0.54985 0.517451 -0.288434 0.183178 -0.34117 
+2004 -0.00696018 -0.0281325 0.950214 -0.273414 -0.200644 -0.275068 -0.0803888 -0.0593367 0.213785 0.270997 0.762726 -0.0969653 -0.439362 -0.699636 -0.0146459 0.0749304 0.117292 0.0421673 -0.180811 -0.118077 0.0810974 0.119923 -0.0684843 -0.395468 0.135867 -0.163427 -0.342136 0.0673856 -0.234739 0.0428693 
+2005 -0.00696505 -0.0281509 -0.0956841 -0.273571 -0.20126 -0.200405 -0.583733 -0.392221 0.464285 -0.417523 0.573027 0.0032304 -0.0624052 0.440745 -0.0170828 -0.249786 0.179049 0.114086 0.230129 -0.304064 -0.242841 0.136138 -0.0490323 -0.0245377 -0.265704 0.34632 0.258117 -0.280171 -0.231476 0.623828 
+2006 -0.00697013 -0.0281702 -0.0957451 0.457448 -0.354275 -0.505448 0.0967943 -0.823071 0.120277 0.149587 0.322421 -0.271068 -0.327813 0.440627 0.316357 0.611733 -0.00603347 0.185481 -0.0138509 0.0783136 -0.350679 0.144219 -0.344552 -0.18922 -0.0391497 0.366585 0.273987 0.0873646 -0.227985 -0.134763 
+2007 -0.00697526 -0.0281894 -0.0958062 -0.273896 -0.354805 -0.127108 -0.451327 0.259389 0.202002 0.261039 -0.610206 -0.408248 0.2391  0.652092 0.412157 0.612908 -0.868824 0.185623 -0.258553 -0.110603 -0.126356 0.147979 -0.0304876 -0.546979 -0.0252781 0.129079 -0.325168 0.467552 0.221733 -0.321482 
+2008 -0.0069805 -0.0282091 -0.0958681 0.456252 -0.203116 -0.431828 -0.180486 0.355065 0.142396 -0.339411 -0.580195 0.307721 0.579605 0.187881 0.07998 0.0745763 -0.313452 0.326856 0.151082 -0.395394 -0.0136716 0.0189794 -0.182592 -0.544261 0.20334 -0.119252 -0.00588321 -0.26624 0.233238 -0.118533 
+2009 -0.00698588 -0.0282293 -0.0959318 -0.274229 -0.0516101 0.0977073 -0.04624 0.0892686 -0.200164 0.114547 0.411954 -0.0334089 -0.592065 0.019739 -0.204485 0.399632 -0.250618 -0.167153 -0.0944715 0.367057 0.544619 -0.373256 -0.0258985 0.380629 0.20895 -0.112856 0.00398579 0.12127 -0.216617 0.0892157 
+2010 -0.0069914 -0.0282501 -0.0959973 0.0903018 -0.508495 -0.0553199 0.269555 -0.669064 0.136866 0.340625 -0.178233 0.683021 0.164979 -0.401828 -0.203208 -0.138745 0.305539 0.188438 -0.256821 -0.204253 -0.23511 -0.635066 0.596783 0.197669 -0.00973636 -0.109586 0.0103074 0.131362 -0.21272 -0.0987612 
+objective function: multinomial likelihood, with delta = 1e-011, N =
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 
+
+Tags2005_R1_R1 :
+tag-recapture data for tag Tags2005_R1 in years 2006 2007 2008 2009 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2006
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 8.14604e-014 0
+250 0 0 8.02416e-012 0
+300 4 0 2.88471e-010 1.15388e-009
+350 50 0 1.16109e-008 5.80545e-007
+400 458 0 2.06629e-007 9.46361e-005
+450 2838 0 2.0479e-006 0.00581193
+500 11974 0.6 1.30193e-005 1.15844
+550 35164 4.7 5.64816e-005 3.04507
+600 73726 20 0.000172698 4.18527
+650 113752 52.7 0.000384382 3.76697
+700 134774 91.5 0.00064814 3.27469
+750 130416 111.3 0.000871377 3.29969
+800 110986 103.7 0.000996019 3.45662
+850 88416 83 0.00103225 3.51555
+900 68136 62.4 0.00101433 3.32397
+950 51292 45.4 0.000964573 3.00087
+1000 37776 31.6 0.000893449 2.71784
+1050 27218 20.9 0.000807108 2.46882
+1100 19190 13 0.000709994 2.22204
+1150 13250 7.7 0.000605318 1.95657
+1200 8980 4.4 0.000495983 1.67873
+1250 6004 2.4 0.000388068 1.39205
+1300 3994 1.3 0.000292325 1.1202
+1350 2670 0.7 0.000217767 0.865077
+1400 1798 0.4 0.00016645 0.66211
+1450 1204 0.2 0.000134433 0.440609
+1500 778 0.1 0.000115123 0.280907
+1550 466 0 0.000103376 0.0481758
+1600 250 0 9.61078e-005 0.0240281
+1650 118 0 9.17798e-005 0.0108305
+1700 48 0 8.92993e-005 0.00428656
+1750 16 0 8.79222e-005 0.00140682
+1800 4 0 8.71767e-005 0.000348722
+1850 2 0 8.67465e-005 0.000173501
+1900 0 0 8.70653e-005 0
+1950 0 0 8.42486e-005 0
+2000 0 0 8.05923e-005 0
+
+total neg_log_likelihood: 47.9272
+
+
+Year 2007
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 3.92396e-018 0
+250 0 0 2.70761e-013 0
+300 4 0 1.54937e-011 6.19749e-011
+350 50 0 9.69578e-010 4.84789e-008
+400 458 0 2.43285e-008 1.11424e-005
+450 2846 0 3.34541e-007 0.000952104
+500 12002 0.2 2.87517e-006 0.62244
+550 35248 1.7 1.65273e-005 1.93593
+600 73898 9.2 6.6142e-005 3.54413
+650 114008 29.7 0.000189936 3.95529
+700 135066 61.2 0.000403829 3.3679
+750 130686 87.9 0.000660088 3.17307
+800 111202 96.1 0.00087117 3.20519
+850 88576 86.6 0.0009866 3.15364
+900 68252 68.7 0.00101738 3.03847
+950 51376 50.8 0.000995145 2.88508
+1000 37830 36 0.000941349 2.71465
+1050 27246 24.4 0.000866391 2.53243
+1100 19194 15.7 0.000776027 2.32205
+1150 13232 9.7 0.000673721 2.09686
+1200 8944 5.8 0.000562013 1.86858
+1250 5954 3.4 0.000446826 1.64944
+1300 3940 1.9 0.0003404 1.3861
+1350 2620 1 0.000254609 1.07176
+1400 1760 0.5 0.000193896 0.7579
+1450 1176 0.2 0.000155175 0.437243
+1500 760 0.1 0.000131358 0.28032
+1550 456 0 0.00011658 0.0531635
+1600 246 0 0.000107227 0.0263794
+1650 116 0 0.00010154 0.0117793
+1700 46 0 9.82255e-005 0.00451859
+1750 16 0 9.63633e-005 0.00154189
+1800 4 0 9.53522e-005 0.000381427
+1850 2 0 9.47845e-005 0.000189578
+1900 0 0 9.52885e-005 0
+1950 0 0 9.16962e-005 0
+2000 0 0 8.60493e-005 0
+
+total neg_log_likelihood: 46.0974
+
+
+Year 2008
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 0 0
+250 0 0 1.18852e-015 0
+300 4 0 5.42751e-013 2.17115e-012
+350 50 0 8.50998e-011 4.25499e-009
+400 460 0 2.86076e-009 1.31595e-006
+450 2852 0 4.91012e-008 0.000140037
+500 12028 0 5.42909e-007 0.00653011
+550 35320 0.5 4.06701e-006 0.993058
+600 74044 3.2 2.11185e-005 2.18168
+650 114222 12 7.80725e-005 2.64848
+700 135306 29.6 0.000210714 2.63608
+750 130900 51.7 0.000427221 3.05679
+800 111370 68.3 0.000675091 3.35735
+850 88698 71.6 0.00087257 3.27803
+900 68338 62.7 0.000977487 3.11756
+950 51436 49 0.0010016 2.92871
+1000 37870 35.8 0.000974327 2.72628
+1050 27270 24.6 0.00091588 2.5261
+1100 19202 15.8 0.000836013 2.30581
+1150 13224 9.5 0.000739273 2.05693
+1200 8922 5.5 0.0006281 1.78711
+1250 5924 3.2 0.000508118 1.53207
+1300 3904 1.7 0.000392619 1.24134
+1350 2584 0.9 0.000296174 0.966881
+1400 1726 0.5 0.000225969 0.739874
+1450 1152 0.3 0.000180237 0.570927
+1500 742 0.2 0.000151626 0.463952
+1550 446 0.1 0.000133606 0.291635
+1600 240 0.1 0.000122025 0.33228
+1650 114 0 0.000114886 0.0130978
+1700 46 0 0.000110681 0.00509159
+1750 16 0 0.000108301 0.00173292
+1800 4 0 0.000107007 0.00042805
+1850 2 0 0.00010629 0.000212591
+1900 0 0 0.000106989 0
+1950 0 0 0.000102582 0
+2000 0 0 9.48061e-005 0
+
+total neg_log_likelihood: 41.7662
+
+
+Year 2009
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 0 0
+250 0 0 5.72914e-020 0
+300 4 0 2.39212e-015 9.76996e-015
+350 50 0 6.38488e-012 3.19245e-010
+400 460 0 3.56132e-010 1.63821e-007
+450 2858 0 7.4183e-009 2.12015e-005
+500 12052 0 9.47435e-008 0.00114185
+550 35386 0.1 8.75701e-007 0.328531
+600 74174 0.9 5.77601e-006 1.15231
+650 114410 3.9 2.7214e-005 1.71261
+700 135510 11.7 9.30224e-005 2.18914
+750 131078 25 0.00023544 3.12732
+800 111502 40.2 0.000453906 3.92119
+850 88788 51.2 0.000691937 3.79316
+900 68398 53.1 0.000874899 3.30138
+950 51476 46.5 0.00096814 2.95435
+1000 37896 35.7 0.000984567 2.74371
+1050 27286 24.9 0.000951401 2.55122
+1100 19210 16 0.00088706 2.34248
+1150 13222 9.6 0.000799628 2.10435
+1200 8910 5.5 0.000692242 1.8237
+1250 5904 3 0.000570354 1.51649
+1300 3878 1.5 0.000447961 1.19328
+1350 2556 0.7 0.000342029 0.872379
+1400 1700 0.3 0.000262644 0.580136
+1450 1130 0.1 0.000209788 0.331096
+1500 726 0 0.000176162 0.127905
+1550 436 0 0.000154699 0.0674541
+1600 234 0 0.000140737 0.0329348
+1650 110 0 0.000132047 0.0145261
+1700 46 0 0.00012689 0.00583731
+1750 16 0 0.000123959 0.00198347
+1800 4 0 0.000122363 0.000489482
+1850 2 0 0.000121487 0.000242988
+1900 0 0 0.000122384 0
+1950 0 0 0.000117122 0
+2000 0 0 0.000107073 0
+
+total neg_log_likelihood: 38.7914
+
+
+Year 2010
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 0 0
+250 0 0 0 0
+300 4 0 1.15309e-019 0
+350 50 0 2.56379e-013 1.28175e-011
+400 462 0 4.07439e-011 1.88237e-008
+450 2862 0 1.20935e-009 3.46116e-006
+500 12074 0 1.72337e-008 0.00020808
+550 35448 0 1.76685e-007 0.00626314
+600 74294 0.2 1.40621e-006 0.470863
+650 114582 1.3 8.25459e-006 1.17242
+700 135692 5 3.53612e-005 1.74447
+750 131230 13.3 0.000111483 2.2814
+800 111610 26.2 0.000263836 2.74089
+850 88858 39.4 0.000482865 2.90513
+900 68442 46.3 0.000709865 2.89258
+950 51502 43.4 0.000877371 2.84148
+1000 37912 34 0.000957994 2.75989
+1050 27296 24.1 0.000965689 2.61288
+1100 19214 16.4 0.000925173 2.37699
+1150 13222 10.9 0.000851999 2.12654
+1200 8904 6.9 0.000752208 1.89941
+1250 5890 4.1 0.000631719 1.66308
+1300 3860 2.3 0.00050512 1.40085
+1350 2534 1.1 0.000391441 1.04607
+1400 1678 0.5 0.000303661 0.725732
+1450 1110 0.2 0.000243861 0.446583
+1500 712 0.1 0.000205142 0.288493
+1550 426 0 0.000180088 0.0767246
+1600 230 0 0.000163605 0.0376323
+1650 108 0 0.00015326 0.0165533
+1700 44 0 0.000147087 0.0064723
+1750 16 0 0.000143567 0.00229724
+1800 4 0 0.00014165 0.000566642
+1850 2 0 0.000140607 0.000281233
+1900 0 0 0.000141715 0
+1950 0 0 0.000135517 0
+2000 0 0 0.000123067 0
+
+total neg_log_likelihood: 34.5427
+
+
+Tags2006_R1_R1 :
+tag-recapture data for tag Tags2006_R1 in years 2007 2008 2009 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2007
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 1.89997e-012 0
+250 0 0 1.93871e-011 0
+300 4 0 6.63821e-010 2.65529e-009
+350 50 0 1.81598e-008 9.07988e-007
+400 458 0 2.4316e-007 0.000111368
+450 2846 0 2.12856e-006 0.00605789
+500 12002 0.6 1.31278e-005 1.15372
+550 35248 5 5.66035e-005 3.32909
+600 73898 21.8 0.000172788 5.09393
+650 114008 55.6 0.000384453 4.38497
+700 135066 94.3 0.000648696 3.44152
+750 130686 116.9 0.000873727 3.33194
+800 111202 115.2 0.00100175 3.35675
+850 88576 96.9 0.00104198 3.31927
+900 68252 73.2 0.00102694 3.13418
+950 51376 51 0.000977636 2.89191
+1000 37830 33.5 0.000904415 2.68427
+1050 27246 20.8 0.000814364 2.48443
+1100 19194 12.1 0.000713153 2.26811
+1150 13232 6.6 0.000604847 2.00585
+1200 8944 3.5 0.000492522 1.66902
+1250 5954 1.9 0.000381993 1.31586
+1300 3940 1.1 0.000283936 1.04061
+1350 2620 0.7 0.000207662 0.874206
+1400 1760 0.5 0.0001554 0.800814
+1450 1176 0.3 0.000123027 0.616358
+1500 760 0.2 0.00010366 0.501501
+1550 456 0.1 9.1965e-005 0.309119
+1600 246 0.1 8.47725e-005 0.357812
+1650 116 0 8.05078e-005 0.00933928
+1700 46 0 7.80701e-005 0.00359136
+1750 16 0 7.67182e-005 0.00122754
+1800 4 0 7.59854e-005 0.000303953
+1850 2 0 7.55613e-005 0.000151128
+1900 0 0 7.58695e-005 0
+1950 0 0 7.31122e-005 0
+2000 0 0 6.95612e-005 0
+
+total neg_log_likelihood: 50.386
+
+
+Year 2008
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 2.27024e-015 0
+250 0 0 9.07392e-013 0
+300 4 0 3.36374e-011 1.3455e-010
+350 50 0 1.5881e-009 7.94051e-008
+400 460 0 3.22276e-008 1.48247e-005
+450 2852 0 3.71707e-007 0.00106011
+500 12028 0.2 2.95393e-006 0.617625
+550 35320 1.7 1.66327e-005 1.92657
+600 74044 8.4 6.62513e-005 3.01663
+650 114222 25.9 0.00019001 2.93111
+700 135306 53.6 0.000403956 2.92137
+750 130900 79.8 0.000660894 3.37692
+800 111370 91.3 0.000873997 3.36789
+850 88698 84.1 0.000992855 3.22614
+900 68338 66 0.00102739 3.14348
+950 51436 47.8 0.00100756 3.0144
+1000 37870 33.5 0.000953739 2.77412
+1050 27270 22.6 0.000876405 2.51721
+1100 19202 14.4 0.000782308 2.27103
+1150 13224 8.7 0.000676056 2.0131
+1200 8922 5.2 0.000560845 1.76278
+1250 5924 3.2 0.000442644 1.58567
+1300 3904 2.1 0.000333562 1.53486
+1350 2584 1.3 0.000245636 1.37968
+1400 1726 0.8 0.000183539 1.16516
+1450 1152 0.5 0.000144121 0.942879
+1500 742 0.3 0.000120031 0.706239
+1550 446 0.2 0.000105187 0.573231
+1600 240 0.1 9.58537e-005 0.350141
+1650 114 0 9.02049e-005 0.0102838
+1700 46 0 8.69224e-005 0.0039986
+1750 16 0 8.50813e-005 0.00136136
+1800 4 0 8.40803e-005 0.000336335
+1850 2 0 8.35139e-005 0.000167035
+1900 0 0 8.40009e-005 0
+1950 0 0 8.04626e-005 0
+2000 0 0 7.49387e-005 0
+
+total neg_log_likelihood: 47.1355
+
+
+Year 2009
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 0 0
+250 0 0 2.71114e-014 0
+300 4 0 1.77084e-012 7.08322e-012
+350 50 0 1.29734e-010 6.48672e-009
+400 460 0 3.85678e-009 1.77412e-006
+450 2858 0 5.86288e-008 0.000167561
+500 12052 0.1 5.81164e-007 0.453253
+550 35386 0.6 4.14408e-006 1.1859
+600 74174 3.6 2.12187e-005 2.53499
+650 114410 13.5 7.81675e-005 3.22896
+700 135510 33.5 0.000210784 3.08113
+750 131078 58.4 0.000427446 3.00331
+800 111502 75.8 0.000676214 3.08481
+850 88788 77.5 0.000875929 3.09519
+900 68398 66.2 0.000984276 3.02547
+950 51476 49.5 0.00101183 2.93643
+1000 37896 33.7 0.000986463 2.86759
+1050 27286 21.4 0.000927517 2.77304
+1100 19210 13.1 0.000845027 2.53543
+1150 13222 8 0.000744553 2.15362
+1200 8910 4.8 0.000629544 1.78175
+1250 5904 2.9 0.000506104 1.48098
+1300 3878 1.6 0.000387566 1.20827
+1350 2556 0.9 0.000288592 0.972354
+1400 1700 0.5 0.000216578 0.746847
+1450 1130 0.3 0.000169774 0.578863
+1500 726 0.1 0.000140618 0.280339
+1550 436 0.1 0.000122356 0.296456
+1600 234 0 0.00011069 0.0259029
+1650 110 0 0.000103535 0.0113894
+1700 46 0 9.93339e-005 0.00456959
+1750 16 0 9.69621e-005 0.00155147
+1800 4 0 9.5671e-005 0.000382702
+1850 2 0 9.495e-005 0.000189909
+1900 0 0 9.56217e-005 0
+1950 0 0 9.12447e-005 0
+2000 0 0 8.35892e-005 0
+
+total neg_log_likelihood: 43.3491
+
+
+Year 2010
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 0 0
+250 0 0 3.31395e-017 0
+300 4 0 5.45032e-014 2.18048e-013
+350 50 0 1.05739e-011 5.28699e-010
+400 462 0 4.54293e-010 2.09883e-007
+450 2862 0 8.95977e-009 2.56429e-005
+500 12074 0 1.06136e-007 0.00128149
+550 35448 0.1 9.15262e-007 0.325394
+600 74294 1.1 5.85108e-006 1.39654
+650 114582 5 2.73065e-005 2.21301
+700 135692 14.7 9.31008e-005 2.42905
+750 131230 30.7 0.000235514 2.63436
+800 111610 47.8 0.000454252 2.93853
+850 88858 57.8 0.000693403 3.06921
+900 68442 56.4 0.000878784 3.05548
+950 51502 46.8 0.000975405 2.96355
+1000 37912 35.3 0.000994914 2.78214
+1050 27296 25.4 0.000963123 2.55436
+1100 19214 17.9 0.000897836 2.3776
+1150 13222 12.2 0.000807564 2.27982
+1200 8904 7.9 0.000696441 2.1766
+1250 5890 4.8 0.000570772 1.9916
+1300 3860 2.6 0.000444937 1.62395
+1350 2534 1.3 0.000336079 1.21439
+1400 1678 0.7 0.000254477 0.926678
+1450 1110 0.3 0.000200176 0.565148
+1500 712 0.1 0.000165706 0.281762
+1550 426 0.1 0.000143783 0.29054
+1600 230 0 0.000129588 0.0298073
+1650 108 0 0.000120792 0.0130463
+1700 44 0 0.000115589 0.00508623
+1750 16 0 0.000112639 0.00180233
+1800 4 0 0.000111033 0.000444157
+1850 2 0 0.000110146 0.000220304
+1900 0 0 0.000111018 0
+1950 0 0 0.000105706 0
+2000 0 0 9.57563e-005 0
+
+total neg_log_likelihood: 40.1414
+
+
+Tags2007_R1_R1 :
+tag-recapture data for tag Tags2007_R1 in years 2008 2009 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2008
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 1.90452e-012 0
+250 0 0 1.96338e-011 0
+300 4 0 6.732e-010 2.6928e-009
+350 50 0 1.85114e-008 9.25572e-007
+400 460 0 2.49995e-007 0.000114998
+450 2852 0.1 2.19286e-006 0.463818
+500 12028 1 1.3434e-005 1.9843
+550 35320 6.2 5.74246e-005 4.60081
+600 74044 23.3 0.00017411 5.87951
+650 114222 55.4 0.000385749 4.2759
+700 135306 89.9 0.000649525 3.19183
+750 130900 108.8 0.000874434 3.40664
+800 111370 107.4 0.00100311 3.34207
+850 88698 91.6 0.00104441 3.18388
+900 68338 70.2 0.00103045 3.04563
+950 51436 49.8 0.000982176 2.87928
+1000 37870 33.8 0.000909985 2.68758
+1050 27270 22.3 0.000820823 2.47472
+1100 19202 14.5 0.000720128 2.27747
+1150 13224 9.2 0.000611882 2.10997
+1200 8922 5.9 0.00049924 2.03302
+1250 5924 3.8 0.000388093 2.01675
+1300 3904 2.4 0.000289211 1.92994
+1350 2584 1.4 0.000212176 1.60639
+1400 1726 0.7 0.000159452 1.0824
+1450 1152 0.3 0.000126912 0.614737
+1500 742 0.1 0.00010754 0.282685
+1550 446 0 9.58986e-005 0.0427728
+1600 240 0 8.87623e-005 0.0213039
+1650 114 0 8.45382e-005 0.00963776
+1700 46 0 8.21251e-005 0.00377791
+1750 16 0 8.07864e-005 0.00129263
+1800 4 0 8.00591e-005 0.000320249
+1850 2 0 7.96369e-005 0.00015928
+1900 0 0 7.99434e-005 0
+1950 0 0 7.72413e-005 0
+2000 0 0 7.36991e-005 0
+
+total neg_log_likelihood: 55.4487
+
+
+Year 2009
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 2.2756e-015 0
+250 0 0 9.11681e-013 0
+300 4 0 3.41149e-011 1.3646e-010
+350 50 0 1.61948e-009 8.09739e-008
+400 460 0 3.29533e-008 1.51585e-005
+450 2858 0 3.82217e-007 0.00109238
+500 12052 0.2 3.03459e-006 0.612881
+550 35386 2.2 1.69691e-005 2.60798
+600 74174 10.8 6.70764e-005 4.66251
+650 114410 32.5 0.00019126 4.90064
+700 135510 64.3 0.000405154 3.76408
+750 131078 90.3 0.000661718 3.24334
+800 111502 97.1 0.000874823 3.20825
+850 88788 87 0.000994377 3.16182
+900 68398 69.9 0.00102998 3.04529
+950 51476 52 0.00101123 2.89569
+1000 37896 35.8 0.000958448 2.71353
+1050 27286 22.9 0.000882121 2.51664
+1100 19210 13.8 0.000788853 2.29936
+1150 13222 8 0.000683071 2.0301
+1200 8910 4.5 0.000567904 1.72143
+1250 5904 2.6 0.000449314 1.4289
+1300 3878 1.5 0.000339465 1.18854
+1350 2556 0.8 0.000250656 0.925626
+1400 1700 0.4 0.000187881 0.656196
+1450 1130 0.2 0.000148103 0.43942
+1500 726 0.1 0.000123886 0.28086
+1550 436 0 0.000109034 0.0475412
+1600 234 0 9.97362e-005 0.0233394
+1650 110 0 9.41275e-005 0.0103545
+1700 46 0 9.08745e-005 0.00418042
+1750 16 0 8.90512e-005 0.00142488
+1800 4 0 8.80586e-005 0.00035225
+1850 2 0 8.74931e-005 0.000174994
+1900 0 0 8.79616e-005 0
+1950 0 0 8.44985e-005 0
+2000 0 0 7.9032e-005 0
+
+total neg_log_likelihood: 48.3915
+
+
+Year 2010
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 0 0
+250 0 0 2.71706e-014 0
+300 4 0 1.77925e-012 7.11697e-012
+350 50 0 1.3286e-010 6.64301e-009
+400 462 0 3.94058e-009 1.82055e-006
+450 2862 0 6.00296e-008 0.000171805
+500 12074 0 5.96921e-007 0.00720723
+550 35448 0.4 4.24415e-006 0.788487
+600 74294 2.8 2.15855e-005 1.82755
+650 114582 11 7.89898e-005 2.32169
+700 135692 27.4 0.000211955 2.60986
+750 131230 47.9 0.000428536 3.50627
+800 111610 63.1 0.000677012 4.08223
+850 88858 67 0.000876837 3.82565
+900 68442 60.7 0.000985922 3.32565
+950 51502 48.8 0.00101454 2.9807
+1000 37912 35.4 0.000990262 2.76659
+1050 27296 23.6 0.000932373 2.57166
+1100 19214 14.9 0.00085088 2.34106
+1150 13222 9.3 0.000751216 2.06315
+1200 8904 5.7 0.000636671 1.80354
+1250 5890 3.4 0.000513211 1.5776
+1300 3860 1.8 0.000394108 1.28257
+1350 2534 0.9 0.000294235 0.970654
+1400 1678 0.4 0.000221369 0.647854
+1450 1110 0.1 0.000173997 0.307659
+1500 712 0 0.000144544 0.102923
+1550 426 0 0.000126162 0.0537486
+1600 230 0 0.000114471 0.0263298
+1650 108 0 0.000107327 0.0115919
+1700 44 0 0.000103144 0.00453858
+1750 16 0 0.000100786 0.00161266
+1800 4 0 9.95021e-005 0.000398028
+1850 2 0 9.87802e-005 0.00019757
+1900 0 0 9.94233e-005 0
+1950 0 0 9.50908e-005 0
+2000 0 0 8.75585e-005 0
+
+total neg_log_likelihood: 41.8092
+
+
+Tags2008_R1_R1 :
+tag-recapture data for tag Tags2008_R1 in years 2009 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2009
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 6.57234e-014 0
+250 0 0 6.82029e-012 0
+300 4 0 2.51314e-010 1.00526e-009
+350 50 0 1.0388e-008 5.194e-007
+400 460 0 1.90136e-007 8.74625e-005
+450 2858 0 1.95391e-006 0.00558428
+500 12052 0.7 1.27729e-005 1.36795
+550 35386 5.6 5.62491e-005 3.97845
+600 74174 23.3 0.000173163 5.9181
+650 114410 59.7 0.000386685 5.3978
+700 135510 101.2 0.000653574 4.08964
+750 131078 122.3 0.000881086 3.51946
+800 111502 115.1 0.00101069 3.31757
+850 88788 93.7 0.00105165 3.18992
+900 68398 71.2 0.00103693 3.05287
+950 51476 51.9 0.000987753 2.90557
+1000 37896 36.3 0.000914385 2.7553
+1050 27286 24.2 0.000823766 2.57956
+1100 19210 15.3 0.000721652 2.36
+1150 13222 9.2 0.000612437 2.10914
+1200 8910 5.2 0.000499405 1.81899
+1250 5904 2.9 0.000388104 1.5542
+1300 3878 1.6 0.000288804 1.29592
+1350 2556 0.8 0.000211011 0.962038
+1400 1700 0.4 0.000157509 0.675098
+1450 1130 0.2 0.000124417 0.44751
+1500 726 0.1 0.00010473 0.28375
+1550 436 0 9.2933e-005 0.0405207
+1600 234 0 8.57317e-005 0.0200621
+1650 110 0 8.14861e-005 0.00896383
+1700 46 0 7.90683e-005 0.00363729
+1750 16 0 7.77297e-005 0.00124372
+1800 4 0 7.70023e-005 0.000308021
+1850 2 0 7.65767e-005 0.000153159
+1900 0 0 7.68692e-005 0
+1950 0 0 7.41747e-005 0
+2000 0 0 7.06849e-005 0
+
+total neg_log_likelihood: 53.6594
+
+
+Year 2010
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 3.16256e-018 0
+250 0 0 2.21383e-013 0
+300 4 0 1.31896e-011 5.27587e-011
+350 50 0 8.75762e-010 4.37881e-008
+400 462 0 2.22992e-008 1.03022e-005
+450 2862 0 3.13449e-007 0.000897091
+500 12074 0.2 2.7732e-006 0.627442
+550 35448 1.9 1.629e-005 2.22368
+600 74294 9.1 6.59675e-005 3.4647
+650 114582 27.8 0.000190525 3.33495
+700 135692 56.2 0.000406349 2.94483
+750 131230 80 0.000665872 3.43191
+800 111610 86.1 0.000881344 3.94676
+850 88858 76.5 0.00100171 4.01262
+900 68442 61.1 0.00103697 3.69766
+950 51502 46.2 0.00101744 3.21938
+1000 37912 33.6 0.000963696 2.79958
+1050 27296 23.3 0.000886139 2.51283
+1100 19214 15.3 0.000791463 2.2882
+1150 13222 9.4 0.000684448 2.0545
+1200 8904 5.2 0.000568548 1.76084
+1250 5890 2.6 0.000449646 1.42882
+1300 3860 1.2 0.000339452 1.08278
+1350 2534 0.5 0.000249996 0.740868
+1400 1678 0.3 0.000186444 0.553195
+1450 1110 0.2 0.00014602 0.440549
+1500 712 0.2 0.000121368 0.49063
+1550 426 0.1 0.000106255 0.304801
+1600 230 0.1 9.68133e-005 0.352655
+1650 108 0 9.11329e-005 0.00984281
+1700 44 0 8.78463e-005 0.00386541
+1750 16 0 8.60075e-005 0.00137618
+1800 4 0 8.50071e-005 0.000340043
+1850 2 0 8.44349e-005 0.000168877
+1900 0 0 8.48922e-005 0
+1950 0 0 8.13884e-005 0
+2000 0 0 7.59591e-005 0
+
+total neg_log_likelihood: 47.7307
+
+
+Tags2009_R1_R1 :
+tag-recapture data for tag Tags2009_R1 in years 2010 , step 1, after proportion 0.5 of mortality, with sampling method size, detection probability 1.
+Year 2010
+class scanned recaptured expected_prop neg_log_likelihood
+100 0 0 0 0
+150 0 0 0 0
+200 0 0 1.91276e-012 0
+250 0 0 1.94109e-011 0
+300 4 0 6.64243e-010 2.65697e-009
+350 50 0 1.81481e-008 9.07405e-007
+400 462 0 2.42177e-007 0.000111886
+450 2862 0.1 2.12277e-006 0.466538
+500 12074 0.8 1.31884e-005 1.55803
+550 35448 5.9 5.72948e-005 4.24358
+600 74294 24.5 0.000175711 6.50084
+650 114582 61.5 0.000391712 5.73485
+700 135692 101.7 0.000661088 3.99944
+750 131230 122.1 0.00088956 3.44303
+800 111610 115.6 0.00101772 3.31195
+850 88858 93.3 0.00105504 3.18829
+900 68442 69.1 0.00103545 3.05968
+950 51502 49.1 0.000981428 2.88798
+1000 37912 33.1 0.000904394 2.69161
+1050 27296 21.2 0.000811985 2.47077
+1100 19214 13.2 0.000710071 2.2223
+1150 13222 8.1 0.000602713 1.97592
+1200 8904 4.9 0.000492597 1.75928
+1250 5890 3 0.00038447 1.60398
+1300 3860 1.7 0.000287775 1.3668
+1350 2534 1 0.000211648 1.15919
+1400 1678 0.6 0.000159044 0.946722
+1450 1110 0.3 0.000126421 0.621162
+1500 712 0.1 0.000107007 0.2837
+1550 426 0 9.53927e-005 0.0406392
+1600 230 0 8.83218e-005 0.0203149
+1650 108 0 8.41641e-005 0.00909011
+1700 44 0 8.18012e-005 0.0035994
+1750 16 0 8.04944e-005 0.00128796
+1800 4 0 7.9784e-005 0.000319149
+1850 2 0 7.93659e-005 0.000158738
+1900 0 0 7.96392e-005 0
+1950 0 0 7.70238e-005 0
+2000 0 0 7.36445e-005 0
+
+total neg_log_likelihood: 55.5712
+
+
+Output quantities start here
+
+* Scalar parameter values
+initialization.B0 206099
+
+* Nuisance q's
+
+* B0
+206099
+
+* R0
+1.63987e+007
+
+* SSBs
+SSB 206099 203294 200172 196747 193047 189135 185092 181006 176962 173038 169293 165757 162445 159353 156476 153797 151313 149013 146886 144922 143120 
+year 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 
+
+* recruitments
+recruitment 1.63987e+007 1.63987e+007 1.63745e+007 1.63468e+007 1.63156e+007 1.62808e+007 1.62426e+007 1.62017e+007 1.61587e+007 1.61144e+007 1.60697e+007 1.60254e+007 1.5982e+007 1.59398e+007 1.5899e+007 1.58598e+007 1.58222e+007 1.57863e+007 1.57521e+007 1.57197e+007 1.56891e+007 
+year 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 
+
+* YCS
+YCS 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+year 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 
+
+* true_YCS
+true_YCS 1 1 0.998524 0.996838 0.994933 0.992808 0.990482 0.987986 0.985364 0.982665 0.97994 0.977236 0.974587 0.972013 0.969528 0.967139 0.964845 0.962655 0.960572 0.958596 0.956728 
+year 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 
+
+* fishing_pressures
+pressure 0 0.0331607 0.0339854 0.0348059 0.0356003 0.0363528 0.0370525 0.0376925 0.0382695 0.0387844 0.0392411 0.0396449 0.0400017 0.0403181 0.0406006 0.0408554 0.0410922 0.0413119 0.0415184 0.0417148 0.0419033 
+year 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 
+
+* Numbers_at_age_R1
+1990  1.52214e+007 1.30358e+007 1.11641e+007 9.56109e+006 8.18827e+006 7.01255e+006 6.00566e+006 5.14334e+006 4.40483e+006 3.77236e+006 3.23071e+006 2.76683e+006 2.36955e+006 2.02932e+006 1.73794e+006 1.4884e+006 1.27469e+006 1.09166e+006 934917 800677 685712 587254 502933 430720 368875 315910 270550 231703 198434 1.18357e+006 
+1991  1.52214e+007 1.30358e+007 1.11641e+007 9.56081e+006 8.18662e+006 7.00585e+006 5.98634e+006 5.104e+006 4.34817e+006 3.71466e+006 3.18163e+006 2.72566e+006 2.3355e+006 2.00154e+006 1.71559e+006 1.47066e+006 1.2608e+006 1.08095e+006 926759 794552 681177 583943 500549 429026 367689 315090 269992 231328 198186 1.18243e+006 
+1992  1.51989e+007 1.30358e+007 1.1164e+007 9.56074e+006 8.18605e+006 7.00263e+006 5.97346e+006 5.06744e+006 4.27469e+006 3.60968e+006 3.07494e+006 2.63491e+006 2.25935e+006 1.93851e+006 1.66413e+006 1.42922e+006 1.22789e+006 1.05516e+006 906839 779375 669772 575491 494372 424575 364525 312874 268460 230284 197484 1.17985e+006 
+1993  1.51733e+007 1.30166e+007 1.1164e+007 9.56072e+006 8.18594e+006 7.00194e+006 5.97007e+006 5.05509e+006 4.24174e+006 3.54593e+006 2.98551e+006 2.54442e+006 2.18235e+006 1.87384e+006 1.61054e+006 1.3854e+006 1.19254e+006 1.02703e+006 884756 762279 656720 565665 487079 419237 360673 310133 266537 228954 196577 1.17697e+006 
+1994  1.51443e+007 1.29946e+007 1.11476e+007 9.56071e+006 8.18588e+006 7.00164e+006 5.96885e+006 5.05082e+006 4.22912e+006 3.51593e+006 2.93034e+006 2.46839e+006 2.10571e+006 1.80859e+006 1.55568e+006 1.33988e+006 1.15526e+006 996899 860732 743385 642067 554458 478628 412955 356070 306807 264169 227292 195427 1.17368e+006 
+1995  1.51119e+007 1.29698e+007 1.11287e+007 9.54659e+006 8.18583e+006 7.0014e+006 5.968e+006 5.04844e+006 4.22337e+006 3.50291e+006 2.90321e+006 2.42086e+006 2.04122e+006 1.74379e+006 1.50046e+006 1.2934e+006 1.11663e+006 965209 835076 722892 625921 541914 469019 405699 350669 302846 261305 225251 193994 1.16983e+006 
+1996  1.50765e+007 1.29421e+007 1.11075e+007 9.53047e+006 8.1737e+006 7.00118e+006 5.96724e+006 5.04647e+006 4.21934e+006 3.49575e+006 2.89029e+006 2.39666e+006 2.00046e+006 1.68921e+006 1.44575e+006 1.24672e+006 1.07729e+006 932460 808162 701063 608454 528129 458292 397471 344448 298211 257902 222789 192239 1.16526e+006 
+1997  1.50385e+007 1.29118e+007 1.10838e+007 9.51224e+006 8.15985e+006 6.99064e+006 5.96654e+006 5.04467e+006 4.21581e+006 3.49021e+006 2.88237e+006 2.38436e+006 1.97915e+006 1.65442e+006 1.39965e+006 1.20059e+006 1.03787e+006 899185 780414 678217 589890 513249 446530 388305 337408 292883 253929 219870 190125 1.1598e+006 
+1998  1.49986e+007 1.28792e+007 1.10578e+007 9.49193e+006 8.14422e+006 6.97865e+006 5.95709e+006 5.04303e+006 4.2126e+006 3.48529e+006 2.87598e+006 2.37634e+006 1.96779e+006 1.63584e+006 1.37007e+006 1.16171e+006 998997 865916 752276 654709 570500 497465 433857 378271 329579 286862 249368 216466 187623 1.15329e+006 
+1999  1.49575e+007 1.2845e+007 1.10299e+007 9.46968e+006 8.12679e+006 6.96514e+006 5.94646e+006 5.03411e+006 4.20971e+006 3.48084e+006 2.87029e+006 2.36974e+006 1.9601e+006 1.6256e+006 1.35401e+006 1.13663e+006 966232 833161 724194 630913 550581 481004 420434 367477 321021 280176 244221 212563 184708 1.14555e+006 
+2000  1.49161e+007 1.28099e+007 1.10006e+007 9.44581e+006 8.10772e+006 6.95012e+006 5.93459e+006 5.02429e+006 4.20091e+006 3.47685e+006 2.86518e+006 2.36387e+006 1.95371e+006 1.61849e+006 1.34494e+006 1.12285e+006 945019 805559 696587 607197 530445 464117 406453 356057 311824 272875 238510 208164 181370 1.13641e+006 
+2001  1.48749e+007 1.27743e+007 1.09705e+007 9.42074e+006 8.08726e+006 6.93371e+006 5.92146e+006 5.01353e+006 4.19152e+006 3.46817e+006 2.86061e+006 2.35861e+006 1.94803e+006 1.61254e+006 1.33854e+006 1.11492e+006 933246 787635 673327 583911 510399 447063 392124 344174 302102 265035 232279 203286 177609 1.12573e+006 
+2002  1.48346e+007 1.27391e+007 1.09401e+007 9.39493e+006 8.06577e+006 6.91612e+006 5.90719e+006 5.0018e+006 4.18148e+006 3.45918e+006 2.85233e+006 2.35393e+006 1.94295e+006 1.60727e+006 1.33316e+006 1.10925e+006 926381 777614 658187 564294 490735 430101 377665 332003 291993 256753 225592 197966 173440 1.11335e+006 
+2003  1.47954e+007 1.27045e+007 1.09099e+007 9.36887e+006 8.04366e+006 6.89767e+006 5.89196e+006 4.98917e+006 4.17076e+006 3.44979e+006 2.84393e+006 2.3463e+006 1.93844e+006 1.60256e+006 1.32839e+006 1.10448e+006 921433 771711 649675 551503 474172 413473 363293 319730 281645 248145 218531 192258 168896 1.0992e+006 
+2004  1.47576e+007 1.2671e+007 1.08803e+007 9.34302e+006 8.02133e+006 6.87868e+006 5.87601e+006 4.97579e+006 4.15941e+006 3.43997e+006 2.83533e+006 2.33867e+006 1.93158e+006 1.59838e+006 1.32414e+006 1.10025e+006 917254 767426 644621 544280 463356 399468 349211 307536 271214 239337 211195 186234 164022 1.08321e+006 
+2005  1.47212e+007 1.26386e+007 1.08516e+007 9.31769e+006 7.99918e+006 6.85951e+006 5.85958e+006 4.96175e+006 4.14733e+006 3.42954e+006 2.82631e+006 2.33082e+006 1.92467e+006 1.59222e+006 1.32029e+006 1.09643e+006 913509 763770 640910 539948 457215 390303 337344 295587 260849 230458 203688 179974 158877 1.06537e+006 
+2006  1.46863e+007 1.26075e+007 1.08238e+007 9.29308e+006 7.97748e+006 6.8405e+006 5.84305e+006 4.94741e+006 4.13483e+006 3.4186e+006 2.81681e+006 2.32263e+006 1.91759e+006 1.58603e+006 1.31482e+006 1.09294e+006 910103 760476 637725 536742 453504 385078 329567 285515 250694 221637 196121 173570 153532 1.04571e+006 
+2007  1.4653e+007 1.25776e+007 1.07972e+007 9.26932e+006 7.9564e+006 6.82189e+006 5.82669e+006 4.93307e+006 4.12225e+006 3.40755e+006 2.80714e+006 2.31427e+006 1.9104e+006 1.57983e+006 1.30942e+006 1.08819e+006 907038 757512 634879 534003 450759 381915 325128 278913 242138 212998 188608 167117 148065 1.02434e+006 
+2008  1.46213e+007 1.2549e+007 1.07716e+007 9.24647e+006 7.93604e+006 6.80381e+006 5.81067e+006 4.91889e+006 4.1097e+006 3.39649e+006 2.79743e+006 2.3058e+006 1.90309e+006 1.57358e+006 1.30404e+006 1.08352e+006 902938 754841 632315 531553 448411 379568 322431 275138 236526 205719 181250 160710 142558 1.0014e+006 
+2009  1.45912e+007 1.25219e+007 1.07471e+007 9.22454e+006 7.91647e+006 6.78635e+006 5.79513e+006 4.90503e+006 4.09734e+006 3.3855e+006 2.78776e+006 2.29734e+006 1.89573e+006 1.56724e+006 1.29863e+006 1.07887e+006 898913 751316 630001 529344 446307 377556 320426 272839 233313 200943 175050 154437 137089 977092 
+2010  1.45627e+007 1.24961e+007 1.07239e+007 9.20361e+006 7.89768e+006 6.76959e+006 5.78016e+006 4.89169e+006 4.08545e+006 3.37489e+006 2.77834e+006 2.28907e+006 1.88852e+006 1.56097e+006 1.29323e+006 1.07426e+006 894958 747892 627001 527364 444420 375762 318711 271129 231355 198207 170982 149151 131736 951650 
+
+Output quantities finish here
+
+Unused parameters:
+annual_cycle.fishery_areas annual_cycle.migrate_from annual_cycle.migrate_to annual_cycle.migration_names annual_cycle.migration_times annual_cycle.n_migrations annual_cycle.recruitment_areas annual_cycle.spawning_all_areas area_names recruitment.p_male recruitment.year_range tag[Tags2005_R1_LL].area tag[Tags2005_R1_LL].sex tag[Tags2006_R1_LL].area tag[Tags2006_R1_LL].sex tag[Tags2007_R1_LL].area tag[Tags2007_R1_LL].sex tag[Tags2008_R1_LL].area tag[Tags2008_R1_LL].sex tag[Tags2009_R1_LL].area tag[Tags2009_R1_LL].sex MCMC.adapt_at MCMC.adaptive_stepsize MCMC.burn_in MCMC.keep MCMC.length MCMC.start MCMC.stepsize profile[1].l profile[1].n profile[1].parameter profile[1].u tag_recapture[Tags2005_R1_R1].area tag_recapture[Tags2006_R1_R1].area tag_recapture[Tags2007_R1_R1].area tag_recapture[Tags2008_R1_R1].area tag_recapture[Tags2009_R1_R1].area n_projections numbers_at[Numbers_at_age_R1].area print.yields 

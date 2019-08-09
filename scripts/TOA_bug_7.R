@@ -3,7 +3,6 @@
 
 ## Let's find that bug!
 ## Different Species - Patagonian toothfish with ORIGINAL LHPs.
-## Source: An integrated stock assessment for the Heard Island and McDonald Islands Patagonian toothfish (Dissostichus eleginoides) fishery in Division 58.5.2
 
 ## Script for generating data and casal assessment output using earthfish
 ## Goal: Use a scenario that performs poorly to inspect attributes between OM and AM that may cause discrepency. Namely, inspect
@@ -73,8 +72,8 @@ TOA_wl_d = 3.2064
 
 # Maturity. 
 TOA_maturity_ogive = "ramp"
-TOA_a_50 = 11 # 14.45
-TOA_a_95 = 17  # 6.5
+mat_param1     = 11
+mat_param2     = 17
 
 # Natural Mortality. Yates and Ziegler 2018
 TOA_M = 0.155
@@ -93,7 +92,7 @@ LL_sel = list(top=10, sigma_left=2, sigma_right=10)
 x = 1:TOA_max_age
 y = calc_VBlen(1:30, x, c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV))
 z = calc_VBweight(1:30, x, c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV), list(a = TOA_wl_c, b = TOA_wl_d))
-m = ogive(TOA_maturity_ogive, x, list(start = TOA_a_50, peak = TOA_a_95))
+m = ogive(TOA_maturity_ogive, x, list(start = mat_param1, peak = mat_param1))
 s = ogive("double_normal", x, LL_sel)
 par(mfrow = c(2,2))
 plot(x, y, type = "l", main = "TOP default VB Length", xlab = "Age", ylab = "Length")
@@ -160,7 +159,9 @@ para$om$WL = list(f = list(a = TOA_wl_c, b = TOA_wl_d), m = list(a = TOA_wl_c, b
 
 # Set maturity parameters
 para$om$pin_mat = TOA_maturity_ogive
-para$om$maturity = list(f = list(x50 = TOA_a_50, x95 = TOA_a_95), m = list(x50 = TOA_a_50, x95 = TOA_a_95))
+para$om$maturity = switch(para$om$pin_mat,
+                          ramp     = list(f = list(start = mat_param1, peak = mat_param2), m = list(start = mat_param1, peak = mat_param2)),
+                          logistic = list(f = list(x50 = mat_param1, x95 = mat_param2), m = list(x50 = mat_param1, x95 = mat_param2)))
 
 # Set natural mortality parameters
 para$om$natM = rep(TOA_M, para$om$n_ages)
@@ -280,8 +281,8 @@ para$ass$estgrowth = list(c(TOA_L_inf, TOA_K, TOA_t_0, TOA_CV))
 para$ass$estWL = list(c(TOA_wl_c, TOA_wl_d))
 
 para$ass$estpin.mat = TOA_maturity_ogive
-para$ass$estmaturity = list(c(TOA_a_50, TOA_a_95))
-para$ass$maturity_props_all = c("allvalues ", round(ogive("logistic", para$ass$ages, list(x50 = TOA_a_50, x95 = TOA_a_95)), 4))
+para$ass$estmaturity = para$om$maturity[[1]]
+para$ass$maturity_props_all = c("allvalues ", round(ogive(para$ass$estpin.mat, para$ass$ages, para$ass$estmaturity), 4))
 
 para$ass$estnatM[[1]] = TOA_M
 
@@ -529,19 +530,19 @@ write.csv(output2, file=paste0(casal_path,file_name, "_Niter_", n_iters, "output
 ################################## BS Plots ----
 
 
-par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1")
-plot_SSB(output, item = "AM_ssb_", mean = F)
-
-
-par(mfrow = c(1,2))
-plot_SSB(output, item = "OM_ssb_R1", mean = F, ylim = c(4000, 14000))
-plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(4000, 14000))
+# par(mfrow = c(1,2))
+# plot_SSB(output, item = "OM_ssb_R1")
+# plot_SSB(output, item = "AM_ssb_", mean = F)
+# 
+# 
+# par(mfrow = c(1,2))
+# plot_SSB(output, item = "OM_ssb_R1", mean = F, ylim = c(4000, 14000))
+# plot_SSB(output, item = "AM_ssb_", mean = F, ylim = c(4000, 14000))
 
 
 
 # Plot of internal SSB comparison. (internal meaning SSB calculated inside the om loop)
-temp1 = read.csv("TOA_bug_4_Niter_1000.csv")
+temp1 = read.csv("TOA_bug_7_Niter_1000.csv")
 library(fishnostics2)
 years = 1990:2010
 true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
@@ -553,29 +554,29 @@ plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
 legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
        col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
 
-# Error Plot
-om_names = paste0("OM_ssb_R1_", years)
-am_names = paste0("AM_ssb_", years)
-err <- process_two_series(res = temp1, true_vars = om_names, est_vars = am_names,
-                          col_names = years, FUN = "rel_err")
-boxplot(err, ylab="Relative error", main="Baseline Brett")
-abline(h=0, col="red")
-
-
-
-
-
-# Plot of external SSB comparison. (external meaning SSB calculated outside the om loop using numbers at age)
-temp2 = read.csv("TOA_bug_4_Niter_101output2.csv")
-library(fishnostics2)
-years = 1990:2010
-true_ssb1 = temp2[, grep("OM_ssb_R1", colnames(temp2))]
-est_ssb1 = temp2[, grep("AM_ssb_", colnames(temp2))]
-
-colnames(true_ssb1) = years
-plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
-legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
-       col=c("blue", "red"), lty=c(2,1), lwd=2, bty="n")
+# # Error Plot
+# om_names = paste0("OM_ssb_R1_", years)
+# am_names = paste0("AM_ssb_", years)
+# err <- process_two_series(res = temp1, true_vars = om_names, est_vars = am_names,
+#                           col_names = years, FUN = "rel_err")
+# boxplot(err, ylab="Relative error", main="Baseline Brett")
+# abline(h=0, col="red")
+# 
+# 
+# 
+# 
+# 
+# # Plot of external SSB comparison. (external meaning SSB calculated outside the om loop using numbers at age)
+# temp2 = read.csv("TOA_bug_4_Niter_101output2.csv")
+# library(fishnostics2)
+# years = 1990:2010
+# true_ssb1 = temp2[, grep("OM_ssb_R1", colnames(temp2))]
+# est_ssb1 = temp2[, grep("AM_ssb_", colnames(temp2))]
+# 
+# colnames(true_ssb1) = years
+# plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
+# legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
+#        col=c("blue", "red"), lty=c(2,1), lwd=2, bty="n")
 
 
 

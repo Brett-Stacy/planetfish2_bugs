@@ -244,6 +244,38 @@ Messing with para\$ass\$spawning_part_mort <- 0.5
 Worked well for TOA_bug_4.R
 Didn't work for TOA_bug_2.R
 Didn't work for TOA_bug_3.R
+Didn't work for TOA_bug_7.R - original TOP LHPs
+
+
+
+
+Go back to B0_calculation_method
+TOA_bug_8.R - same results for casal, stoch, init_age for 100 iterations with part_mort = 0.5 - BAD
+
+
+Messing with para\$ass\$spawning_part_mort <- 1 and B0_method
+TOA_bug_8.R - part_mort = 1, B0 = stoch: performed GOOD, just like when B0 = casal
+
+
+
+Changed rounding place in tagging transition to est.csl:
+Improved SSB estimation very slightly I think. Ran with 150 iterations. 
+
+
+Changed om\$growth_props == 0 from 0.5:
+TOA_bug_8.r: didn't change anything in SSB.
+
+
+Mess with CV in growth:
+TOA_bug_8.r: effects SSB a LOT! Tried lower and higher than 0.1
+Changing this scales SSB: decreasing this lower than 0.1 decreases SSB proportionally
+
+
+CHange age and length range to deplete plus group 
+TOA_bug_10.r: pushed age to 100 and lengths to 3000:
+Didn't help.
+
+
 
 ## population.csl Questions
 Should \@size_based False be True in population.csl?
@@ -253,6 +285,11 @@ I think it should be False because this is a age-based model.
   
   
   
+  
+  
+  
+##### Need to change for HCR stuff:
+  * possibly tagging stuff that used datass$year in M1_OM.r
   
   
   

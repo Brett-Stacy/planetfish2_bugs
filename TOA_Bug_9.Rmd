@@ -1,0 +1,63 @@
+---
+title: "TOA Bug 9"
+author: "Brett Stacy"
+date: "9 August 2019"
+output: html_document
+---
+
+## Changing Growth CV
+This document illustrates the impact of changing the CV related to the Von Bertalanffy growth parameters passed to Planetfish on assessment performance. As you know, I initially noticed that changing all the growth parameters from the default in Planetfish to any other had a large effect on the accuracy with which CASAL estimated SSB. Upon further inspection, I think that the specific parameter related to growth that has the most severe influence on SSB estimation is the CV. Below are the SSB results from Planetfish and CASAL under different Planetfish growth CV settings, with all other parameters remaining consistent. 
+\
+\
+Notice that if I set growth CV = 0.8 I can artificially generate great correspondence.
+
+\
+\
+\
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(fishnostics2)
+bug8.out   = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_8/Output_Niter_100.csv")
+bug9.1.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_9.1/Output_Niter_1000.csv")
+bug9.2.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_9.2/Output_Niter_100.csv")
+bug9.3.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_9.3/Output_Niter_100.csv")
+bug9.4.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_9.4/Output_Niter_100.csv")
+
+```
+
+
+```{r fig.width=15, fig.height=15}
+
+temp_plot = function(output, ...){
+  temp1 = output
+  
+  years = 1990:2010
+  true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
+  est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
+
+  # TS plot
+  colnames(true_ssb1) = years
+  plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000, ...)
+  legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
+       col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+
+}
+
+
+par(mfrow = c(3,2))
+temp_plot(bug8.out, main = "OM Growth CV = 0.1 (default)", cex.main = 1.5)
+temp_plot(bug9.1.out, main = "OM Growth CV = 0.8", cex.main = 1.5)
+temp_plot(bug9.2.out, main = "OM Growth CV = 0.5", cex.main = 1.5)
+temp_plot(bug9.3.out, main = "OM Growth CV = 0.122 (TOA)", cex.main = 1.5)
+temp_plot(bug9.4.out, main = "OM Growth CV = 0.0", cex.main = 1.5)
+
+
+
+
+
+```
+
+
+

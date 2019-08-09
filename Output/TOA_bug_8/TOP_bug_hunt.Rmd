@@ -1,8 +1,11 @@
 ---
 title: "TOP Bug Hunt"
 author: "Brett Stacy"
-date: "31 July 2019"
-output: html_document
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
 editor_options: 
   chunk_output_type: console
 ---
@@ -14,35 +17,25 @@ knitr::opts_chunk$set(echo = FALSE)
 
 This script uses output from TOA_bug_8.r in my planetfish2_bugs repository
 
-### Paul 1/8/19
-should be able to set seed in Casal, but do it for the OM so we know it is different each time and can repeat it. Look at 3 output diagnostics to see if the trend is consistent. set up markdown with 3 runs and plots for each. 
-
-try taking data out completely.
-
-may need to add different index of abundance - CPUE placeholder in OM
-
-provide an index of abundance that reflects exactly the true abundance. may as well add some error around it (centered at zero). need to accociate it with a fleet. CASAL - should be able to do it as a CPUE fleet or survey fleet. Fleet will need to have a selectivity for survey or CPUE. 
-
-Most assessments adjust ageing data (length bin sampling - CCAMLR, NZ) - good to know
-
-
-## Illustrate the problem
-
-
-```{r}
-	RootDir  <- "C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_8/"
-# RootDir  <- "C:/Users/bstacy/Work/Chapter_3_output/SKJ/baseline/"
+```{r, message=F, warning=F, results="hide"}
+	RootDir  <- "C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_8/"
 	## Working directory
 	setwd(paste(RootDir,"",sep=""))
 	
 	library(casal)
 	library(lattice)
-	# source("1 Functions Diagnostics.r")
+	library(kableExtra)
 	library(earthfish)
 	library(fishnostics2)
-```
+	
+	para   = readRDS("para.Rds")
+	res    = readRDS("res.Rds")
+	datass = readRDS("datass.Rds")
+	
+	output_df = read.csv(paste0(RootDir, "Output_Niter_50.csv"))
 
-```{r, message=F, warning=F, results="hide"}
+
+# Stuff created by Phil
 	casalprefix		<- "casal_"
 	casaloutprefix	<- "casalout_"
 	pop_csl			<- paste(casalprefix, "population.csl", sep="")	
@@ -64,10 +57,285 @@ Most assessments adjust ageing data (length bin sampling - CCAMLR, NZ) - good to
 	pfits <- top[["fits"]]
 ```
 
-```{r, warning=F}
+
+## Overview
+
+
+## Symptom
+The capability of the AM to adequately estimate SSB generated from the OM under data-heavy situations is my primary indicator of a good baseline scenario. When there is bias between the two models in this situation, it likely means something has gone wrong. This section illustrates that bias.
+
+```{r}
+years = 1990:2010
+true_ssb1 = output_df[, grep("OM_ssb_R1", colnames(output_df))]
+est_ssb1 = output_df[, grep("AM_ssb_", colnames(output_df))]
+
+# TS plot
+colnames(true_ssb1) = years
+plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000,
+                  ylab = "SSB ('000 Tonnes)", xlab = "Year", main = "Patagonian Toothfish")
+legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
+       col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+```
+
+## Scenario Specifics of Interest
+
+```{r}
+
+to_show = c("OM Recruitment Variability", para$om$rec_sigma,
+            "AM Spawning_part_mort", para$ass$spawning_part_mort,
+            "Von Bertalanffy Growth", paste(c("L_inf:", "  K:", "  T_0:", "  CV:"), para$om$growth$f, collapse = ""),
+            "Study Period", paste(para$om$year, collapse = "-"),
+            "Tag Years", paste(colnames(para$ass$sample_years)[para$ass$sample_years["tagging",,1]==1], collapse = " "),
+            "Tag Quantity per Year", para$sampling$tag_N[1],
+            "Iterations", "50")
+
+df = data.frame(names = to_show[c(TRUE, FALSE)], value = to_show[c(FALSE, TRUE)])
+
+kable(df) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+## Examination - My Diagnostics
+### Age frequency through years
+if this matches, shouldn't SSB match unless they are not being calculated the same between OM/AM?
+
+```{r, fig.width=12, fig.height=8}
+## POPULATION OM AGE FREQUENCY VS AM ESTIMATED AGE FREQUENCY
+est.age.om = res$pop$n[,,1,,]*2
+est.age.am = top$quant$Numbers_at_age_R1
+
+par(mfrow = c(2, 4))
+for (i in c(seq(1, 21, 3), 21)) {
+  plot(est.age.om[,i], type="l", main = names(est.age.am)[i], xlab = "Age", ylab = "Number in Population", ylim = c(0, 1.1*max(c(est.age.om[,i], est.age.am[[i]]))))
+  points(est.age.am[[i]], col = "red", type="l")
+  legend("topright", legend = c("OM", "AM"), lty = c(1, 1), col = c("black", "red"))
+}
+```
+
+  
+\
+\
+\
+\
+  
+
+### Tag recapture by length: res -> datass 
+
+BS 5/8/19: Tag recaptures by length between res and datass were not the same initially. There was premature rounding in the translation from res to datass and subsequently to est.csl. Although this rounding error resulted in only a tenth of a recapture discrepency in about half of the recaptures, I think it had a slight impact on SSB estimation. I ran a few simulations with and without it and it improved a little bit. I changed the rounding action to occur at the end of the recapture translation in earthfish and now there is consistency.
+
+```{r testing, eval=F}
+tags.recap.am = top$est[grep("tag_recap", names(top$est))]
+
+round(rowSums(res$tag$recaps_len[,21,,,,20,]),1) - as.numeric(tags.recap.am$`tag_recapture[Tags2009_R1_R1]`$recaptured_2010)
+# Tpool = res$tag$recaps_len[,"2010",,,1,"2009",1]
+#         dat <- round(apply(Tpool,drop=FALSE,c(1,2,3),sum),1)
+# 				Rec_data	<- apply(dat,c(1,2),sum)
+
+
+
+ff = 5
+tag_names = datass$tag_names
+tyear	<- as.numeric(tag_names[ff,"Year"])
+		# tyy	<- which(datass$years  %in% tyear)			# Year number
+		tyy = which(para$om$years %in% tyear) # BS 25/06/19 change to om$years for extracting correct period from tag$recaps_len below
+		treg <- tag_names[ff,"Region"]
+		tr_om <- unique(datass$match_region["OM",][datass$match_region["Ass",] %in% treg])
+		# Define years of recaptures: (tyear+1):(tyear+datass$tag_y_liberty)
+		ryear <- (tyear+1) : min(tyear+datass$tag_y_liberty,(datass$year[2]))
+		# ryy <- which(datass$years %in% ryear)			# Year number
+		ryy = which(para$om$years %in% ryear) # BS 25/06/19 change to om$years for extracting correct period from tag$recaps_len below
+		# For each recapture area in the assessment:
+Tpool	<- res$tag$recaps_len[,ryy,,,rr_om,tyy,tr_om,drop=FALSE] # [len, Recapture.year, sex, season, area, tag.year, tag.area]; [31 51 2 1 2 51 2]
+				# Sum recapture Numbers over by length, year, and sex
+				dat <- round(apply(Tpool,drop=FALSE,c(1,2,3),sum),1) 
+				Rec_data	<- apply(dat,c(1,2),sum) # Sum over sex
+				
+				dat = apply(Tpool, drop = FALSE, c(1,2,3), sum)
+				Rec_data = round(apply(dat, c(1,2), sum), 1)
+```
+```{r plotting, fig.width=12, fig.height=8}
+size.class = datass$class_mins[-length(datass$class_mins)]
+
+tags.recap.om1 = res$tag$recaps_len # [len, Recapture.year, sex, season, area, tag.year, tag.area]; [31 51 2 1 2 51 2]
+tags.recap.am  = top$est[grep("tag_recap", names(top$est))]
+
+par(mfrow = c(3, 5))
+for (i in 1:nrow(datass$tag_names)) {
+  tag_names = datass$tag_names
+  tyear	= as.numeric(tag_names[i,"Year"])
+  ryears = (tyear+1):para$om$year[2]
+  for (j in 1:length(ryears)) {
+    
+    sub.recap.om1     = tags.recap.om1[, as.character(ryears[j]), , , , as.character(tyear), ]
+    sub.recap.om1.sum = round(rowSums(sub.recap.om1), 1)
+    
+    g.ind             = grep("recaptured", names(tags.recap.am[[i]]))
+    sub.recap.am1.sum = as.numeric(tags.recap.am[[i]][[g.ind[j]]])
+    
+    
+    plot(size.class, sub.recap.om1.sum, type = "l")
+    
+    lines(size.class, sub.recap.am1.sum, lty = 3, col = "red", lwd = 3)
+      
+  }
+}
+
+
+
+
+
+```
+
+
+\
+\
+\
+
+### Tag recapture by length: datass -> est.csl
+```{r, fig.width=12, fig.height=8}
+## TAGS RECAPTURED
+size.class = datass$class_mins[-length(datass$class_mins)]
+
+tags.recap.om = datass$Rec_data
+tags.recap.am = top$est[grep("tag_recap", names(top$est))]
+par(mfrow = c(3, 5))
+for (i in 1:5) {
+  for (j in 1:ncol(tags.recap.om[[i]])) {
+    
+    g.ind = grep("recaptured", names(tags.recap.am[[i]]))
+    
+    plot(size.class, tags.recap.om[[i]][,j], type = "l", main = bquote(.(substr(names(tags.recap.om[i]), start = 5, stop = 8)) %->% .(colnames(tags.recap.om[[i]])[j])), 
+         ylab = "Frequency", xlab = "Size", ylim = c(0, 1.1*max(c(max(tags.recap.om[[i]][,j]), as.numeric(max(as.numeric(tags.recap.am[[i]][[g.ind[j]]])))))))
+    
+    
+    lines(size.class, tags.recap.am[[i]][[g.ind[j]]], lty = 3, col = "red", lwd = 3)
+  }
+}
+```
+Why on earth are these different? It looks like est.csl directly grabs datass after I save datass. How could these values be different? \
+Because! datass is from the first iteration and the est.csl is from the last! There would be different tags administered for each run because it's drawn from a multinomial dist. 
+
+
+\
+\
+\
+
+### Is tagging array getting calculated correctly?
+Is tagging array being calculated correctly in the operating model? The tagging array should take into account LHPs. It does this through converting ages to lengths using calc_VBlen()
+
+
+Recaptures by length are calculated using recaptures by age:
+```{r}
+# tag$recaps_len[,y,i,ss,rr,ytag,rtag] <- sample_lengths(ssages,para$sampling$len_classes,tag$recaps[,y,i,ss,rr,ytag,rtag],om$growth[[om$sex[i]]])
+
+ssages <- para$om$ages + para$om$growth_props			# Ages for length and weight calculations
+y    = "2010"
+i    = 1
+ss   = 1
+rr   = 1
+ytag = "2009"
+rtag = 1
+temp = sample_lengths(ssages, para$sampling$len_classes, res$tag$recaps[,y,i,ss,rr,ytag,rtag], para$om$growth[[para$om$sex[i]]])
+
+# INSPECT SAMPLE_LENGTHS
+# sample_lengths <- function (ages1, lenbins, agecomp, growth) {
+#   # Mean length
+#   alk <- calc_VBlen(ages1, agecomp, growth)
+#   # Calculate normal distribution of length by length classes & sum up
+#   res0 <- vector(mode="numeric", length=length(lenbins))
+#   for (aa in 1:length(agecomp)) {
+#     # SD = Mean * CV, cumulative distribution
+#     res1 <- pnorm(lenbins, mean=alk[aa], sd=alk[aa]*growth[4])
+#     res11 <- res1[1]
+#     res1[1:(length(res1)-1)] <- (res1[2:length(res1)] - res1[1:(length(res1)-1)])
+#     res1[1] <- res1[1] + res11
+#     res1[length(res1)] <- 0
+#     res0 <- res0 + res1 * agecomp[aa]
+#   }
+#   #return(round(res,0))
+#   return(res0)
+# }
+
+ages1   = ssages
+lenbins = para$sampling$len_classes
+agecomp = res$tag$recaps[,y,i,ss,rr,ytag,rtag]
+growth  = para$om$growth[[para$om$sex[i]]]
+
+
+plot(ssages, res$tag$recaps[,y,i,ss,rr,ytag,rtag], ylim = c(0, max(c(res$tag$recaps[,y,i,ss,rr,ytag,rtag], temp))), xlim = c(0, length(temp)), axes = F, ylab = "Number", xlab = "", type = "l")
+axis(side = 2, at = seq(0, max(c(res$tag$recaps[,y,i,ss,rr,ytag,rtag], temp)), 10), las = 2)
+axis(side = 1, at = seq(0, 40, 5), line=1, col="black", col.ticks="black", col.axis="black")
+mtext("Age", 1, line=1, at=-3, col="black")
+
+lines(2:40, temp, col = "red", lty = 3)
+axis(side = 1, at = seq(0, 40, 4), labels = seq(0, max(para$sampling$len_classes), 200), line=3, col="red", col.ticks="red", col.axis="red")
+mtext("Length", 1, line=3, at=-3, col="red")
+
+# lines(2:40,res$tag$recaps_len[,y,i,ss,rr,ytag,rtag]) # checks out. I.E. calculation matches result
+
+
+
+
+# LETS SEE THE ACTUAL CALCULATION
+alk <- calc_VBlen(ages1, agecomp, growth)
+res0 <- vector(mode="numeric", length=length(lenbins))
+  for (aa in 1:length(agecomp)) {
+    # SD = Mean * CV, cumulative distribution
+    res1 <- pnorm(lenbins, mean=alk[aa], sd=alk[aa]*growth[4]) # BS: look like logistic curve
+    res11 <- res1[1] # BS: I have no idea what all this stuff does...
+    res1[1:(length(res1)-1)] <- (res1[2:length(res1)] - res1[1:(length(res1)-1)])
+    res1[1] <- res1[1] + res11
+    res1[length(res1)] <- 0
+    res0 <- res0 + res1 * agecomp[aa]
+  }
+
+
+
+
+```
+
+
+
+### Fish Scanned By Length
+```{r, fig.width=12, fig.height=8}
+## FISH SCANNED
+size.class = datass$class_mins[-length(datass$class_mins)]
+
+tags.scan.om = datass$scannedN
+tags.scan.am = top$est[grep("tag_recap", names(top$est))]
+par(mfrow = c(3, 5))
+for (i in 1:5) {
+  for (j in 1:ncol(tags.scan.om[[i]])) {
+    
+    g.ind = grep("scanned", names(tags.scan.am[[i]]))
+    
+    plot(size.class, tags.scan.om[[i]][,j], type = "l", main = bquote(.(substr(names(tags.scan.om[i]), start = 5, stop = 8)) %->% .(colnames(tags.scan.om[[i]])[j])), 
+         ylab = "Frequency", xlab = "Size", ylim = c(0, 1.1*max(c(max(tags.scan.om[[i]][,j]), as.numeric(max(as.numeric(tags.scan.am[[i]][[g.ind[j]]])))))))
+    
+    
+    lines(size.class, tags.scan.am[[i]][[g.ind[j]]], lty = 3, col = "red", lwd = 3)
+  }
+}
+```
+
+
+### Other stuff from Bug_Hunt_Strategy.Rmd
+
+## Examination - Phil's Model Fit Diagnostics
+These plots show if the AM is fitting the data well. They can be used to examine where the root of the problem may be that is causing the poor SSB symptoms. 
+
+
+
+
+
+```{r, warning=F, fig.width=12, fig.height=12}
+  # LHPs and selectivity
 	ages 	<- seq(ppop$min_age$value, ppop$max_age$value)
 	vb_para <- ppop$size_at_age
 	vb		<- as.numeric(as.character(vb_para$Linf))*(1-exp(-as.numeric(as.character(vb_para$k))*(ages-as.numeric(as.character(vb_para$t0)))))
+	
+	par(mfrow = c(2,2))
 	plot(x=ages,y=vb, type="l",ylab="Length (mm)",xlab="Ages (y)",font.lab=2)
 	lw_para	<- ppop$size_weight 
 	lw		<- as.numeric(as.character(lw_para$a))*vb^(as.numeric(as.character(lw_para$b)))
@@ -80,8 +348,9 @@ Most assessments adjust ageing data (length bin sampling - CCAMLR, NZ) - good to
 	# selLL	<- pquant$'Ogive parameter values'	# Not estimated
 	plot(x=ages,y=selLL, type="l",ylab="Selectivity",xlab="Ages (y)",font.lab=2)
 	lines(x=ages,y=mat, type="l",col="blue")
+```
 
-
+```{r, warning=F}
 	# Fits to ageing data
 	plot_fits_in_trellis(dat=pfits, dat_name="LL_catchA", xlab="Age (years)", ylab="Proportion")
 	boxplot_fits_age(dat=pfits, dat_name=c("LL_catchA"),ylab="Mean age (year)")
@@ -97,5 +366,25 @@ Most assessments adjust ageing data (length bin sampling - CCAMLR, NZ) - good to
 ```
 
 
+### Paul notes 1/8/19
+should be able to set seed in Casal, but do it for the OM so we know it is different each time and can repeat it. Look at 3 output diagnostics to see if the trend is consistent. set up markdown with 3 runs and plots for each. 
 
+try taking data out completely.
+
+may need to add different index of abundance - CPUE placeholder in OM
+
+provide an index of abundance that reflects exactly the true abundance. may as well add some error around it (centered at zero). need to accociate it with a fleet. CASAL - should be able to do it as a CPUE fleet or survey fleet. Fleet will need to have a selectivity for survey or CPUE. 
+
+Most assessments adjust ageing data (length bin sampling - CCAMLR, NZ) - good to know
+
+
+## To Do
+### Parameters between OM/AM match before model activation?
+```{r}
+check_match(para)
+```
+
+  
+### Tagging data to CASAL correctly?
+### Tagging data generated correctly?
 

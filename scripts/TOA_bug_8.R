@@ -2,13 +2,13 @@
 ##
 ## 31/7/19
 ##
-## PATAGONIAN TOOTHFISH BUG. 
+## PATAGONIAN TOOTHFISH BUG. ORIGINAL LHPs. NEW SCRIPT FLOW.
 ## POST-PHIL MEETING
 ## LOOK AT TAGGING STUFF AND USE PHIL'S DIAGNOSTICS TO CHECK FIT
 
 
 
-n_iters = 50
+n_iters = 100
 
 ## Packages ----
 library(earthfish)
@@ -26,10 +26,10 @@ para = get_om_data()
 max_age = 30
 
 # Growth. Von Bertalanfy
-L_inf = 2870
+L_inf = 2870.8
 K     = 0.02056
 t_0   = -4.28970
-CV    = 0.100
+CV    = 0.1 # 0.1
 
 # Weight-Length
 wl_c = 2.59e-12
@@ -60,7 +60,7 @@ n_regions = 1
 
 ########## POPULATION
 R_mu           = 1.5e7
-R_sigma        = 0.3
+R_sigma        = 0 # 0.3
 B0_calc_method = "casal" # one of "casal", "stoch", or "init_age"
 
 
@@ -83,7 +83,7 @@ n_years_lengthed = 0
 len_years        = if(n_years_lengthed == 0) NULL else((study_year_range[2] - n_years_lengthed):study_year_range[2])
 
 # tagging
-n_tags       = 2500
+n_tags       = 25000
 n_years_tags = 5
 tag_years    = (study_year_range[2] - n_years_tags + 1):study_year_range[2] - 1
 
@@ -177,9 +177,10 @@ para$om$catchsplits[1:no_fish_range, , , ]	    = 0
 ## Sampling ----
 
 # tags
-para$sampling$pin_tagging = TRUE
-para$sampling$pin_tag_N   = "Fixed" # "Fixed" or "Catch"
-para$sampling$tag_N       = c(n_tags, 0)
+para$sampling$pin_tagging    = TRUE
+para$sampling$pin_tag_Method = "Pool" # sampling method either Pooled ("Pool") or Individual ("Ind")
+para$sampling$pin_tag_N      = "Fixed" # "Fixed" or "Catch"
+para$sampling$tag_N          = c(n_tags, 0)
 
 # selectivity
 para$sampling$pin_tag_sel = list(LL1 = pin_sel, LL2 = pin_sel)
@@ -263,6 +264,7 @@ para$ass$future_constant_catches = 200 # what does this specify?
 
 # other
 para$ass$spawning_part_mort = 1 # set CASAL to calculate SSB after 100% F and M
+# para$ass$spawning_part_mort = 0.5 # set CASAL to calculate SSB after 100% F and M
 
 
 
@@ -316,7 +318,7 @@ for(i_iter in 1:n_iters){
   #para[["control"]]$pin_casal_assess <- 1
   res <- run_annual_om(para=para, res=res) #, intern=TRUE) #
   ## Save res object for inspection
-  if(i_iter == 1) saveRDS(res, file = paste0(para$control$casal_path, "res.Rds"))
+  if(i_iter == n_iters) saveRDS(res, file = paste0(para$control$casal_path, "res.Rds"))
   ## set output quantities to NULL, could use rm() instead
   ssb <- rec <- SSB0 <- OM_SSB_R1 <- OM_Rec_R1 <- NULL
   ## calculated quantities
@@ -380,7 +382,7 @@ write.csv(output, file=paste0(casal_path, "Output_Niter_", n_iters, ".csv"),
 ## Plots ----
 
 
-temp1 = read.csv(paste0(casal_path, "Output_Niter_50.csv"))
+temp1 = read.csv(paste0(casal_path, "Output_Niter_100.csv"))
 years = 1990:2010
 true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
 est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
@@ -390,3 +392,4 @@ colnames(true_ssb1) = years
 plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
 legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
        col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+
