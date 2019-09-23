@@ -277,6 +277,28 @@ Didn't help.
 
 
 
+TOA_bug_11.R - mess with CV TOA
+changed CV to 0.05 and casal still underestimating SSB 
+changed CV to 0.04 and it's better but very slightly underestimating
+changed CV to 0.03 and it overestimates slightly
+changed CV to 0.35 and it's perfect.
+
+
+
+Try matching para\$sampling\$ageing_error to match growth CV
+used TOA_bug_11.R but this script was written to test different values of CV for TOA as above.
+Didn't help SSB discrepency. assessment still about 10% lower than OM.
+
+
+TOA_bug_12.R - check if tags set/recaptured by LL2:
+NO, see comments at top of script
+
+
+
+
+
+
+
 ## population.csl Questions
 Should \@size_based False be True in population.csl?
 I think it should be False because this is a age-based model.
