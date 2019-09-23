@@ -14,7 +14,7 @@ library(casal)
 The estimated tagging data in casal does not match the observed well at all (even for TOP). This may mean one of the follwing is occuring:
   * The OM may not be passing the tagging data to CASAL correctly
   * The OM may not be calculating tagging data correctly
-      * If not, and it passes data correctly to CASAL, then CASAL should not be expected to estimate tag-recapture quantities          well. 
+      * If not, and it passes data correctly to CASAL, then CASAL should not be expected to estimate tag-recapture quantities well. 
 
 
 ## BS 23/07/19: Things to look at if I revisit this discrepency stuff:
