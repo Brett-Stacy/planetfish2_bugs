@@ -48,8 +48,8 @@ temp_plot = function(output, ...){
 
 par(mfrow = c(3,2))
 temp_plot(bug8.out, main = "OM Growth CV = 0.1 (default)", cex.main = 1.5)
-temp_plot(bug9.1.out, main = "OM Growth CV = 0.8", cex.main = 1.5)
-temp_plot(bug9.2.out, main = "OM Growth CV = 0.5", cex.main = 1.5)
+temp_plot(bug9.1.out, main = "OM Growth CV = 0.08", cex.main = 1.5)
+temp_plot(bug9.2.out, main = "OM Growth CV = 0.05", cex.main = 1.5)
 temp_plot(bug9.3.out, main = "OM Growth CV = 0.122 (TOA)", cex.main = 1.5)
 temp_plot(bug9.4.out, main = "OM Growth CV = 0.0", cex.main = 1.5)
 

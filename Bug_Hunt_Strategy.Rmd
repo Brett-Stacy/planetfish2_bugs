@@ -284,6 +284,35 @@ changed CV to 0.03 and it overestimates slightly
 changed CV to 0.35 and it's perfect.
 
 
+Where does CV show up in Planetfish?
+Script:
+  - para$om$growth
+      - M1_OM.r
+          - mod$landings_n_len[[ff]][,y,i,ss,rr] <- sample_lengths(ssages,sampling$len_classes,
+							                                                      fleet[[ff]]$landings_n[,y,i,ss,rr],
+							                                                      om$growth[[om$sex[i]]])
+					- obs[[ff]]$tag_len_n[,y,i,ss,rr] <- sample_lengths(ssages,sampling$len_classes
+					                                                          obs[[ff]]$tag_age_n[,y,i,ss,rr],
+					                                                          om$growth[[om$sex[i]]])
+					- tag$recaps_len[,y,i,ss,rr,ytag,rtag] <- sample_lengths(ssages,sampling$len_classes,
+					                                                          tag$recaps[,y,i,ss,rr,ytag,rtag],
+					                                                          om$growth[[om$sex[i]]])
+			- M3_CASAL1_Data.r
+			    - dat[,y,i] <- round(sample_lengths(ssages,sampling$len_classes,
+			                                                              dat_age1[,y],
+			                                                              om$growth[[om$sex[i]]]),1)
+All of these places use sample_lengths()
+this gives the length composition of landings, tagged fish, and recaptured fish. if these are calculated incorrectly, perhaps that could influence the SSB.
+
+
+
+  - para$ass$estgrowth
+      - M3_CASAL2_Create_Pop.r
+          - casalpop[["size_at_age"]]$cv <- params$estgrowth[[1]][4]
+
+
+
+
 
 Try matching para\$sampling\$ageing_error to match growth CV
 used TOA_bug_11.R but this script was written to test different values of CV for TOA as above.

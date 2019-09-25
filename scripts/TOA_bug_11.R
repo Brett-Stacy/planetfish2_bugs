@@ -21,7 +21,7 @@ scenario <- "TOA_bug_11"
 file_name <- scenario
 
 ## Brett's file path
-file_path <- paste0("C:/Users/bstacy/Documents/GitHub/planetfish2_bugs/Output/", scenario, "/")
+file_path <- paste0("C:/Users/sta384/Documents/GitHub/planetfish2_bugs/Output/", scenario, "/")
 ## PB file path
 # file_path <- paste0("C:/Work/Manuscripts/2019_Stacy_etal_Exploratory_fisheries/Antarctic_toothfish_scenario/single_region/", scenario, "/")
 
