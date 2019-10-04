@@ -1,0 +1,103 @@
+@initialization 
+B0 101373
+
+@size_based False
+
+@min_age 1
+
+@max_age 30
+
+@plus_group True
+
+@sex_partition False
+
+@mature_partition False
+
+@n_areas 1
+
+@area_names R1
+
+@n_stocks 1
+
+@initial 1990
+
+@current 2010
+
+@final 2045
+
+@annual_cycle 
+time_steps 1
+recruitment_time 1
+spawning_time 1
+spawning_part_mort 0.5
+aging_time 1
+growth_props 0
+M_props 1
+baranov False
+fishery_names LL
+fishery_times 1
+fishery_areas R1
+recruitment_areas R1
+spawning_all_areas 1
+spawning_p 1
+spawning_use_total_B False
+n_migrations 0
+migration_names MoveRec_1_2
+migration_times 1
+migrate_from R1
+migrate_to R2
+
+@y_enter 1
+
+@standardise_YCS True
+
+@recruitment 
+YCS_years 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
+YCS 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+first_free 1989
+last_free 2006
+year_range 1989 2006
+SR BH
+sigma_r 0.6
+steepness 0.7
+rho 0
+p_male 0.5
+
+@randomisation_method lognormal
+
+@first_random_year 2007
+
+@maturity_props 
+all allvalues  0 0 0 0 0 0 0 0 0 0 0 0.1667 0.3333 0.5 0.6667 0.8333 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+@natural_mortality 
+all 0.155
+
+@size_at_age_type von_Bert
+
+@size_at_age_dist normal
+
+@size_at_age 
+Linf 2870.8
+k 0.02056
+t0 -4.2897
+cv 0.19
+by_length True
+
+@size_weight 
+a 2.59e-12
+b 3.2064
+verify_size_weight 500 0.5 1.5
+
+@fishery LL 
+years 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010
+catches 0 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000 6000
+U_max 0.95
+selectivity SelLL
+future_constant_catches 200
+
+@selectivity_names SelLL
+
+@selectivity SelLL 
+all double_normal 10 2 10
+

@@ -1,0 +1,156 @@
+---
+title: "TOA Bug 15"
+author: "Brett Stacy"
+date: "30 September 2019"
+output: html_document
+---
+
+# CPUE in Planetfish
+Using CPUE as a relative index of abundance instead of tagging data for absolute abundance.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# library(fishnostics2)
+# bug7.out   = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_7/TOA_bug_7_Niter_1000.csv")
+bug15.1.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_15/Output_Niter_1001.csv") # part_mort = .5, CV = 0.1
+bug15.2.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_15/Output_Niter_1002.csv") # part_mort = .5, CV = 0.01
+bug15.3.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_15/Output_Niter_1000.csv") # part_mort = 1, CV = 0.1
+bug15.4.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_15/Output_Niter_1003.csv") # part_mort = 1, CV = 0.1, rec_sigma = 0.3
+bug15.5.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_15/Output_Niter_1007.csv") # part_mort = .5, CV = 0.1, rec_sigma = 0.3
+bug15.6.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_15/Output_Niter_1008.csv") # part_mort = .5, CV = 0.19, rec_sigma = 0.3
+
+bug8.1.out = read.csv("C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_8/Output_Niter_1002.csv") # part_mort = 1, CV = 0.1, rec_sigma = 0.3
+
+
+
+
+
+
+
+
+plot_ts_uncertainty <- function(d,
+                                xs=NULL,
+                                d2=NULL,
+                                probs=c("lwr"=0.025, "mid"=0.5, "upr"=0.975),
+                                xlab="", ylab="", main="",
+                                save=FALSE, file_name=NULL, file_type="png", path=NULL,
+                                graph_pars=list(mar=c(4,4,1,1),
+                                                las=2),...
+){
+  ## set the graphical parameters for the plot
+  ##* I've removed 'windows' from graph_pars because it is a function
+  # graph_pars <- par(graph_pars) # BS 8/8/19: commented out 
+  ## check the probabilities
+  if(length(probs) != 3) stop("probs must be a vector of length 3")
+  if(any(probs>1) | any(probs<0)) stop("all probs must be in [0,1]")
+  ## calculate the midpoints and quantiles to plot
+  mid <- apply(d, 2, quantile, probs[["mid"]])
+  lwr <- apply(d, 2, quantile, probs[["lwr"]])
+  upr <- apply(d, 2, quantile, probs[["upr"]])
+  ## if a second data set is provided plot it as well
+  if(!is.null(d2)){
+    if(ncol(d) != ncol(d2)) stop("d and d2 have different numbers of columns")
+    ## compare the same probabilities
+    mid2 <- apply(d2, 2, quantile, probs[["mid"]])
+    lwr2 <- apply(d2, 2, quantile, probs[["lwr"]])
+    upr2 <- apply(d2, 2, quantile, probs[["upr"]])
+  }
+  ## extract the xs
+  if(is.null(xs)) xs <- as.numeric(names(d))
+  ## can we asign a plot to an object then print it? Nope, think ggplot does though
+  ## if we save the plot do this
+  if(save) save_plot(file_name, file_type, path)
+  ## now we create the plot
+  #* increase the number of tick marks
+  ## this gets overwritten by the polygon
+  plot(mid ~ xs, type = "l", ylab = ylab, xlab = xlab, main = main,
+       # ylim = c(0, 1.05*max(upr)),
+       # if(!exists("ylim")) ylim = c(0, 1.05*max(upr)),
+       # ylim = c(0, 1.05*max(c(upr, upr2))),
+       las = 2,...)
+  ## how does the polygon function work
+  polygon(x=c(xs,rev(xs)),y=c(upr, rev(lwr)),col="lightgrey",border="lightgrey")
+  #abline(h=1,col="darkgrey",lty=3)
+  ## points adds the
+  points(mid ~ xs, type="l", pch=21,col="blue",bg="blue",lwd=2,lty="solid")
+  #for (ii in 1:length(ycs_y_hist)) segments(ycs_y_hist[ii],lwr[ii],ycs_y_hist[ii],upr[ii])
+  ## now add the line for the true values
+  if(!is.null(d2)){
+    points(mid2 ~ xs, type="l", pch=21,col="red",bg="red",lwd=1.8,lty=2)
+    points(lwr2 ~ xs, type="l", pch=21,col="red",bg="red",lwd=1.8,lty=3)
+    points(upr2 ~ xs, type="l", pch=21,col="red",bg="red",lwd=1.8,lty=3)
+  }
+  ## if save turn off graphics device
+  if(save) dev.off()
+  ## at the end of plotting we reset the graphical parameters
+  # par(graph_pars) # BS 8/8/19: commented out 
+}
+
+
+
+
+
+temp_plot = function(output, ...){
+  temp1 = output
+  
+  years = 1990:2010
+  true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
+  est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
+
+  # TS plot
+  colnames(true_ssb1) = years
+  plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000, ...)
+  legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
+       col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+
+}
+
+```
+
+
+
+## CPUE Compared to Tagging
+What happens when CPUE is used instead of tagging data in the same scenario? Below are the results of the simulations that are the same in every way except the abundance variables. Notice the scenario using tagging data is the best-performing example I have and the one I'm currently using as a baseline for the IUU paper.
+
+```{r fig.width=15, fig.height=15, fig.cap="Figure 1. Tag and CPUE based simulations with the same parameterizations. spawning_part_mort=1 refers to the annual cycle of dynamics in CASAL. A value of 0.5 means half of mortality is applied before recording SSB. A value of 1 means all of mortality is applied before recording SSB."}
+par(mfrow = c(2,1))
+# temp_plot(bug7.out, main = "2500 TAGS OM Growth CV = 0.1 (default), part_mort=0.5", cex.main = 1.5)
+temp_plot(bug8.1.out, main = "Tagging. OM Growth CV = 0.1, spawning_part_mort=1, rec_sigma = 0.3", cex.main = 1.5, ylim = c(0,500))
+# temp_plot(bug15.3.out, main = "CPUE. OM Growth CV = 0.1, spawning_part_mort=1, rec_sigma = 0", cex.main = 1.5)
+temp_plot(bug15.5.out, main = "CPUE. OM Growth CV = 0.1, spawning_part_mort=1, rec_sigma = 0.3", cex.main = 1.5, ylim = c(0,500))
+```
+
+### Conclusion:
+The accuracy for which the AM estimates the OM SSB is comparable between the tagging case and CPUE case. The precision is quite different, however, with the error bars much wider in the CPUE case then the tagging case. 
+
+\
+\
+\
+\
+\
+\
+
+## Changing Growth CV in CPUE Simulation
+Below illustrates the impact of changing the CV related to the Von Bertalanffy growth parameters passed to Planetfish on assessment performance. This time, CPUE is used for abundance instead of tagging data. 
+
+```{r fig.width=15, fig.height=15, fig.cap="Figure 2. CPUE based simulations with different von Bert. growth CVs. spawning_part_mort=0.5 refers to the annual cycle of dynamics in CASAL. A value of 0.5 means half of mortality is applied before recording SSB. A value of 1 means all of mortality is applied before recording SSB."}
+
+par(mfrow = c(2,1))
+# temp_plot(bug7.out, main = "2500 TAGS OM Growth CV = 0.1 (default), part_mort=0.5", cex.main = 1.5)
+temp_plot(bug15.1.out, main = "CPUE OM Growth CV = 0.1, spawning_part_mort=0.5, rec_sigma = 0", cex.main = 1.5, ylim = c(0,300))
+temp_plot(bug15.2.out, main = "CPUE OM Growth CV = 0.01, spawning_part_mort=0.5, rec_sigma = 0", cex.main = 1.5, ylim = c(0,300))
+temp_plot(bug15.6.out, main = "CPUE OM Growth CV = 0.19, spawning_part_mort=0.5, rec_sigma = 0.3", cex.main = 1.5, ylim = c(0,300))
+
+
+```
+
+
+### Conclusion:
+Changing growth CV does not impact the SSB discrepancy when using CPUE for abundance. This is contrary to situation when using tagging, where the CV dramatically impacts it. I conclude from this that the von-Bertalanffy growth CV set in the operating model has an unreasonable effect on the calculation of SSB in the AM and this effect is transmitted through the tagging array that gets generated from the OM and passed to the AM.
+
+
+
+
+

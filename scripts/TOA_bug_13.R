@@ -7,7 +7,7 @@
 ## Mess with CV. Specifically see what happens in sample_lengths equation at end of script
 
 
-n_iters = 1
+n_iters = 1000
 
 ## Packages ----
 library(earthfish)
@@ -15,7 +15,7 @@ library(casal)
 library(fishnostics2)
 
 ## House ----
-casal_path = "C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_13/"
+casal_path = paste0("C:/Users/", Sys.info()["login"], "/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_13/")
 # casal_path = "C:/Users/bstacy/Work/Chapter_3_output/TOP/baseline/"
 setwd(casal_path)
 para = get_om_data()
@@ -262,7 +262,7 @@ para$ass$future_constant_catches = 200 # what does this specify?
 
 
 # other
-para$ass$spawning_part_mort = 1 # set CASAL to calculate SSB after 100% F and M
+# para$ass$spawning_part_mort = 1 # set CASAL to calculate SSB after 100% F and M
 
 
 
@@ -380,7 +380,7 @@ write.csv(output, file=paste0(casal_path, "Output_Niter_", n_iters, ".csv"),
 ## Plots ----
 
 
-temp1 = read.csv(paste0(casal_path, "Output_Niter_1.csv"))
+temp1 = read.csv(paste0(casal_path, "Output_Niter_1000.csv"))
 years = 1990:2010
 true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
 est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
@@ -390,6 +390,26 @@ colnames(true_ssb1) = years
 plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000)
 legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
        col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##### sample_lengths ----
 
@@ -425,7 +445,7 @@ agecomp = res$fleet$LL1$landings_n[,"2010",1,1,1]
 growth = para$om$growth[[para$om$sex[1]]]
 
 
-
+############################################.
 
 
 #' Size sample
@@ -453,7 +473,7 @@ sample_lengths <- function (ages1, lenbins, agecomp, growth) {
   #return(round(res,0))
   return(res)
 }
-sample_lengths(ages1, lenbins, agecomp, growth)
+temp2 = sample_lengths(ages1, lenbins, agecomp, growth)
 
 
 
@@ -491,3 +511,23 @@ sample_lengths(ages1, lenbins, agecomp, growth)
 
 
 
+
+sample_lengths <- function (ages1, lenbins, agecomp, growth) {
+  # Mean length
+  alk <- calc_VBlen(ages1, agecomp, growth)
+  # Calculate normal distribution of length by length classes & sum up
+  res <- vector(mode="numeric", length=length(lenbins))
+  for (aa in 1:length(agecomp)) {
+    # SD = Mean * CV, cumulative distribution
+    res1 <- pnorm(lenbins, mean=alk[aa], sd=100)
+    res11 <- res1[1]
+    res1[1:(length(res1)-1)] <- (res1[2:length(res1)] - res1[1:(length(res1)-1)])
+    res1[1] <- res1[1] + res11
+    res1[length(res1)] <- 0
+    res <- res + res1 * agecomp[aa]
+  }
+  #return(round(res,0))
+  return(res)
+}
+temp= sample_lengths(ages1, lenbins, agecomp, growth)
+plot(temp)

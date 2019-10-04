@@ -270,6 +270,8 @@ Mess with CV in growth:
 TOA_bug_8.r: effects SSB a LOT! Tried lower and higher than 0.1
 Changing this scales SSB: decreasing this lower than 0.1 decreases SSB proportionally
 
+TOA_bug_8.r: increase tags: 2500 performs well. 25000 tags, performs bad.
+
 
 CHange age and length range to deplete plus group 
 TOA_bug_10.r: pushed age to 100 and lengths to 3000:
@@ -301,6 +303,8 @@ Script:
 			    - dat[,y,i] <- round(sample_lengths(ssages,sampling$len_classes,
 			                                                              dat_age1[,y],
 			                                                              om$growth[[om$sex[i]]]),1)
+			    * the above dat one is not used because it pertains to iTags, which aren't activated.
+			    
 All of these places use sample_lengths()
 this gives the length composition of landings, tagged fish, and recaptured fish. if these are calculated incorrectly, perhaps that could influence the SSB.
 
@@ -309,9 +313,22 @@ this gives the length composition of landings, tagged fish, and recaptured fish.
   - para$ass$estgrowth
       - M3_CASAL2_Create_Pop.r
           - casalpop[["size_at_age"]]$cv <- params$estgrowth[[1]][4]
+          
+Try changing SD in sample_lengths() to a constant: 100 in Earthfish sampling.R functions:
+This wasn't a magic fix. the AM overestimated SSB by a large margin. The OM SSB was in the middle between the AM mean and it's lower 95% CI after 1000 iterations. Changing sample_lengths back to default now.
 
 
-
+TOA_bug_15.r: CPUE. 
+with 1000 iters, spawning_part_mort=1, performs decently. am below om by 10,000 tonnes consistently
+with 1001 iters, spawning_part_mort=0.5, performs about the same, but AM above OM by 10,000 tonnes; gets a little better towards 2010.
+with 1002 iters. Try changing CV now: , spawning_part_mort=0.5, CV = 0.01: Didn't change!!!
+Try no tags: didn't change anything because tags still aren't getting into assessment and they don't effect OM population.
+with 1003 iters. add rec variability 0.3. changed the discrepency to just over OM.
+with 1004 iters. add rec variability 1.0. discrepency worsened to above.
+with 1005 iters. add rec variability 0.1. similar to 1003 but with tighter error bars around OM
+with 1006 iters. add rec variability 0.2. similar to 1005 but with slightly wider error bars.
+with 1007 iters. add rec variability 0.3. spawning_part_mort=1. 
+with 1008 iters. same as 1002 but changing CV to 0.19: 
 
 
 Try matching para\$sampling\$ageing_error to match growth CV
@@ -324,6 +341,36 @@ NO, see comments at top of script
 
 
 
+Should sum_to_one be True instead of False in estimation.csl @catch_at?
+I don't know if it should, probably. But changing it to True in bug_14 didn't help the SSB discrepency after 100 iters
+
+
+
+I still don't think N_2001.. should be 100 in the estimation.csl file for @catch_at LL_CatchA. I think it should be 1000 like I set in the OM
+According to the CASAL manual, this looks like the number aged in each year. Phil had told me differently, that it pertained to 100% contribution to the liklihood or something.
+TOA_Bug_16.R explored this a tiny bit, didn't seem to make a difference in discrepency.. 
+Try again with 1000 iters: Still large discrepency.
+looking at the output from a casal -r run, 100 may refer to each age class each year. 
+
+
+TOA_bug_17.r: Tried changing scanned_ and recaptured_ in est.csl after reading casal manual. casal didn't like it. I think manual is wrong.
+
+
+Need to revisit changing tagging stuff from length to age.
+"age-size": TOA_bug_18.r: I tried to implement this through adding "age-size" option to para\$ass\$tag_sampling_type.
+This was done in M3_CASAL1_Data.r by changing the tagging arrays that get passed to casal to be by age if desired. 
+CASAL didn't like it. It gave this error:
+about to evaluate function with x = 424890
+Betadiff error: bad size in dvv::operator[](int)
+Please notify the software maintainer about this error.
+
+Tried with @size_based True: got this error:
+Error: CASAL needs command n_classes, but does not find it in your parameter files
+
+"age": TOA_bug_18.r: casal works but the discrepency in SSB is terrible even after 1000 iterations. 
+how about changing CV? does that change the discrepency?
+1000 iters: CV 0.1, 1001 iters: CV 0.01, 1002 iters: CV 0.19
+YES, it still effects it! big time. see .rmd file
 
 
 

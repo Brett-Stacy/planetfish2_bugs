@@ -1,0 +1,97 @@
+---
+title: "Change Tag from Length to Age"
+author: "Brett Stacy"
+date: "1 October 2019"
+output: html_document
+---
+
+Document attempts to allow passing tagged data by age to CASAL as apposed to tagged data by length. This was motivated by the problems encountered with growth CV impacting the SSB fit through age-to-length conversions of tagging data. 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, results = "hide")
+file_path = "C:/Users/STA384/Documents/GitHub/planetfish2_bugs/Output/TOA_bug_18/"
+```
+
+
+```{r}
+datass = readRDS(paste0(file_path, "datass.RDS"))
+res    = readRDS(paste0(file_path, "res.RDS"))
+
+
+ryy = 18
+rr_om = 1
+tyy = 17
+tr_om = 1
+
+
+Tpool	<- res$tag$recaps[,ryy,,,rr_om,tyy,tr_om,drop=FALSE]
+Tpool
+			    # Sum recapture Numbers over by length, year, and sex
+dat <- apply(Tpool,drop=FALSE,c(1,2,3),sum) # BS 5/08/19: remove round here
+```
+
+```{r}
+Tpool	<- res$tag$recaps_len[,ryy,,,rr_om,tyy,tr_om,drop=FALSE]
+Tpool
+			    # Sum recapture Numbers over by length, year, and sex
+dat <- apply(Tpool,drop=FALSE,c(1,2,3),sum) # BS 5/08/19: remove round here
+```
+
+```{r}
+round(apply(res$mod$landings_n_len_sum[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
+round(apply(res$fleet$LL1$landings_n[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
+# res$fleet$LL1$landings_n[,ryy,,,rr_om]
+```
+
+
+compare default vs low growth CV:
+
+```{r, fig.width=15, fig.height=13}
+library(fishnostics2)
+casal_path = file_path
+temp1 = read.csv(paste0(casal_path, "Output_Niter_1000.csv"))
+years = 1990:2010
+true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
+est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
+
+
+par(mfrow = c(3,1))
+# TS plot
+colnames(true_ssb1) = years
+plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000, main = "CV 0.1")
+legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
+       col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+
+
+
+
+temp1 = read.csv(paste0(casal_path, "Output_Niter_1001.csv"))
+years = 1990:2010
+true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
+est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
+
+# TS plot
+colnames(true_ssb1) = years
+plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000, main = "CV 0.01")
+legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
+       col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+
+
+
+
+temp1 = read.csv(paste0(casal_path, "Output_Niter_1002.csv"))
+years = 1990:2010
+true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
+est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
+
+# TS plot
+colnames(true_ssb1) = years
+plot_ts_uncertainty(d = true_ssb1/1000, d2 = est_ssb1/1000, main = "CV 0.19")
+legend("bottomleft",c("True SSB from OM", "Estimated SSB from CASAL"),
+       col=c("blue", "red"), lty=c(1,2), lwd=2, bty="n")
+```
+
+
+
+

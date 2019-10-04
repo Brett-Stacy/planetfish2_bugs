@@ -8,7 +8,7 @@
 
 
 
-n_iters = 100
+n_iters = 1003
 
 ## Packages ----
 library(earthfish)
@@ -60,7 +60,7 @@ n_regions = 1
 
 ########## POPULATION
 R_mu           = 1.5e7
-R_sigma        = 0 # 0.3
+R_sigma        = 0.5 # 0.3
 B0_calc_method = "casal" # one of "casal", "stoch", or "init_age"
 
 
@@ -83,7 +83,7 @@ n_years_lengthed = 0
 len_years        = if(n_years_lengthed == 0) NULL else((study_year_range[2] - n_years_lengthed):study_year_range[2])
 
 # tagging
-n_tags       = 25000
+n_tags       = 2500
 n_years_tags = 5
 tag_years    = (study_year_range[2] - n_years_tags + 1):study_year_range[2] - 1
 
@@ -382,7 +382,7 @@ write.csv(output, file=paste0(casal_path, "Output_Niter_", n_iters, ".csv"),
 ## Plots ----
 
 
-temp1 = read.csv(paste0(casal_path, "Output_Niter_100.csv"))
+temp1 = read.csv(paste0(casal_path, "Output_Niter_1003.csv"))
 years = 1990:2010
 true_ssb1 = temp1[, grep("OM_ssb_R1", colnames(temp1))]
 est_ssb1 = temp1[, grep("AM_ssb_", colnames(temp1))]
