@@ -375,6 +375,14 @@ YES, it still effects it! big time. see .rmd file
 
 
 
+*** if revisit this bug explore:
+  - sample_lengths() is different than Rich's method for translating selectivity at age to selectivity at length
+  bins. Which one should be used? This could impact the tag/size overlap among other things and cause the SSB discrepency.
+  - ogive Sell is not in any of my estimation.csl files under @tag_recapture. Shouldn't it be? The selectivity seems to be applied though the scanned_ numbers, but the ogive must come into play as well because it is an option for this block command after all. 
+
+
+
+
 ## population.csl Questions
 Should \@size_based False be True in population.csl?
 I think it should be False because this is a age-based model.

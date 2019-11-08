@@ -41,3 +41,5 @@ With original TOP LHPs and Pauls scripts, and 2500 tags, and spawning_part_mort 
 When recruitment variability is added to my base case from ch.3, the discrepency narrows. i.e. the AM SSB matches better. In fact, I can change increase it past 0.3 i.e. 0.5 and it matches even better.
 
 CPUE ABUNDANCE:
+Changing the growth CV does not result in a changing SSB discrepency between the OM/AM. i.e. the problem above with CV doesn't appear when using CPUE instead of tagging observations. TOA_but_15 html
+When recruitment variability is added, however, there is a assymetrical error in the AM SSB. the upper bound is much further away from the mean than the lower bound. TOA_but_15 html
