@@ -22,6 +22,7 @@ TOA_bug_15.R - TOP same as TOA_bug_14.R but trying CPUE instead of tags as abund
 TOA_bug_16.R - TOP same as TOA_bug_8 but trying to match up catchA stuff.
 TOA_bug_17.R - TOP same as TOA_bug_8 but switching scanned and recaptured numbers in @tag_recapture in earthfish.
 TOA_bug_18.R - TOP same as TOA_bug_8 but testing the capability of adding "age-size" and "age" to casal input files.
+TOA_bug_19.R - TOP same as TOA_bug_8 but testing effect of matching N_aged observation in OM and AM.
 
 
 
